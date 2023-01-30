@@ -8,13 +8,15 @@ body {
 footer {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items:center;
     position: fixed;
     bottom: 0;
     width: 100%;
     background-color: #ddd;
+    
   }
 
+  
   nav ul {
     display: flex;
     list-style: none;
@@ -22,4 +24,18 @@ footer {
     margin: 0;
     width: 100%;
     justify-content: space-between;
+  }
+
+  nav ul li {
+    margin-left: 30px;
+    margin-right: 30px;
+    
+  }
+
+  nav ul li a img {
+  width: 60%;
+  }
+
+  #folioIcon {
+    width: 250px;
   }

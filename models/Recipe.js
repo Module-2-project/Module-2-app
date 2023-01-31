@@ -49,7 +49,7 @@ const recipeSchema = new Schema({
   level: {
     type: String,
     enum: {
-      values: ["Begginner", "Medium", "Hard", "God", "Grandma"],
+      values: ["Beginner", "Medium", "Hard", "God", "Grandma"],
       message: "Please select the level of difficulty",
     },
   },
@@ -58,11 +58,11 @@ const recipeSchema = new Schema({
     required: [true, "Please add the amount of servings"],
   },
   ingredients: {
-    type: String,
+    type: Array,
     required: [true, "Please add all the ingredients of your meal, all separated by a comma"],
   },
   steps: {
-    type: String,
+    type: Array,
     required: [true, "Please add the cooking instructions, all separated by a comma and in the right order"],
   },
     username: {

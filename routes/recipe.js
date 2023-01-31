@@ -59,9 +59,6 @@ router.post("/new", async (req, res, next) => {
   const glutenBool = gluten === "ON" ? true : false;
   const veggieBool = veggie === "ON" ? true : false;
   const user = req.session.currentUser;
-  console.log('level:', level);
-console.log('values:', ["Begginner", "Medium", "Hard", "God", "Grandma"]);
-
   try {
     const newRecipe = await Recipe.create({ name, image, time, cuisine, kcal, spices, lactose: lactoseBool, gluten: glutenBool, veggie: veggieBool, level, pax, ingredients, steps, username });
     res.redirect("/recipe/searchResults", {recipe: newRecipe});
@@ -95,7 +92,7 @@ router.post("/:recipeId/edit", async (req, res, next) => {
   const veggieBool = veggie === "ON" ? true : false;
   try {
     const editedRecipe = await Recipe.findByIdAndUpdate(recipeId, {name, image, time, cuisine, kcal, spices, lactose: lactoseBool, gluten: glutenBool, veggie: veggieBool, level, pax, ingredients, steps, username}, {new: true});
-    res.redirect("/recipes/all");
+    res.redirect("/recipe/searchResults", {recipe: editedRecipe});
   } catch(error) {
     next(error);
   }

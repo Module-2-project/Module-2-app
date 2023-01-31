@@ -3,7 +3,7 @@ const router = express.Router();
 const User = require('../models/User');
 const Recipe = require("../models/Recipe");
 
-// functions to manipulate ingredients and steps in Recipe model
+// functions to manipulate ingredients and steps in Recipe model + import checkbox data as booleans
 function stringToBulletList(str) { 
   let array = str.split(","); 
   let list = "<ul>"; 
@@ -37,6 +37,18 @@ router.get("/search", (req, res, next) => {
   res.render("recipe/search");
 });
 
+// @desc    Displays all recipes
+// @route   GET /recipe/all
+// @access  Public
+router.get("/all", async (req, res, next) => {
+  try {
+    const recipes = await Recipe.find({});
+    res.render("recipe/searchResults", {recipes});
+  } catch (error) {
+    next(error);
+  }
+});
+
 // @desc    Displays add new recipe form
 // @route   GET /recipe/new
 // @access  User
@@ -49,11 +61,11 @@ router.get("/new", (req, res, next) => {
 // @access  User
 router.post("/new", async (req, res, next) => {
   const { name, image, time, cuisine, kcal, spices, lactose, gluten, veggie, level, pax, username } = req.body;
-  // define steps and username with JS func defined at this effect + change lactose, gluten and meet values form ON/OFF to true or false with JS func too
+  // TBD: define steps and username with JS func defined at this effect + change lactose, gluten and meet values form ON/OFF to true or false with JS func too
   const user = req.session.currentUser;
   try {
     const newRecipe = await Recipe.create({ name, image, time, cuisine, kcal, spices, lactose, gluten, veggie, level, pax, ingredients, steps, username });
-    res.redirect("/", user, newRecipe);
+    res.redirect("/");
   } catch(error) {
     next(error);
   }
@@ -66,7 +78,7 @@ router.get("/:recipeId/edit", async (req, res, next) => {
   const { recipeId } = req.params;
   try {
     const recipe = await Recipe.findById(recipeId);
-    res.redirect("/recipe/editRecipe", recipe);
+    res.redirect("/");
   } catch(error) {
     next(error);
   }
@@ -80,7 +92,7 @@ router.post("/:recipeId/edit", async (req, res, next) => {
   const { name, image, time, cuisine, kcal, spices, lactose, gluten, veggie, level, pax, ingredients, steps, username } = req.body;
   try {
     const editedRecipe = await Recipe.findByIdAndUpdate(recipeId, {name, image, time, cuisine, kcal, spices, lactose, gluten, veggie, level, pax, ingredients, steps, username}, {new: true});
-    res.redirect("/", editedRecipe);
+    res.redirect("/");
   } catch(error) {
     next(error);
   }

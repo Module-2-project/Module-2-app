@@ -49,6 +49,10 @@ app.use(
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 
+// partials
+const hbs = require("hbs");
+hbs.registerPartials(__dirname + "/views/partials");
+
 // routes intro
 app.use('/', indexRouter);
 app.use('/auth', authRouter);

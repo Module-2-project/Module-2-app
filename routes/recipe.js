@@ -61,11 +61,13 @@ router.get("/new", (req, res, next) => {
 // @access  User
 router.post("/new", async (req, res, next) => {
   const { name, image, time, cuisine, kcal, spices, lactose, gluten, veggie, level, pax, username } = req.body;
-  // TBD: define steps and username with JS func defined at this effect + change lactose, gluten and meet values form ON/OFF to true or false with JS func too
+  const lactoseBool = lactose === "ON" ? true : false;
+  const glutenBool = gluten === "ON" ? true : false;
+  const veggieBool = veggie === "ON" ? true : false;
   const user = req.session.currentUser;
   try {
-    const newRecipe = await Recipe.create({ name, image, time, cuisine, kcal, spices, lactose, gluten, veggie, level, pax, ingredients, steps, username });
-    res.redirect("/");
+    const newRecipe = await Recipe.create({ name, image, time, cuisine, kcal, spices, lactose: lactoseBool, gluten: glutenBool, veggie: veggieBool, level, pax, ingredients, steps, username });
+    res.redirect("/recipe/searchResults", {newRecipe});
   } catch(error) {
     next(error);
   }
@@ -78,7 +80,7 @@ router.get("/:recipeId/edit", async (req, res, next) => {
   const { recipeId } = req.params;
   try {
     const recipe = await Recipe.findById(recipeId);
-    res.redirect("/");
+    res.render("recipe/editRecipe", {recipe});
   } catch(error) {
     next(error);
   }

@@ -11,12 +11,7 @@ router.get('/signup', async (req, res, next) => {
   res.render('auth/signup');
 })
 
-// @desc    Displays form view to log in
-// @route   GET /auth/login
-// @access  Public
-router.get('/login', async (req, res, next) => {
-  res.render('auth/login');
-})
+
 
 // @desc    Sends user auth data to database to create a new user
 // @route   POST /auth/signup
@@ -33,6 +28,13 @@ router.post('/signup', async (req, res, next) => {
     next(error)
   }
 });
+
+// @desc    Displays form view to log in
+// @route   GET /auth/login
+// @access  Public
+router.get('/login', async (req, res, next) => {
+  res.render('auth/login');
+})
 
 // @desc    Sends user auth data to database to authenticate user
 // @route   POST /auth/login

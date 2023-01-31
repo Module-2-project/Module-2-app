@@ -1,8 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const User = require('../models/User');
+const User = require('../models/User.js');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
+
 
 // @desc    Displays form view to sign up
 // @route   GET /auth/signup
@@ -11,6 +12,33 @@ router.get('/signup', async (req, res, next) => {
   res.render('auth/signup');
 })
 
+
+router.post('/signup', async (req, res, next) => {
+  const { username, firstName , lastName, email, password, cookingLevel } = req.body;
+  if (!username || !firstName || !lastName || !email || !password || !cookingLevel) {
+    res.render('auth/signup', { error: 'Please fill all data to signup' });
+    return;
+  }
+//Check if user exists ... its correct?
+  const userInDB = await User.findOne({email});
+  if ( userInDB) {
+    res.render("auth/signup" , { error: "Email already exists!"});
+  }
+  const regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/;
+  if (!regex.test(password)) {
+    res.render("auth/signup", { error: "Password needs to contain at least 6 characters, one number and one lowercase and uppercase character."});
+    return;
+  }
+  try {
+    const salt = bcrypt.genSaltSync(saltRounds);
+    const hashedPassword = bcrypt.hashSync(password, salt);
+    const user = await User.create({ username, firstName , lastName, email, password, cookingLevel });
+    res.redirect('/');
+
+  } catch (error) { 
+    next (error);
+  }
+})
 
 
 // @desc    Sends user auth data to database to create a new user
@@ -62,7 +90,7 @@ router.post('/login', async (req, res, next) => {
   } catch (error) {
     next(error);
   }
-})
+});
 
 // @desc    Destroy user session and log out
 // @route   POST /auth/logout
@@ -72,7 +100,7 @@ router.post('/logout', (req, res, next) => {
     if (err) {
       next(err)
     } else {
-      res.redirect('/auth/login');
+      res.redirect('/auth/login')
     }
   });
 })

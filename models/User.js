@@ -9,9 +9,19 @@ const userSchema = new Schema(
       required: [true, 'Username is required.'],
       unique: true
     },
+    firstName: {
+      type: String,
+      trim: true,
+      required: true,
+    },
+    lastName: {
+      type: String,
+      trim: true,
+      required: true,
+    },
     email: {
       type: String,
-      required: [true, 'Email is required.'],
+      required: [true, 'An email address is required.'],
       unique: true,
       lowercase: true,
       trim: true
@@ -19,6 +29,19 @@ const userSchema = new Schema(
     hashedPassword: {
       type: String,
       required: [true, 'Password is required.']
+    },
+    cookingLevel: {
+      type: String,
+      enum: {
+        values: ["Beginner", "Medium","Hard", "God", "Grandma"],
+        message: "Please tell us your cooking skill level",
+      },
+      required: true,
+      unique: true,
+    },
+    favorites: {
+      type: Schema.Types.ObjectId,
+      ref: "Recipe",
     }
   },
   {

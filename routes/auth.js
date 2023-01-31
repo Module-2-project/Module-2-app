@@ -39,20 +39,22 @@ router.post('/signup', async (req, res, next) => {
 // @access  Public
 router.post('/login', async (req, res, next) => {
   const { email, password } = req.body;
-  // ⚠️ Add validations!
+  if (!email || !password) {
+    res.render("auth/login", { error: "Introduce all the fields requested in order to log in"});
+    return;
+  }
   try {
     const user = await User.findOne({ email: email });
     if (!user) {
-      res.render('auth/login', { error: "User not found" });
+      res.render('auth/login', { error: `There is no user signed up for the following email: ${email}` });
       return;
     } else {
       const match = await bcrypt.compare(password, user.hashedPassword);
       if (match) {
-        // Remember to assign user to session cookie:
         req.session.currentUser = user;
-        res.redirect('/');
+        res.redirect('/', user);
       } else {
-        res.render('auth/login', { error: "Unable to authenticate user" });
+        res.render('auth/login', { error: "Unable to authenticate user." });
       }
     }
   } catch (error) {

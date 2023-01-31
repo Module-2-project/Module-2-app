@@ -1,0 +1,68 @@
+<h2>Add recipe</h2>
+
+<form method="POST" action="/recipe/new">
+  <label>Dish name:</label>
+  <input required="true" type="text" name="name" placeholder="Hummus"/>
+  <label>Image URL:</label>
+  <input required="true" type="text" name="image"/>
+  <label>Time required in minutes:</label>
+  <input required="true" type="number" name="time" placeholder="25" />
+  <label>Cuisine type:</label>
+  <select required="true" name="cuisine">
+    <option value="Asian">Asian</option>
+    <option value="Japanese">Japanese</option>
+    <option value="Thai">Thai</option>
+    <option value="Italian">Italian</option>
+    <option value="Greek">Greek</option>
+    <option value="Mexican">Mexican</option>
+    <option value="Argentinian">Argentinian</option>
+    <option value="Colombian">Colombian</option>
+    <option value="South American">South American</option>
+    <option value="Etiopian">Etiopian</option>
+    <option value="Marrocan">Marrocan</option>
+    <option value="Spanish">Spanish</option>
+    <option value="Portuguese">Portuguese</option>
+    <option value="Indian">Indian</option>
+    <option value="American">American</option>
+    <option value="Other">Other</option>
+  </select>
+  <label>Kcal:</label>
+  <input required="true" type="number" name="kcal" placeholder="450"/>
+  <label>Spices:</label>
+  <select required="true" name="spices">
+    <option value="Mild">🔥</option>
+    <option value="Medium">🔥🔥</option>
+    <option value="Spicy">🔥🔥🔥</option>
+    <option value="Very spicy">🐲</option>
+  </select>
+  <label>Does the recipe contain:</label>
+  <div>
+    <label>Lactose</label>
+    <input type="checkbox" name="lactose" />
+  </div>
+  <div>
+    <label>Gluten</label>
+    <input type="checkbox" name="gluten" />
+  </div>
+  <div>
+    <label>Meet or fish:</label>
+    <input type="checkbox" name="veggie" />
+  </div>
+  <label>Select your cooking level:</label>
+  <select required="true" name="level">
+    <option value="Beginner">Beginner</option>
+    <option value="Medium">Medium</option>
+    <option value="Experienced">Experienced</option>
+    <option value="God">God</option>
+    <option value="Grandma">Grandma</option>
+  </select>
+  <label>Number of servings:</label>
+  <input required="true" type="number" name="pax" placeholder="4" />
+  <label>Ingredients:</label>
+  <textarea required="true" name="ingredients" rows="10" columns="25" placeholder="Add all your ingredients separated by a comma"></textarea>
+  <label>Steps:</label>
+  <textarea required="true" name="ingredients" rows="10" columns="25" placeholder="Add each cooking instruction separated by a comma"></textarea>
+  <label>Added by:</label>
+  <input value="{{user.username}}" />
+  <button type="submit">Add recipe</button>
+</form>

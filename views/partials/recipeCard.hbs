@@ -1,12 +1,13 @@
 <div class="recipeCard">
-  <img src="{{this.image}}" alt="Dish image" />
-  <h4>{{this.name}}</h4>
-  <p>Cuisine: {{this.cuisine}}</p>
+  <img src={{image}} alt="Dish image" />
+  <h4>{{name}}</h4>
+  <p>Cuisine: {{cuisine}}</p>
   <ul>
-    <li>{{this.time}} min</li>
-    <li>Level: {{ths.level}}</li>
-    <li>Servings: {{this.pax}}</li>
-    <li>Kcal: {{this.kcal}}</li>
-    <li>Created by: {{this.username}}</li>
+    <li>{{time}} min</li>
+    <li>Level: {{level}}</li>
+    <li>Servings: {{pax}}</li>
+    <li>Kcal: {{kcal}}</li>
+    <li>Created by: {{username}}</li>
   </ul>
+  <a href="/recipe/:{{_id}}/detail">View more</a>
 </div>

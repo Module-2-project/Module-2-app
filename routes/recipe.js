@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const User = require('../models/User');
 const Recipe = require("../models/Recipe");
+const { addListener } = require('../app');
 
 // functions to manipulate ingredients and steps in Recipe model 
 function stringToBulletList(str) { 
@@ -94,6 +95,19 @@ router.post("/:recipeId/edit", async (req, res, next) => {
     const editedRecipe = await Recipe.findByIdAndUpdate(recipeId, {name, image, time, cuisine, kcal, spices, lactose: lactoseBool, gluten: glutenBool, veggie: veggieBool, level, pax, ingredients, steps, username}, {new: true});
     res.redirect("/recipe/searchResults", {recipe: editedRecipe});
   } catch(error) {
+    next(error);
+  }
+});
+
+// @desc    Displays recipe detail
+// @route   GET /recipe/:recipeId/detail
+// @access  User
+router.get("/:recipeId/detail", async (req, res, next) => {
+  const { recipeId } = req.params;
+  try {
+    const recipe = await Recipe.findById({recipeId});
+    res.render("recipe/recipeDetail", {recipe});
+  } catch (error) {
     next(error);
   }
 });

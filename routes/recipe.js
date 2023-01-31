@@ -36,7 +36,7 @@ router.get("/search", (req, res, next) => {
 router.get("/all", async (req, res, next) => {
   try {
     const recipes = await Recipe.find({});
-    res.render("recipe/searchResults", {recipes});
+    res.render("recipe/searchResults", {recipe: recipes});
   } catch (error) {
     next(error);
   }
@@ -64,7 +64,7 @@ console.log('values:', ["Begginner", "Medium", "Hard", "God", "Grandma"]);
 
   try {
     const newRecipe = await Recipe.create({ name, image, time, cuisine, kcal, spices, lactose: lactoseBool, gluten: glutenBool, veggie: veggieBool, level, pax, ingredients, steps, username });
-    res.redirect("/recipe/searchResults", {newRecipe});
+    res.redirect("/recipe/searchResults", {recipe: newRecipe});
   } catch(error) {
     next(error);
   }

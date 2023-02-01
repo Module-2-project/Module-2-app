@@ -1,13 +1,21 @@
-<div class="recipeCard">
-  <img src={{image}} alt="Dish image" />
-  <h4>{{name}}</h4>
+<div class="myRecipeCard">
+  <h3>{{name}}</h3>
   <p>Cuisine: {{cuisine}}</p>
+  <img src={{image}} alt="Dish image" />
   <ul>
     <li>{{time}} min</li>
+    <li>Servings: {{pax}}</li>
     <li>Level: {{level}}</li>
-    <li>{{pax}} servings</li>
-    <li>{{kcal}} kcal</li>
+    <li>Kcal: {{kcal}}</li>
+    <li>Spices: {{spices}}</li>
+    <li>Lactose: {{lactose}}</li>
+    <li>Gluten: {{gluten}}</li>
+    <li>Meat: {{meat}}</li>
   </ul>
-  <a href="/recipe/:{{_id}}/detail">View more</a>
-  <a href="/recipe/:{{_id}}/edit">Edit recipe</a>
+  <h4>Ingredients:</h4>
+  <!-- this is a ul tag with li inside -->
+  {{{splitIngredients ingredients}}}
+  <h4>Steps:</h4>
+  <!-- this is a ol tag with li inside -->
+  {{{splitSteps steps}}}
 </div>

@@ -35,21 +35,21 @@ const recipeSchema = new Schema({
     },
   },
   lactose: {
-    type: Boolean,
+    type: String,
     required: [true, "Please check this box if your meal contains lactose"],
   },
   gluten: {
-    type: Boolean,
+    type: String,
     required: [true, "Please check this box if your meal contains gluten"],
   },
   veggie: {
-    type: Boolean,
+    type: String,
     required: [true, "Please check this box if your meal contains meat or fish - non vegetarian friendly"],
   },
   level: {
     type: String,
     enum: {
-      values: ["Begginner", "Medium", "Hard", "God", "Grandma"],
+      values: ["Beginner", "Medium", "Hard", "God", "Grandma"],
       message: "Please select the level of difficulty",
     },
   },

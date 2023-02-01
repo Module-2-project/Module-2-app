@@ -13,8 +13,6 @@ const indexRouter = require('./routes/index');
 const authRouter = require('./routes/auth');
 const recipeRouter = require("./routes/recipe");
 
-//----//
-
 // middlewares
 const isLoggedIn = require("./middlewares");
 
@@ -50,6 +48,10 @@ app.use(
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
+
+// partials
+const hbs = require("hbs");
+hbs.registerPartials(__dirname + "/views/partials");
 
 // routes intro
 app.use('/', indexRouter);

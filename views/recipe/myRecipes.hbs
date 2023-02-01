@@ -1,0 +1,10 @@
+<h2>My recipes</h2>
+
+{{#if recipe}}
+  {{#each recipe}}
+    {{> myRecipeCard}}
+  {{/each}}
+{{else}}
+  <p>You didn't create any recipe with this account. <a
+      href="/recipe/new">Click here to create one</a></p>
+{{/if}}

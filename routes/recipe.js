@@ -6,26 +6,6 @@ const Recipe = require("../models/Recipe");
 const { addListener } = require('../app');
 const isLoggedIn = require('../middlewares');
 
-// functions to manipulate ingredients and steps in Recipe model 
-function stringToBulletList(str) { 
-  let array = str.split(","); 
-  let list = "<ul>"; 
-  for (let i = 0; i < array.length; i++) { 
-    list += "<li>" + array[i] + "</li>"; 
-  } 
-  list += "</ul>"; 
-  return list; 
-} 
-function stringToOrderedList(str) { 
-  let array = str.split(","); 
-  let list = "<ol>"; 
-  for (let i = 0; i < array.length; i++) { 
-    list += "<li>" + array[i] + "</li>"; 
-  } 
-  list += "</ol>"; 
-  return list; 
-}
-
 // @desc    Displays search form for recipes
 // @route   GET /recipe/search
 // @access  Public

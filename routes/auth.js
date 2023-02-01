@@ -8,37 +8,42 @@ const saltRounds = 10;
 // @desc    Displays form view to sign up
 // @route   GET /auth/signup
 // @access  Public
+
+//get signup view
 router.get('/signup', async (req, res, next) => {
   res.render('auth/signup');
+  console.log("signup!")
 })
 
-
+//post signup
 router.post('/signup', async (req, res, next) => {
   const { username, firstName , lastName, email, password, cookingLevel } = req.body;
   if (!username || !firstName || !lastName || !email || !password || !cookingLevel) {
     res.render('auth/signup', { error: 'Please fill all data to signup' });
     return;
-  }
-//Check if user exists ... its correct?
-  const userInDB = await User.findOne({email});
-  if ( userInDB) {
-    res.render("auth/signup" , { error: "Email already exists!"});
-  }
+  } 
   const regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/;
   if (!regex.test(password)) {
     res.render("auth/signup", { error: "Password needs to contain at least 6 characters, one number and one lowercase and uppercase character."});
     return;
   }
+//Check if user exists ... its correct?
+  const userInDB = await User.findOne({ email: email });
+  if (userInDB) {
+    res.render('auth/signup' , { error: `${email} already exists!`});
+    return;
+  }
+  
   try {
     const salt = bcrypt.genSaltSync(saltRounds);
     const hashedPassword = bcrypt.hashSync(password, salt);
-    const user = await User.create({ username, firstName , lastName, email, password, cookingLevel });
+    const user = await User.create({ username, firstName , lastName, email, hashedPassword, cookingLevel });
     res.redirect('/');
-
+//redirect to Profile once the signup its done
   } catch (error) { 
     next (error);
   }
-})
+});
 
 
 // @desc    Sends user auth data to database to create a new user

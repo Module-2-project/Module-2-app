@@ -1,4 +1,4 @@
-<h1>¡Create a new account!</h1>
+<h1>¡Create your account!</h1>
 
 
 <div id="form">
@@ -7,11 +7,23 @@
     <label>Username</label>
       <input type="text" name="username" placeholder="JohnD69" />
 
-    <label>firstname</label>
-      <input type="text" name="username" placeholder="JohnD69" />  
+    <label>First Name</label>
+      <input type="text" name="firstName" placeholder="John" />
+
+    <label>Last Name</label>
+      <input type="text" name="lastName" placeholder="Smith" />  
  
     <label>Email</label>
-      <input type="email" name="email" placeholder="john@d.com" />
+      <input type="email" name="email" placeholder="john@smith.com" />
+
+    <label>Cooking Level:</label>
+      <select required="true" name="cookingLevel">
+    <option value="Beginner">Beginner 👶🏻</option>
+    <option value="Medium"> Medium 👨🏻</option>
+    <option value="Hard">Experienced 🧞‍♂️</option>
+    <option value="God">God 👨🏻‍🍳</option>
+    <option value="Grandma">Grandma 👵🏻</option>
+  </select>  
     
     <label>Password</label>
       <input type="password" name="password" placeholder="********" />

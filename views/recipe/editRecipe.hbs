@@ -37,16 +37,25 @@
   </select>
   <label>Does the recipe contain:</label>
   <div>
-    <label>Lactose</label>
-    <input type="checkbox" name="lactose" />
+    <label>Lactose:</label>
+    <select required="true" name="lactose">
+      <option value="Yes">Yes</option>
+      <option value="No">No</option>
+    </select>
   </div>
   <div>
-    <label>Gluten</label>
-    <input type="checkbox" name="gluten" />
+    <label>Gluten:</label>
+    <select required="true" name="gluten">
+      <option value="Yes">Yes</option>
+      <option value="No">No</option>
+    </select>
   </div>
   <div>
     <label>Meat or fish:</label>
-    <input type="checkbox" name="meat" />
+    <select required="true" name="meat">
+      <option value="Yes">Yes</option>
+      <option value="No">No</option>
+    </select>
   </div>
   <label>Select your cooking level:</label>
   <select required="true" name="level">
@@ -60,9 +69,9 @@
   <input required="true" type="number" name="pax" value="{{pax}}" />
   <label>Ingredients:</label>
   <textarea required="true" name="ingredients" rows="10" columns="25"
-    value="{{ingrdients}}"></textarea>
+    value="{{ingredients}}"></textarea>
   <label>Steps:</label>
-  <textarea required="true" name="ingredients" rows="10" columns="25"
+  <textarea required="true" name="steps" rows="10" columns="25"
     value="{{steps}}"></textarea>
   <label>Added by:</label>
   <input value="{{user.username}}" />

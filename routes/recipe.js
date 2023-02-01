@@ -45,9 +45,9 @@ router.get("/search-results", async (req, res, next) => {
   if (name) query.name = { $regex: `.*${name}.*`, $options: "i" };
   if (cuisine) query.cuisine = cuisine;
   if (spices) query.spices = spices;
-  if (lactose) query.lactose = lactose;
-  if (gluten) query.gluten = gluten;
-  if (meat) query.meat = meat;
+  if (lactose) query.lactose = lactose === "Yes";
+  if (gluten) query.gluten = gluten === "Yes";
+  if (meat) query.meat = meat === "Yes";
   if (level) query.level = level;
   if (pax) query.pax = pax;
   try {

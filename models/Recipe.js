@@ -63,7 +63,7 @@ const recipeSchema = new Schema({
   },
   steps: {
     type: String,
-    required: [true, "Please add the cooking instructions, all separated by a comma and in the right order"],
+    required: [true, "Please add the cooking instructions, all separated by a dot and in the right order"],
   },
     username: {
     type: Schema.Types.ObjectId,

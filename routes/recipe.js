@@ -101,7 +101,7 @@ router.get("/:recipeId/detail", isLoggedIn, async (req, res, next) => {
   const { recipeId } = req.params;
   const user = req.session.currentUser;
   if (!mongoose.Types.ObjectId.isValid(recipeId)) {
-  return next(new Error("Invalid recipe id"));
+  return next(new Error("Invalid recipe ID"));
   }
   try {
     const recipe = await Recipe.findById(recipeId);

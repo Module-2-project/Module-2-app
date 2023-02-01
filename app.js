@@ -13,9 +13,6 @@ const indexRouter = require('./routes/index');
 const authRouter = require('./routes/auth');
 const recipeRouter = require("./routes/recipe");
 
-// middlewares
-const isLoggedIn = require("./middlewares");
-
 const app = express();
 
 // cookies and loggers
@@ -52,6 +49,31 @@ app.set('view engine', 'hbs');
 // partials
 const hbs = require("hbs");
 hbs.registerPartials(__dirname + "/views/partials");
+
+// middlewares
+const isLoggedIn = require("./middlewares");
+
+// lodash and custom helpers used to manipulate ingedients and steps coming from Recipe model
+const _ = require("lodash");
+const splitIngredients = _.template(
+  '<ul>' +
+    '<% _.forEach(ingredients.split(","), function(ingredient) { %>' +
+      '<li><%= ingredient.trim().charAt(0).toUpperCase() + ingredient.trim().slice(1) %></li>' +
+    '<% }); %>' +
+  '</ul>'
+);
+const splitSteps = _.template(
+  '<ol>' +
+    '<% _.forEach(steps.split("."), function(step, index) { %>' +
+      '<li><%= index + 1 %>. <%= step.trim().charAt(0).toUpperCase() + step.trim().slice(1) %></li>' +
+    '<% }); %>' +
+  '</ol>'
+);
+hbs.registerHelper("splitSteps", function(steps) {
+  return splitSteps({ steps });
+});
+
+
 
 // routes intro
 app.use('/', indexRouter);

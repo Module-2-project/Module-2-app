@@ -2,4 +2,8 @@
     <img id="folioIcon" src="./images/app-logo.png" alt="FoodFolio icon">
 </div>
 
-    
+{{#if user}}
+{{else}}
+<a href="/auth/signup">Sign up</a>
+<a href="/auth/login">Log in</a>
+{{/if}}

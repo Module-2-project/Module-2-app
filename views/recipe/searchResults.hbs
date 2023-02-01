@@ -1,4 +1,11 @@
 <h2>Recipes</h2>
+
+{{#if user}}
+{{else}}
+  <a href="/auth/signup">Sign up</a>
+  <a href="/auth/login">Log in</a>
+{{/if}}
+
 {{#each recipe}}
   {{> recipeCard}}
 {{/each}}

@@ -55,13 +55,9 @@ router.get("/new", (req, res, next) => {
 // @access  User
 router.post("/new", async (req, res, next) => {
   const { name, image, time, cuisine, kcal, spices, lactose, gluten, veggie, level, pax, ingredients, steps, username } = req.body;
-  // used to send ON/OFF data from checkbox form as booleans
-  const lactoseBool = lactose === "ON" ? true : false;
-  const glutenBool = gluten === "ON" ? true : false;
-  const veggieBool = veggie === "ON" ? true : false;
   const user = req.session.currentUser;
   try {
-    const newRecipe = await Recipe.create({ name, image, time, cuisine, kcal, spices, lactose: lactoseBool, gluten: glutenBool, veggie: veggieBool, level, pax, ingredients, steps, username });
+    const newRecipe = await Recipe.create({ name, image, time, cuisine, kcal, spices, lactose, gluten, veggie, level, pax, ingredients, steps, username }, {new: true});
     res.redirect("/recipe/searchResults", {recipe: newRecipe});
   } catch(error) {
     next(error);
@@ -87,12 +83,8 @@ router.get("/:recipeId/edit", async (req, res, next) => {
 router.post("/:recipeId/edit", async (req, res, next) => {
   const { recipeId } = req.params;
   const { name, image, time, cuisine, kcal, spices, lactose, gluten, veggie, level, pax, ingredients, steps, username } = req.body;
-  // used to send ON/OFF data from checkbox form as booleans  
-  const lactoseBool = lactose === "ON" ? true : false;
-  const glutenBool = gluten === "ON" ? true : false;
-  const veggieBool = veggie === "ON" ? true : false;
   try {
-    const editedRecipe = await Recipe.findByIdAndUpdate(recipeId, {name, image, time, cuisine, kcal, spices, lactose: lactoseBool, gluten: glutenBool, veggie: veggieBool, level, pax, ingredients, steps, username}, {new: true});
+    const editedRecipe = await Recipe.findByIdAndUpdate(recipeId, {name, image, time, cuisine, kcal, spices, lactose, gluten, veggie, level, pax, ingredients, steps, username}, {new: true});
     res.redirect("/recipe/searchResults", {recipe: editedRecipe});
   } catch(error) {
     next(error);

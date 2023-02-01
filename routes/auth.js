@@ -64,7 +64,7 @@ router.post('/login', async (req, res, next) => {
 
 // @desc    Destroy user session and log out
 // @route   POST /auth/logout
-// @access  Private 
+// @access  User 
 router.post('/logout', (req, res, next) => {
   req.session.destroy((err) => {
     if (err) {

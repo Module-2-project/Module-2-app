@@ -37,16 +37,25 @@
   </select>
   <label>Does the recipe contain:</label>
   <div>
-    <label>Lactose</label>
-    <input type="checkbox" name="lactose" />
+    <label>Lactose:</label>
+    <select required="true" name="lactose">
+      <option value="Yes">Yes</option>
+      <option value="No">No</option>
+    </select>
   </div>
   <div>
-    <label>Gluten</label>
-    <input type="checkbox" name="gluten" />
+    <label>Gluten:</label>
+    <select required="true" name="gluten">
+      <option value="Yes">Yes</option>
+      <option value="No">No</option>
+    </select>
   </div>
   <div>
     <label>Meet or fish:</label>
-    <input type="checkbox" name="veggie" />
+    <select required="true" name="veggie">
+      <option value="Yes">Yes</option>
+      <option value="No">No</option>
+    </select>
   </div>
   <label>Select your cooking level:</label>
   <select required="true" name="level">

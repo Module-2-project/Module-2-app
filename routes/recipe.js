@@ -31,7 +31,7 @@ function stringToOrderedList(str) {
 // @access  Public
 router.get("/search", (req, res, next) => {
   const user = req.session.currentUser;
-  res.render("recipe/search", user);
+  res.render("recipe/search", {user});
 });
 
 // @desc    Searches for recipes
@@ -63,9 +63,10 @@ router.get("/search-results", async (req, res, next) => {
 // @route   GET /recipe/all
 // @access  Public
 router.get("/all", async (req, res, next) => {
+  const user = req.session.currentUser;
   try {
     const recipes = await Recipe.find({});
-    res.render("recipe/searchResults", {recipe: recipes});
+    res.render("recipe/searchResults", {recipe: recipes, user: user});
   } catch (error) {
     next(error);
   }
@@ -76,7 +77,7 @@ router.get("/all", async (req, res, next) => {
 // @access  User
 router.get("/new", isLoggedIn, (req, res, next) => {
   const user = req.session.currentUser;
-  res.render("recipe/newRecipe", user);
+  res.render("recipe/newRecipe", {user});
 });
 
 // @desc    Sends new recipe form
@@ -87,7 +88,7 @@ router.post("/new", isLoggedIn, async (req, res, next) => {
   const user = req.session.currentUser;
   try {
     const newRecipe = await Recipe.create({ name, image, time, cuisine, kcal, spices, lactose, gluten, meat, level, pax, ingredients, steps, username }, {new: true});
-    res.render("recipe/searchResults", {recipe: newRecipe});
+    res.render("recipe/searchResults", {recipe: newRecipe, user: user});
   } catch(error) {
     next(error);
   }
@@ -98,12 +99,13 @@ router.post("/new", isLoggedIn, async (req, res, next) => {
 // @access  User
 router.get("/:recipeId/detail", isLoggedIn, async (req, res, next) => {
   const { recipeId } = req.params;
+  const user = req.session.currentUser;
   if (!mongoose.Types.ObjectId.isValid(recipeId)) {
   return next(new Error("Invalid recipe id"));
   }
   try {
     const recipe = await Recipe.findById(recipeId);
-    res.render("recipe/recipeDetail", recipe);
+    res.render("recipe/recipeDetail", {recipe, user});
   } catch (error) {
     next(error);
   }
@@ -114,9 +116,10 @@ router.get("/:recipeId/detail", isLoggedIn, async (req, res, next) => {
 // @access  User
 router.get("/:recipeId/edit", isLoggedIn, async (req, res, next) => {
   const { recipeId } = req.params;
+  const user = req.session.currentUser;
   try {
     const recipe = await Recipe.findById(recipeId);
-    res.render("recipe/editRecipe", {recipe});
+    res.render("recipe/editRecipe", {recipe, user});
   } catch(error) {
     next(error);
   }
@@ -127,10 +130,11 @@ router.get("/:recipeId/edit", isLoggedIn, async (req, res, next) => {
 // @access  User
 router.post("/:recipeId/edit", isLoggedIn, async (req, res, next) => {
   const { recipeId } = req.params;
+  const user = req.session.currentUser;
   const { name, image, time, cuisine, kcal, spices, lactose, gluten, meat, level, pax, ingredients, steps, username } = req.body;
   try {
     const editedRecipe = await Recipe.findByIdAndUpdate(recipeId, {name, image, time, cuisine, kcal, spices, lactose, gluten, meat, level, pax, ingredients, steps, username}, {new: true});
-    res.render("recipe/searchResults", {recipe: editedRecipe});
+    res.render("recipe/searchResults", {recipe: editedRecipe, user: user});
   } catch(error) {
     next(error);
   }

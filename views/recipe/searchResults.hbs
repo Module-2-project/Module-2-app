@@ -6,6 +6,10 @@
   <a href="/auth/login">Log in</a>
 {{/if}}
 
+{{#if recipe}}
 {{#each recipe}}
   {{> recipeCard}}
-{{/each}}
+  {{/each}}
+{{else}}
+<p>Sorry, no recipe has been found under this name. <a href="/recipe/search">Try again</a> or <a href="/recipe/new">add</a> this recipe.</p>
+{{/if}}

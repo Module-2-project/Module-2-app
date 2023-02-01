@@ -1,4 +1,5 @@
 const express = require('express');
+const mongoose = require("mongoose");
 const router = express.Router();
 const User = require('../models/User');
 const Recipe = require("../models/Recipe");
@@ -33,6 +34,31 @@ router.get("/search", (req, res, next) => {
   res.render("recipe/search", user);
 });
 
+// @desc    Searches for recipes
+// @route   GET /recipe/search
+// @access  Public
+router.get("/search-results", async (req, res, next) => {
+  const user = req.session.currentUser;
+  const { name, cuisine, spices, lactose, gluten, meat, level, pax } = req.query;
+  // Define the query to search for and avoid error if blank field in search form
+  let query = {};
+  if (name) query.name = { $regex: `.*${name}.*`, $options: "i" };
+  if (cuisine) query.cuisine = cuisine;
+  if (spices) query.spices = spices;
+  if (lactose) query.lactose = lactose;
+  if (gluten) query.gluten = gluten;
+  if (meat) query.meat = meat;
+  if (level) query.level = level;
+  if (pax) query.pax = pax;
+  try {
+    const recipe = await Recipe.find(query);
+    res.render("recipe/searchResults", {recipe, user});
+  } catch (error) {
+    next(error);
+  }
+});
+
+
 // @desc    Displays all recipes in preview mode
 // @route   GET /recipe/all
 // @access  Public
@@ -57,10 +83,10 @@ router.get("/new", isLoggedIn, (req, res, next) => {
 // @route   POST /recipe/new
 // @access  User
 router.post("/new", isLoggedIn, async (req, res, next) => {
-  const { name, image, time, cuisine, kcal, spices, lactose, gluten, veggie, level, pax, ingredients, steps, username } = req.body;
+  const { name, image, time, cuisine, kcal, spices, lactose, gluten, meat, level, pax, ingredients, steps, username } = req.body;
   const user = req.session.currentUser;
   try {
-    const newRecipe = await Recipe.create({ name, image, time, cuisine, kcal, spices, lactose, gluten, veggie, level, pax, ingredients, steps, username }, {new: true});
+    const newRecipe = await Recipe.create({ name, image, time, cuisine, kcal, spices, lactose, gluten, meat, level, pax, ingredients, steps, username }, {new: true});
     res.render("recipe/searchResults", {recipe: newRecipe});
   } catch(error) {
     next(error);
@@ -72,9 +98,12 @@ router.post("/new", isLoggedIn, async (req, res, next) => {
 // @access  User
 router.get("/:recipeId/detail", isLoggedIn, async (req, res, next) => {
   const { recipeId } = req.params;
+  if (!mongoose.Types.ObjectId.isValid(recipeId)) {
+  return next(new Error("Invalid recipe id"));
+  }
   try {
-    const recipe = await Recipe.findById({recipeId});
-    res.render("recipe/recipeDetail", {recipe});
+    const recipe = await Recipe.findById(recipeId);
+    res.render("recipe/recipeDetail", recipe);
   } catch (error) {
     next(error);
   }
@@ -98,9 +127,9 @@ router.get("/:recipeId/edit", isLoggedIn, async (req, res, next) => {
 // @access  User
 router.post("/:recipeId/edit", isLoggedIn, async (req, res, next) => {
   const { recipeId } = req.params;
-  const { name, image, time, cuisine, kcal, spices, lactose, gluten, veggie, level, pax, ingredients, steps, username } = req.body;
+  const { name, image, time, cuisine, kcal, spices, lactose, gluten, meat, level, pax, ingredients, steps, username } = req.body;
   try {
-    const editedRecipe = await Recipe.findByIdAndUpdate(recipeId, {name, image, time, cuisine, kcal, spices, lactose, gluten, veggie, level, pax, ingredients, steps, username}, {new: true});
+    const editedRecipe = await Recipe.findByIdAndUpdate(recipeId, {name, image, time, cuisine, kcal, spices, lactose, gluten, meat, level, pax, ingredients, steps, username}, {new: true});
     res.render("recipe/searchResults", {recipe: editedRecipe});
   } catch(error) {
     next(error);

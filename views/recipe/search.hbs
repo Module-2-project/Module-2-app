@@ -1,7 +1,74 @@
 <h2>Search</h2>
 
-{{#if user}}
-{{else}}
-  <a href="/auth/signup">Sign up</a>
-  <a href="/auth/login">Log in</a>
-{{/if}}
+<form class="search-form" method="GET" action="/recipe/search-results">
+  <label>Search for a recipe:</label>
+  <input type="text" name="name" />
+  <label for="cuisine">Cuisine:</label>
+  <select name="cuisine">
+    <option value="">None</option>
+    <option value="Asian">Asian</option>
+    <option value="Japanese">Japanese</option>
+    <option value="Thai">Thai</option>
+    <option value="Italian">Italian</option>
+    <option value="Greek">Greek</option>
+    <option value="Mexican">Mexican</option>
+    <option value="Argentinian">Argentinian</option>
+    <option value="Colombian">Colombian</option>
+    <option value="South American">South American</option>
+    <option value="Etiopian">Etiopian</option>
+    <option value="Marrocan">Marrocan</option>
+    <option value="Spanish">Spanish</option>
+    <option value="Portuguese">Portuguese</option>
+    <option value="Indian">Indian</option>
+    <option value="American">American</option>
+    <option value="Other">Other</option>
+  </select>
+  <label for="spices">Spiciness:</label>
+  <select name="spices">
+    <option value="">Not specified</option>
+    <option value="Mild">Mild</option>
+    <option value="Medium">Medium</option>
+    <option value="Spicy">Spicy</option>
+    <option value="Very spicy">Very spicy</option>
+  </select>
+  <label>Does the recipe contain:</label>
+  <div>
+    <label>Lactose:</label>
+    <select required="true" name="lactose">
+      <option value="">Not specified</option>
+      <option value="Yes">Yes</option>
+      <option value="No">No</option>
+    </select>
+  </div>
+  <div>
+    <label>Gluten:</label>
+    <select required="true" name="gluten">
+      <option value="">Not specified</option>
+      <option value="Yes">Yes</option>
+      <option value="No">No</option>
+    </select>
+  </div>
+  <div>
+    <label>Meat or fish:</label>
+    <select required="true" name="meat">
+      <option value="">Not specified</option>
+      <option value="Yes">Yes</option>
+      <option value="No">No</option>
+    </select>
+  </div>
+  <label for="level">Level of difficulty:</label>
+  <select name="level">
+    <option value="">Not specified</option>
+    <option value="Beginner">Beginner</option>
+    <option value="Medium">Medium</option>
+    <option value="Hard">Hard</option>
+    <option value="God">God</option>
+    <option value="Grandma">Grandma</option>
+  </select>
+  <button type="submit">Search</button>
+</form>
+<form class="search-form" method="GET" action="/recipe/search-results">
+  <label>Search for a recipe by name:</label>
+  <input type="text" name="name" />
+  <button type="submit">Search</button>
+</form>

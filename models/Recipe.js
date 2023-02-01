@@ -42,7 +42,7 @@ const recipeSchema = new Schema({
     type: String,
     required: [true, "Please check this box if your meal contains gluten"],
   },
-  veggie: {
+  meat: {
     type: String,
     required: [true, "Please check this box if your meal contains meat or fish - non vegetarian friendly"],
   },

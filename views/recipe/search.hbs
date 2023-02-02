@@ -1,5 +1,6 @@
 <h2>Search</h2>
 
+{{#if user}}
 <form class="search-form" method="GET" action="/recipe/search-results">
   <label>Search for a recipe:</label>
   <input type="text" name="name" />
@@ -34,27 +35,14 @@
   <label>Does the recipe contain:</label>
   <div>
     <label>Lactose:</label>
-    <select required="true" name="lactose">
-      <option value="">Not specified</option>
-      <option value="Yes">Yes</option>
-      <option value="No">No</option>
-    </select>
-  </div>
-  <div>
+    <input type="radio" name="lactose" value="true" />Yes
+    <input type="radio" name="lactose" value="false" />No
     <label>Gluten:</label>
-    <select required="true" name="gluten">
-      <option value="">Not specified</option>
-      <option value="Yes">Yes</option>
-      <option value="No">No</option>
-    </select>
-  </div>
-  <div>
-    <label>Meat or fish:</label>
-    <select required="true" name="meat">
-      <option value="">Not specified</option>
-      <option value="Yes">Yes</option>
-      <option value="No">No</option>
-    </select>
+    <input type="radio" name="gluten" value="true" />Yes
+    <input type="radio" name="gluten" value="false" />No
+    <label>Meat:</label>
+    <input type="radio" name="meat" value="true" />Yes
+    <input type="radio" name="meat" value="false" />No
   </div>
   <label for="level">Level of difficulty:</label>
   <select name="level">
@@ -67,8 +55,10 @@
   </select>
   <button type="submit">Search</button>
 </form>
+{{else}}
 <form class="search-form" method="GET" action="/recipe/search-results">
   <label>Search for a recipe by name:</label>
   <input type="text" name="name" />
   <button type="submit">Search</button>
 </form>
+{{/if}}

@@ -35,15 +35,15 @@ const recipeSchema = new Schema({
     },
   },
   lactose: {
-    type: String,
+    type: Boolean,
     required: [true, "Please check this box if your meal contains lactose"],
   },
   gluten: {
-    type: String,
+    type: Boolean,
     required: [true, "Please check this box if your meal contains gluten"],
   },
   meat: {
-    type: String,
+    type: Boolean,
     required: [true, "Please check this box if your meal contains meat or fish - non vegetarian friendly"],
   },
   level: {

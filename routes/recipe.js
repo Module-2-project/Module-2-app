@@ -25,13 +25,14 @@ router.get("/search-results", async (req, res, next) => {
   if (name) query.name = { $regex: `.*${name}.*`, $options: "i" };
   if (cuisine) query.cuisine = cuisine;
   if (spices) query.spices = spices;
-  if (lactose) query.lactose = lactose === "Yes";
-  if (gluten) query.gluten = gluten === "Yes";
-  if (meat) query.meat = meat === "Yes";
+  if (lactose) query.lactose = lactose === "true" ? true : false;
+  if (gluten) query.gluten = gluten === "true";
+  if (meat) query.meat = meat === "true" ? true : false;
   if (level) query.level = level;
   if (pax) query.pax = pax;
   try {
     const recipe = await Recipe.find(query);
+    console.log(query);
     res.render("recipe/searchResults", {recipe, user});
   } catch (error) {
     next(error);

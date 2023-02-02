@@ -12,6 +12,7 @@ const MongoStore = require('connect-mongo');
 const indexRouter = require('./routes/index');
 const authRouter = require('./routes/auth');
 const recipeRouter = require("./routes/recipe");
+const profileRouter = require('./routes/profile');
 
 const app = express();
 
@@ -21,6 +22,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+//=====//
+app.use('./profile, profileRouter');
 
 // For deployment
 app.set('trust proxy', 1);

@@ -52,3 +52,7 @@ nav ul li a img {
   display: flex;
   justify-content: flex-end;
 }
+
+.arrow-back {
+  width: 25px;
+}

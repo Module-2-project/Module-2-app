@@ -4,27 +4,28 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href='./stylesheets/style.css' rel="stylesheet"/>
+  <link href='../stylesheets/style.css' rel="stylesheet"/>
   <title>Project module 2</title>
 </head>
 <body>
+  <img id="folioIcon" src="../images/app-logo.png" alt="FoodFolio icon">
     {{{ body }}}
-<footer>
-    <nav>
-      <ul>
-        {{#if user}}
-        <li class="homeIcon"><a href="/"><img src="./images/Home icon 2.png"></a></li>
-        <li><a href="#"><img src="./images/Question Mark Hand Icon.png"></a></li>
-        <li><a href="/recipe/search"><img src="./images/Search icon.png"></a></li>
-        <li><a href="#"><img src="./images/Heart icon 2.png"></a></li>
-        <li><a href="/profile"><img src="./images/Chef profile icon.png"></a></li>
-        {{else}}
-        <li class="homeIcon"><a href="/"><img src="./images/Home icon 2.png"></a></li>
-        <li><a href="#"><img src="./images/Question Mark Hand Icon.png"></a></li>
-        <li><a href="/recipe/search"><img src="./images/Search icon.png"></a></li>
-        {{/if}}
-      </ul>
-    </nav>
+    <footer>
+      <nav>
+        <ul>
+          {{#if user}}
+          <li class="homeIcon"><a href="/"><img src="../images/home-icon.png"></a></li>
+          <li><a href="#"><img src="../images/question-icon-box.png"></a></li>
+          <li><a href="/recipe/search"><img src="../images/search-icon.png"></a></li>
+          <li><a href="#"><img src="../images/heart-icon-navbar.png"></a></li>
+          <li><a href="/profile"><img src="../images/chef-icon.png"></a></li>
+          {{else}}
+          <li class="homeIcon"><a href="/"><img src="../images/home-icon.png"></a></li>
+          <li><a href="#"><img src="../images/question-icon-box.png"></a></li>
+          <li><a href="/recipe/search"><img src="../images/search-icon.png"></a></li>
+          {{/if}}
+        </ul>
+      </nav>
   </footer>
 </body>
 </html>

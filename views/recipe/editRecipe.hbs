@@ -9,22 +9,22 @@
   <input required="true" type="number" name="time" value="{{time}}" />
   <label>Cuisine type:</label>
   <select required="true" name="cuisine">
-    <option value="Asian">Asian</option>
-    <option value="Japanese">Japanese</option>
-    <option value="Thai">Thai</option>
-    <option value="Italian">Italian</option>
-    <option value="Greek">Greek</option>
-    <option value="Mexican">Mexican</option>
-    <option value="Argentinian">Argentinian</option>
-    <option value="Colombian">Colombian</option>
-    <option value="South American">South American</option>
-    <option value="Etiopian">Etiopian</option>
-    <option value="Marrocan">Marrocan</option>
-    <option value="Spanish">Spanish</option>
-    <option value="Portuguese">Portuguese</option>
-    <option value="Indian">Indian</option>
-    <option value="American">American</option>
-    <option value="Other">Other</option>
+    <option value="Asian" {{ "Asian"==cuisine ? "selected" : "" }}>Asian</option>
+    <option value="Japanese" {{ "Japanese"==cuisine ? "selected" : "" }}>Japanese</option>
+    <option value="Thai" {{ "Thai"==cuisine ? "selected" : "" }}>Thai</option>
+    <option value="Italian" {{ "Italian"==cuisine ? "selected" : "" }}>Italian</option>
+    <option value="Greek" {{ "Greek"==cuisine ? "selected" : "" }}>Greek</option>
+    <option value="Mexican" {{ "Mexican"==cuisine ? "selected" : "" }}>Mexican</option>
+    <option value="Argentinian" {{ "Argentinian"==cuisine ? "selected" : "" }}>Argentinian</option>
+    <option value="Colombian" {{ "Colombian"==cuisine ? "selected" : "" }}>Colombian</option>
+    <option value="South American" {{ "South American"==cuisine ? "selected" : "" }}>South American</option>
+    <option value="Etiopian" {{ "Etiopian"==cuisine ? "selected" : "" }}>Etiopian</option>
+    <option value="Marrocan" {{ "Marrocan"==cuisine ? "selected" : "" }}>Marrocan</option>
+    <option value="Spanish" {{ "Spanish"==cuisine ? "selected" : "" }}>Spanish</option>
+    <option value="Portuguese" {{ "Portuguese"==cuisine ? "selected" : "" }}>Portuguese</option>
+    <option value="Indian" {{ "Indian"==cuisine ? "selected" : "" }}>Indian</option>
+    <option value="American" {{ "American"==cuisine ? "selected" : "" }}>American</option>
+    <option value="Other" {{ "Other"==cuisine ? "selected" : "" }}>Other</option>
   </select>
   <label>Kcal:</label>
   <input required="true" type="number" name="kcal" value="{{kcal}}" />
@@ -38,24 +38,14 @@
   <label>Does the recipe contain:</label>
   <div>
     <label>Lactose:</label>
-    <select required="true" name="lactose">
-      <option value="Yes">Yes</option>
-      <option value="No">No</option>
-    </select>
-  </div>
-  <div>
+    <input type="radio" name="lactose" value="true" {{lactose=="true" ? "checked" : "" }} />Yes
+    <input type="radio" name="lactose" value="false" {{lactose=="false" ? "checked" : "" }} />No
     <label>Gluten:</label>
-    <select required="true" name="gluten">
-      <option value="Yes">Yes</option>
-      <option value="No">No</option>
-    </select>
-  </div>
-  <div>
-    <label>Meat or fish:</label>
-    <select required="true" name="meat">
-      <option value="Yes">Yes</option>
-      <option value="No">No</option>
-    </select>
+    <input type="radio" name="gluten" value="true" {{gluten=="true" ? "checked" : "" }} />Yes
+    <input type="radio" name="gluten" value="false" {{gluten=="false" ? "checked" : "" }} />No
+    <label>Meat:</label>
+    <input type="radio" name="meat" value="true" {{meat=="true" ? "checked" : "" }} />Yes
+    <input type="radio" name="meat" value="false" {{meat=="false" ? "checked" : "" }} />No
   </div>
   <label>Select your cooking level:</label>
   <select required="true" name="level">

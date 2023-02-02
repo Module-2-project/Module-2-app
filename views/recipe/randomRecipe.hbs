@@ -1,0 +1,11 @@
+<h2>Chef's proposal</h2>
+
+{{#if user}}
+{{else}}
+  <a href="/auth/signup">Sign up</a>
+  <a href="/auth/login">Log in</a>
+{{/if}}
+
+{{#if recipe}}
+    {{> recipeCard}}
+{{/if}}

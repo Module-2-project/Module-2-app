@@ -53,6 +53,21 @@ router.get("/all", async (req, res, next) => {
   }
 });
 
+// @desc    Displays a random recipe in preview mode
+// @route   GET /recipe/random
+// @access  Public
+router.get("/random", async (req, res, next) => {
+  const user = req.session.currentUser;
+  try {
+    const count = await Recipe.countDocuments();
+    const randomIndex = Math.floor(Math.random() * count);
+    const randomRecipe = await Recipe.findOne().skip(randomIndex);
+    res.render("recipe/randomRecipe", {recipe: randomRecipe, user: user});
+  } catch(error) {
+    next(error);
+  }
+});
+
 // @desc    Displays add new recipe form
 // @route   GET /recipe/new
 // @access  User

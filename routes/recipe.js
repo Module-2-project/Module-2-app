@@ -67,6 +67,10 @@ router.get("/new", isLoggedIn, (req, res, next) => {
 router.post("/new", isLoggedIn, async (req, res, next) => {
   const { name, image, time, cuisine, kcal, spices, lactose, gluten, meat, level, pax, ingredients, steps, username } = req.body;
   const user = req.session.currentUser;
+  // regex to make sure the ingredients and steps strings start by a letter
+  if (!/^[a-zA-Z].*/.test(ingredients) || !/^[a-zA-Z].*/.test(steps)) {
+    return next(new Error("You need to add ingredients separated by commas and steps separated by dots."));
+  }
   try {
     const newRecipe = await Recipe.create({ name, image, time, cuisine, kcal, spices, lactose, gluten, meat, level, pax, ingredients, steps, username }, {new: true});
     res.render("recipe/searchResults", {recipe: newRecipe, user: user});
@@ -113,6 +117,10 @@ router.post("/:recipeId/edit", isLoggedIn, async (req, res, next) => {
   const { recipeId } = req.params;
   const user = req.session.currentUser;
   const { name, image, time, cuisine, kcal, spices, lactose, gluten, meat, level, pax, ingredients, steps, username } = req.body;
+  // regex to make sure the ingredients and steps strings start by a letter
+  if (!/^[a-zA-Z].*/.test(ingredients) || !/^[a-zA-Z].*/.test(steps)) {
+    return next(new Error("You need to add ingredients separated by commas and steps separated by dots."));
+  }
   try {
     const editedRecipe = await Recipe.findByIdAndUpdate(recipeId, {name, image, time, cuisine, kcal, spices, lactose, gluten, meat, level, pax, ingredients, steps, username}, {new: true});
     res.render("recipe/searchResults", {recipe: editedRecipe, user: user});

@@ -1,22 +1,22 @@
 <div class="recipeDetail">
-  <h3>{{name}}</h3>
-  <p>Cuisine: {{cuisine}}</p>
-  <img src={{image}} alt="Dish image" />
+  <h3>{{recipe.name}}</h3>
+  <p>Cuisine: {{recipe.cuisine}}</p>
+  <img src={{recipe.image}} alt="Dish image" />
   <ul>
-    <li>{{time}} min</li>
-    <li>Servings: {{pax}}</li>
-    <li>Level: {{level}}</li>
-    <li>Kcal: {{kcal}}</li>
-    <li>Spices: {{spices}}</li>
-    <li>Lactose: {{lactose}}</li>
-    <li>Gluten: {{gluten}}</li>
-    <li>Meat: {{meat}}</li>
+    <li>{{recipe.time}} min</li>
+    <li>Servings: {{recipe.pax}}</li>
+    <li>Level: {{recipe.level}}</li>
+    <li>Kcal: {{recipe.kcal}}</li>
+    <li>Spices: {{srecipe.pices}}</li>
+    <li>Lactose: {{recipe.lactose}}</li>
+    <li>Gluten: {{recipe.gluten}}</li>
+    <li>Meat: {{recipe.meat}}</li>
   </ul>
   <h4>Ingredients:</h4>
   <!-- this is a ul tag with li inside -->
-    {{{splitIngredients ingredients}}}
+    {{{splitIngredients recipe.ingredients}}}
   <h4>Steps:</h4>
   <!-- this is a ol tag with li inside -->
-    {{{splitSteps steps}}}
+    {{{splitSteps recipe.steps}}}
   <p>Created by: {{username}}</p>
 </div>

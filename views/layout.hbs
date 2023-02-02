@@ -9,6 +9,18 @@
 </head>
 <body>
   <img id="folioIcon" src="../images/app-logo.png" alt="FoodFolio icon">
+  <div class="top-navbar">
+    {{#if user}}
+    <div id="homePageNav">
+      <a href="/recipe/new"><img class="homePageIcons" src="../images/add-icon.png" alt="Add icon" /></a>
+      <a href="/recipe/all"><img class="homePageIcons" src="../images/chef-hat.png" alt="All recipes" /></a>
+    </div>
+    {{else}}
+      <a href="/recipe/all">All recipes</a>
+      <a href="/auth/signup">Sign up</a>
+      <a href="/auth/login">Log in</a>
+    {{/if}}
+  </div>
     {{{ body }}}
     <footer>
       <nav>

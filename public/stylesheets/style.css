@@ -1,10 +1,12 @@
+/* GLOBAL STYLING  */
+
 body {
   padding: 0;
   margin: 0;
   font: 16px "Lucida Grande", Helvetica, Arial, sans-serif;
+  /* margin for navbar not to cover text */
+  margin-bottom: 50px;
 }
-
-/* Global styling  */
 
 #folioIcon {
   width: 250px;
@@ -15,7 +17,7 @@ footer {
   position: fixed;
   bottom: 0%;
   width: 100vw;
-  background-color: #ddd;  
+  background-color: #ddd;
 }
   
 nav ul {
@@ -23,6 +25,7 @@ nav ul {
   list-style: none;
   padding: 1px;
   width: 100%;
+  /* space between icons - flexbox allowed */
   gap: 20px;
 }
 
@@ -32,4 +35,14 @@ nav ul li a img {
 
 .homeIcon {
   width: 120px;
+}
+
+.homePageIcons {
+  width: 40px;
+}
+
+/* styles add and all recipe icons */
+#homePageNav {
+  display: flex;
+  justify-content: flex-end;
 }

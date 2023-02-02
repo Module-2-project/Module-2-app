@@ -19,7 +19,7 @@ const recipeSchema = new Schema({
   cuisine: {
     type: String,
     enum: {
-      values: ["Asian", "Japanese", "Thai", "Italian", "Greek", "Mexican", "Argentinian", "Colombian", "South American", "Etiopian", "Marrocan", "Spanish", "Portuguese", "Indian", "American", "Other"],
+      values: ["Asian", "Japanese", "Thai", "Italian", "Greek", "Mexican", "Argentinian", "Colombian", "South American", "Ethiopian", "Marrocan", "Spanish", "Portuguese", "Indian", "American", "Other"],
       message: "Please select the cuisine type of your dish. If it is not in the list, select Other."
     }, 
   },

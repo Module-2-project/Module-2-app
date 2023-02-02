@@ -123,7 +123,7 @@ router.post("/:recipeId/edit", isLoggedIn, async (req, res, next) => {
   }
   try {
     const editedRecipe = await Recipe.findByIdAndUpdate(recipeId, {name, image, time, cuisine, kcal, spices, lactose, gluten, meat, level, pax, ingredients, steps, username}, {new: true});
-    res.render("recipe/searchResults", {recipe: editedRecipe, user: user});
+    res.render("recipe/recipeDetail", {recipe: editedRecipe, user: user});
   } catch(error) {
     next(error);
   }

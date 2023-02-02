@@ -73,16 +73,20 @@ const splitSteps = _.template(
     '<% }); %>' +
   '</ol>'
 );
-
 hbs.registerHelper("splitIngredients", function(ingredients) {
   return splitIngredients({ ingredients });
 });
 hbs.registerHelper("splitSteps", function(steps) {
   return splitSteps({ steps });
 });
-
-
-
+// helper to compare values from DB to another value
+hbs.registerHelper('eq', function (value, otherValue, options) {
+  if (_.isEqual(value, otherValue)) {
+    return options.fn(this);
+  } else {
+    return options.inverse(this);
+  }
+});
 
 // routes intro
 app.use('/', indexRouter);

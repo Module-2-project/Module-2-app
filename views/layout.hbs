@@ -21,23 +21,25 @@
       <a href="/auth/login">Log in</a>
     {{/if}}
   </div>
+  <main>
     {{{ body }}}
-    <footer>
-      <nav>
-        <ul>
-          {{#if user}}
-          <li class="homeIcon"><a href="/"><img src="../images/home-icon.png"></a></li>
-          <li><a href="#"><img src="../images/question-icon-box.png"></a></li>
-          <li><a href="/recipe/search"><img src="../images/search-icon.png"></a></li>
-          <li><a href="#"><img src="../images/heart-icon-navbar.png"></a></li>
-          <li><a href="/profile"><img src="../images/chef-icon.png"></a></li>
-          {{else}}
-          <li class="homeIcon"><a href="/"><img src="../images/home-icon.png"></a></li>
-          <li><a href="#"><img src="../images/question-icon-box.png"></a></li>
-          <li><a href="/recipe/search"><img src="../images/search-icon.png"></a></li>
-          {{/if}}
-        </ul>
-      </nav>
+  </main>
+  <footer>
+    <nav>
+      <ul>
+        {{#if user}}
+        <li class="homeIcon"><a href="/"><img src="../images/home-icon.png"></a></li>
+        <li><a href="#"><img src="../images/question-icon-box.png"></a></li>
+        <li><a href="/recipe/search"><img src="../images/search-icon.png"></a></li>
+        <li><a href="#"><img src="../images/heart-icon-navbar.png"></a></li>
+        <li><a href="/profile"><img src="../images/chef-icon.png"></a></li>
+        {{else}}
+        <li class="homeIcon"><a href="/"><img src="../images/home-icon.png"></a></li>
+        <li><a href="#"><img src="../images/question-icon-box.png"></a></li>
+        <li><a href="/recipe/search"><img src="../images/search-icon.png"></a></li>
+        {{/if}}
+      </ul>
+    </nav>
   </footer>
 </body>
 </html>

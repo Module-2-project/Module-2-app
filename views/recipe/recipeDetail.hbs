@@ -8,9 +8,10 @@
     <li>Level: {{recipe.level}}</li>
     <li>Kcal: {{recipe.kcal}}</li>
     <li>Spices: {{srecipe.pices}}</li>
-    <li>Lactose: {{recipe.lactose}}</li>
-    <li>Gluten: {{recipe.gluten}}</li>
-    <li>Meat: {{recipe.meat}}</li>
+    <!-- as the following 3 items are booleans in DB, we need to check the value and decide what to send to front end -->
+    <li>Lactose: {{#if recipe.lactose}}Yes{{else}}No{{/if}}</li>
+    <li>Gluten: {{#if recipe.gluten}}Yes{{else}}No{{/if}}</li>
+    <li>Meat: {{#if recipe.meat}}Yes{{else}}No{{/if}}</li>
   </ul>
   <h4>Ingredients:</h4>
   <!-- this is a ul tag with li inside -->

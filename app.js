@@ -55,6 +55,7 @@ const isLoggedIn = require("./middlewares");
 
 // lodash and custom helpers used to manipulate ingedients and steps coming from Recipe model
 const _ = require("lodash");
+// ingredients will show as an unordered list, all with capital letter
 const splitIngredients = _.template(
   '<ul>' +
     '<% _.forEach(ingredients.split(","), function(ingredient) { %>' +
@@ -62,16 +63,24 @@ const splitIngredients = _.template(
     '<% }); %>' +
   '</ul>'
 );
+// steps will show as an ordered list, all with capital letter at first letter of each step
 const splitSteps = _.template(
   '<ol>' +
     '<% _.forEach(steps.split("."), function(step, index) { %>' +
-      '<li><%= index + 1 %>. <%= step.trim().charAt(0).toUpperCase() + step.trim().slice(1) %></li>' +
+      '<% if (index !== steps.split(".").length - 1 || step.trim().length > 0) { %>' +
+        '<li><%= step.trim().charAt(0).toUpperCase() + step.trim().slice(1) %></li>' +
+      '<% } %>' +
     '<% }); %>' +
   '</ol>'
 );
+
+hbs.registerHelper("splitIngredients", function(ingredients) {
+  return splitIngredients({ ingredients });
+});
 hbs.registerHelper("splitSteps", function(steps) {
   return splitSteps({ steps });
 });
+
 
 
 

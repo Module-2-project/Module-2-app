@@ -22,8 +22,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
 //=====//
-app.use('./profile, profileRouter');
+app.use('/profile', function (req, res, next) { 
+  res.render('auth/profile') });
+// app.use('./profile', profileRouter);
+//-----//
 
 // For deployment
 app.set('trust proxy', 1);
@@ -58,6 +62,7 @@ const isLoggedIn = require("./middlewares");
 
 // lodash and custom helpers used to manipulate ingedients and steps coming from Recipe model
 const _ = require("lodash");
+const { profile } = require('console');
 // ingredients will show as an unordered list, all with capital letter
 const splitIngredients = _.template(
   '<ul>' +

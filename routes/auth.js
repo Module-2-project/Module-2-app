@@ -17,26 +17,26 @@ router.get('/signup', async (req, res, next) => {
 // @route   POST /auth/signup
 // @access  Public
 router.post('/signup', async (req, res, next) => {
-  const { username, firstName , lastName, email, password, cookingLevel } = req.body;
+  const {username, firstName , lastName, email, password, cookingLevel} = req.body;
   if (!username || !firstName || !lastName || !email || !password || !cookingLevel) {
-    res.render('auth/signup', { error: 'Please fill all data to sign up.' });
+    res.render('auth/signup', {error: 'Please fill all data to sign up.'});
     return;
   } 
   const regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/;
   if (!regex.test(password)) {
-    res.render("auth/signup", { error: "Password needs to contain at least 6 characters, one number, one special character and one lowercase and uppercase character."});
+    res.render("auth/signup", {error: "Password needs to contain at least 6 characters, one number, one special character and one lowercase and uppercase character."});
     return;
   }
-  const userInDB = await User.findOne({ email: email });
+  const userInDB = await User.findOne({email});
   if (userInDB) {
-    res.render('auth/signup', { error: `${email} already exists!`});
+    res.render('auth/signup', {error: `${email} already exists!`});
     return;
   }
   try {
     const salt = bcrypt.genSaltSync(saltRounds);
     const hashedPassword = bcrypt.hashSync(password, salt);
     console.log(username, firstName , lastName, email, password, cookingLevel);
-    const user = await User.create({ username, firstName, lastName, email, hashedPassword, cookingLevel });
+    const user = await User.create({username, firstName, lastName, email, hashedPassword, cookingLevel});
     res.render('auth/login');
   } catch (error) { 
     next (error);
@@ -54,15 +54,15 @@ router.get('/login', async (req, res, next) => {
 // @route   POST /auth/login
 // @access  Public
 router.post('/login', async (req, res, next) => {
-  const { email, password } = req.body;
+  const {email, password} = req.body;
   if (!email || !password) {
-    res.render("auth/login", { error: "Introduce all the fields requested in order to log in"});
+    res.render("auth/login", {error: "Introduce all the fields requested in order to log in"});
     return;
   }
   try {
-    const user = await User.findOne({ email: email });
+    const user = await User.findOne({email});
     if (!user) {
-      res.render('auth/login', { error: `There is no user signed up for the following email: ${email}` });
+      res.render('auth/login', {error: `There is no user signed up for the following email: ${email}`});
       return;
     } else {
       const match = await bcrypt.compare(password, user.hashedPassword);
@@ -70,7 +70,7 @@ router.post('/login', async (req, res, next) => {
         req.session.currentUser = user;
         res.render('profile/profile', {user});
       } else {
-        res.render('auth/login', { error: "Unable to authenticate user." });
+        res.render('auth/login', {error: "Unable to authenticate user."});
       }
     }
   } catch (error) {

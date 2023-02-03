@@ -81,13 +81,13 @@ router.get("/new", isLoggedIn, (req, res, next) => {
 router.post("/new", isLoggedIn, async (req, res, next) => {
   const { name, image, time, cuisine, kcal, spices, lactose, gluten, meat, level, pax, ingredients, steps, owner } = req.body;
   const user = req.session.currentUser;
-  // regex to make sure the inRecipe.find(query)gredients and steps strings start by a letter
+  // regex to make sure the ingredients and steps strings start by a letter
   if (!/^[a-zA-Z].*/.test(ingredients) || !/^[a-zA-Z].*/.test(steps)) {
-    return next(new Error("You need to add ingredients separated by commas and steps separated by dots."));
+    return next(new Error("You need to add ingredients and steps."));
   }
   try {
     const newRecipe = await Recipe.create({ name, image, time, cuisine, kcal, spices, lactose, gluten, meat, level, pax, ingredients, steps, owner });
-    res.render("recipe/justAddedRecipe", {recipe: newRecipe, user });
+    res.render("recipe/justAddedRecipe", {recipe: newRecipe, user});
     console.log(newRecipe);
   } catch(error) {
     next(error);
@@ -99,24 +99,20 @@ router.post("/new", isLoggedIn, async (req, res, next) => {
 // @access  User
 router.get("/my-recipes", isLoggedIn, async (req, res, next) => {
   const user = req.session.currentUser;
-  console.log(user);
   try {
-    const recipes = await Recipe.find({ owner: user._id });
-    res.render("recipe/myRecipes", { recipe: recipes, user });
+    const recipes = await Recipe.find({owner: user._id});
+    res.render("recipe/myRecipes", {recipe: recipes, user});
   } catch(error) {
     next(error);
   }
 });
 
 // @desc    Displays recipe detail
-// @route   GET /recipe/:recipeId/detail
+// @route   GET /recipe/:recipeId
 // @access  User
 router.get("/:recipeId", isLoggedIn, async (req, res, next) => {
-  const { recipeId } = req.params;
+  const {recipeId} = req.params;
   const user = req.session.currentUser;
-  if (!mongoose.Types.ObjectId.isValid(recipeId)) {
-  return next(new Error("Invalid recipe ID"));
-  }
   try {
     const recipe = await Recipe.findById(recipeId);
     res.render("recipe/recipeDetail", {recipe, user});
@@ -126,10 +122,10 @@ router.get("/:recipeId", isLoggedIn, async (req, res, next) => {
 });
 
 // @desc    Displays edit recipe form
-// @route   GET /recipe/:recipeId/edit
+// @route   GET /recipe/edit/:recipeId
 // @access  User
 router.get("/edit/:recipeId", isLoggedIn, async (req, res, next) => {
-  const { recipeId } = req.params;
+  const {recipeId} = req.params;
   const user = req.session.currentUser;
   try {
     const recipe = await Recipe.findById(recipeId);
@@ -140,15 +136,15 @@ router.get("/edit/:recipeId", isLoggedIn, async (req, res, next) => {
 });
 
 // @desc    Sends edit recipe form data
-// @route   POST /recipe/:recipeId/edit
+// @route   POST /recipe/edit/:recipeId
 // @access  User
 router.post("/edit/:recipeId", isLoggedIn, async (req, res, next) => {
-  const { recipeId } = req.params;
+  const {recipeId} = req.params;
   const user = req.session.currentUser;
-  const { name, image, time, cuisine, kcal, spices, lactose, gluten, meat, level, pax, ingredients, steps, owner } = req.body;
+  const {name, image, time, cuisine, kcal, spices, lactose, gluten, meat, level, pax, ingredients, steps, owner} = req.body;
   // regex to make sure the ingredients and steps strings start by a letter
   if (!/^[a-zA-Z].*/.test(ingredients) || !/^[a-zA-Z].*/.test(steps)) {
-    return next(new Error("You need to add ingredients separated by commas and steps separated by dots."));
+    return next(new Error("You need to add ingredients and steps."));
   }
   try {
     const editedRecipe = await Recipe.findByIdAndUpdate(recipeId, {name, image, time, cuisine, kcal, spices, lactose, gluten, meat, level, pax, ingredients, steps, owner}, {new: true});

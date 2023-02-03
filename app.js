@@ -52,7 +52,7 @@ const hbs = require("hbs");
 hbs.registerPartials(__dirname + "/views/partials");
 
 // middlewares
-const {isLoggedIn, isAdmin} = require("./middlewares/index");
+const isLoggedIn = require("./middlewares/index");
 
 // lodash and custom helpers used to manipulate ingedients and steps coming from Recipe model
 const _ = require("lodash");

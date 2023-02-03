@@ -1,0 +1,28 @@
+<button onclick="history.back()"><img class="arrow-back" src="../images/back-arrow.png" />Go back</button>
+<h2>Favorite recipes</h2>
+
+<!-- sorting form -->
+<form action="/recipe/search-results" method="GET">
+  <label for="sortBy">Sort by:</label>
+  <select class="sortBy" name="sortBy">
+    <option value="paxAsc">Servings (Ascending)</option>
+    <option value="paxDesc">Servings (Descending)</option>
+    <option value="kcalAsc">Calories (Ascending)</option>
+    <option value="kcalDesc">Calories (Descending)</option>
+    <option value="levelAsc">Level (Ascending)</option>
+    <option value="levelDesc">Level (Descending)</option>
+    <option value="timeAsc">Time (Ascending)</option>
+    <option value="timeDesc">Time (Descending)</option>
+  </select>
+  <button type="submit">Sort recipes</button>
+</form>
+
+
+{{#if recipe}}
+  {{#each recipe}}
+    {{> recipeCard}}
+  {{/each}}
+{{else}}
+  <p>Sorry, you don't have any favorite recipes yet. Click <a
+      href="/recipe/all">here</a> to browse our recipes catalog.</p>
+{{/if}}

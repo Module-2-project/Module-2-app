@@ -1,1 +1,24 @@
 <h2>Welcome {{user.firstName}}</h2>
+
+<div class="recipeSlides">
+  <img src="" alt="Dish image">
+  <button class="nextBtn">Next</button>
+</div>
+
+<!-- added in this file because a separate JS file won't accept hbs -->
+<script>
+  const slides = document.querySelectorAll(".recipeSlides img");
+  const recipes = {{recipe}};
+  let index = 0;
+// adds image to the recipeSlides div above
+  function showSlide() {
+    slides[0].setAttribute("src", recipes[index].image);
+  }
+// switches to next images when user presses the next button
+  document.getElementById("nextBtn").onclick = function () {
+    index = (index + 1) % recipes.length;
+    showSlide();
+  };
+// starts the slideshow as user accesses the page
+  showSlide();
+</script>

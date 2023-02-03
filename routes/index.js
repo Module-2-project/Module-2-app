@@ -6,9 +6,15 @@ const isLoggedIn = require("../middlewares/index");
 // @desc    App home page
 // @route   GET /
 // @access  Public
-router.get('/', (req, res, next) => {
+router.get('/', async (req, res, next) => {
   const user = req.session.currentUser;
-  res.render('index', {user});
+  try {
+    const recipes = await Recipe.find();
+    res.render('index', {recipe: recipes, user});
+  } catch(error) {
+    next(error);
+  }
 });
+
 
 module.exports = router;

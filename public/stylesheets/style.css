@@ -19,7 +19,7 @@ main {
 footer {
   position: fixed;
   bottom: 0%;
-  width: 100vw;
+  width: 100%;
   background-color: #ddd;
 }
   
@@ -29,7 +29,7 @@ nav ul {
   padding: 1px;
   width: 100%;
   /* space between icons - flexbox allowed */
-  gap: 20px;
+  gap: 4vw;
 }
 
 nav ul li a img {
@@ -44,7 +44,12 @@ nav ul li a img {
   width: 40px;
 }
 
-/* styles add and all recipe icons */
+.arrow-back {
+  width: 25px;
+}
+
+/* home page */
+
 #homePageNav {
   position: absolute;
   top: 140px;
@@ -53,6 +58,20 @@ nav ul li a img {
   justify-content: flex-end;
 }
 
-.arrow-back {
-  width: 25px;
+.recipeSlides {
+  width: 100%;
+  height: 300px;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.recipeSlides img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  transition: left 0.5s ease;
 }

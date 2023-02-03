@@ -11,7 +11,8 @@ body {
 main {
   margin: 10px;
 }
-#folioIcon {
+
+.folio-icon {
   width: 250px;
   margin: 10px;
 }
@@ -20,7 +21,7 @@ footer {
   position: fixed;
   bottom: 0%;
   width: 100%;
-  background-color: #ddd;
+  background-color: rgba(255, 166, 0, 0.24);
 }
   
 nav ul {
@@ -34,11 +35,11 @@ nav ul li a img {
   width: 50%;
 }
 
-.homeIcon {
+.home-icons {
   width: 120px;
 }
 
-.homePageIcons {
+.home-page-icons {
   width: 40px;
 }
 
@@ -46,9 +47,29 @@ nav ul li a img {
   width: 25px;
 }
 
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+}
+
+button {
+  border: none;
+  background-color: rgba(255, 166, 0, 0.534);
+  border-radius: 8px;
+  padding: 2px;
+}
+
+a {
+  color: orange;
+  text-decoration: none;
+  font-weight: bold;
+}
+
 /* home page */
 
-#homePageNav {
+.home-page-nav {
   position: absolute;
   top: 140px;
   right: 10px;

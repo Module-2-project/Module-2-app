@@ -8,19 +8,16 @@
   <title>Project module 2</title>
 </head>
 <body>
-  <img id="folioIcon" src="../images/app-logo.png" alt="FoodFolio icon">
-  <div class="top-navbar">
+  <img class="folio-icon" src="../images/app-logo.png" alt="FoodFolio icon">
+  <header class="top-navbar">
     {{#if user}}
-    <div id="homePageNav">
-      <a href="/recipe/new"><img class="homePageIcons" src="../images/add-icon.png" alt="Add icon" /></a>
-      <a href="/recipe/all"><img class="homePageIcons" src="../images/chef-hat.png" alt="All recipes" /></a>
+    <div class="home-page-nav">
+      <a href="/recipe/new"><img class="home-page-icons" src="../images/add-icon.png" alt="Add icon" /></a>
+      <a href="/recipe/all"><img class="home-page-icons" src="../images/chef-hat.png" alt="All recipes" /></a>
     </div>
     {{else}}
-      <a href="/recipe/all">All recipes</a>
-      <a href="/auth/signup">Sign up</a>
-      <a href="/auth/login">Log in</a>
     {{/if}}
-  </div>
+  </header>
   <main>
     {{{ body }}}
   </main>
@@ -28,14 +25,14 @@
     <nav>
       <ul>
         {{#if user}}
-        <li class="homeIcon"><a href="/"><img src="../images/home-icon.png"></a></li>
+        <li class="home-icons"><a href="/"><img src="../images/home-icon.png"></a></li>
         <li><a href="/recipe/random"><img src="../images/question-icon-box.png"></a></li>
         <li><a href="/recipe/search"><img src="../images/search-icon.png"></a></li>
         <li><a href="#"><img src="../images/heart-icon-navbar.png"></a></li>
         <li><a href="/profile"><img src="../images/chef-icon.png"></a></li>
         {{else}}
-        <li class="homeIcon"><a href="/"><img src="../images/home-icon.png"></a></li>
-        <li><a href="#"><img src="../images/question-icon-box.png"></a></li>
+        <li class="home-icons"><a href="/"><img src="../images/home-icon.png"></a></li>
+        <li><a href="/recipe/random"><img src="../images/question-icon-box.png"></a></li>
         <li><a href="/recipe/search"><img src="../images/search-icon.png"></a></li>
         {{/if}}
       </ul>

@@ -65,7 +65,7 @@ const recipeSchema = new Schema({
     type: String,
     required: [true, "Please add the cooking instructions, all separated by a dot and in the right order"],
   },
-    username: {
+    owner: {
     type: Schema.Types.ObjectId,
     ref: "User"
   }

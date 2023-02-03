@@ -32,7 +32,6 @@ router.get("/search-results", async (req, res, next) => {
   if (pax) query.pax = pax;
   try {
     const recipe = await Recipe.find(query);
-    console.log(query);
     res.render("recipe/searchResults", {recipe, user});
   } catch (error) {
     next(error);
@@ -47,7 +46,7 @@ router.get("/all", async (req, res, next) => {
   const user = req.session.currentUser;
   try {
     const recipes = await Recipe.find({});
-    res.render("recipe/searchResults", {recipe: recipes, user: user});
+    res.render("recipe/searchResults", {recipe: recipes, user});
   } catch (error) {
     next(error);
   }
@@ -62,7 +61,7 @@ router.get("/random", async (req, res, next) => {
     const count = await Recipe.countDocuments();
     const randomIndex = Math.floor(Math.random() * count);
     const randomRecipe = await Recipe.findOne().skip(randomIndex);
-    res.render("recipe/randomRecipe", {recipe: randomRecipe, user: user});
+    res.render("recipe/randomRecipe", {recipe: randomRecipe, user});
   } catch(error) {
     next(error);
   }
@@ -80,15 +79,30 @@ router.get("/new", isLoggedIn, (req, res, next) => {
 // @route   POST /recipe/new
 // @access  User
 router.post("/new", isLoggedIn, async (req, res, next) => {
-  const { name, image, time, cuisine, kcal, spices, lactose, gluten, meat, level, pax, ingredients, steps, username } = req.body;
+  const { name, image, time, cuisine, kcal, spices, lactose, gluten, meat, level, pax, ingredients, steps, owner } = req.body;
   const user = req.session.currentUser;
-  // regex to make sure the ingredients and steps strings start by a letter
+  // regex to make sure the inRecipe.find(query)gredients and steps strings start by a letter
   if (!/^[a-zA-Z].*/.test(ingredients) || !/^[a-zA-Z].*/.test(steps)) {
     return next(new Error("You need to add ingredients separated by commas and steps separated by dots."));
   }
   try {
-    const newRecipe = await Recipe.create({ name, image, time, cuisine, kcal, spices, lactose, gluten, meat, level, pax, ingredients, steps, username }, {new: true});
-    res.render("recipe/searchResults", {recipe: newRecipe, user: user});
+    const newRecipe = await Recipe.create({ name, image, time, cuisine, kcal, spices, lactose, gluten, meat, level, pax, ingredients, steps, owner });
+    res.render("recipe/justAddedRecipe", {recipe: newRecipe, user });
+    console.log(newRecipe);
+  } catch(error) {
+    next(error);
+  }
+});
+
+// @desc    My recipes page
+// @route   GET /recipe/my-recipes
+// @access  User
+router.get("/my-recipes", isLoggedIn, async (req, res, next) => {
+  const user = req.session.currentUser;
+  console.log(user);
+  try {
+    const recipes = await Recipe.find({ owner: user._id });
+    res.render("recipe/myRecipes", { recipe: recipes, user });
   } catch(error) {
     next(error);
   }
@@ -97,7 +111,7 @@ router.post("/new", isLoggedIn, async (req, res, next) => {
 // @desc    Displays recipe detail
 // @route   GET /recipe/:recipeId/detail
 // @access  User
-router.get("/:recipeId/detail", isLoggedIn, async (req, res, next) => {
+router.get("/:recipeId", isLoggedIn, async (req, res, next) => {
   const { recipeId } = req.params;
   const user = req.session.currentUser;
   if (!mongoose.Types.ObjectId.isValid(recipeId)) {
@@ -114,7 +128,7 @@ router.get("/:recipeId/detail", isLoggedIn, async (req, res, next) => {
 // @desc    Displays edit recipe form
 // @route   GET /recipe/:recipeId/edit
 // @access  User
-router.get("/:recipeId/edit", isLoggedIn, async (req, res, next) => {
+router.get("/edit/:recipeId", isLoggedIn, async (req, res, next) => {
   const { recipeId } = req.params;
   const user = req.session.currentUser;
   try {
@@ -128,17 +142,17 @@ router.get("/:recipeId/edit", isLoggedIn, async (req, res, next) => {
 // @desc    Sends edit recipe form data
 // @route   POST /recipe/:recipeId/edit
 // @access  User
-router.post("/:recipeId/edit", isLoggedIn, async (req, res, next) => {
+router.post("/edit/:recipeId", isLoggedIn, async (req, res, next) => {
   const { recipeId } = req.params;
   const user = req.session.currentUser;
-  const { name, image, time, cuisine, kcal, spices, lactose, gluten, meat, level, pax, ingredients, steps, username } = req.body;
+  const { name, image, time, cuisine, kcal, spices, lactose, gluten, meat, level, pax, ingredients, steps, owner } = req.body;
   // regex to make sure the ingredients and steps strings start by a letter
   if (!/^[a-zA-Z].*/.test(ingredients) || !/^[a-zA-Z].*/.test(steps)) {
     return next(new Error("You need to add ingredients separated by commas and steps separated by dots."));
   }
   try {
-    const editedRecipe = await Recipe.findByIdAndUpdate(recipeId, {name, image, time, cuisine, kcal, spices, lactose, gluten, meat, level, pax, ingredients, steps, username}, {new: true});
-    res.render("recipe/recipeDetail", {recipe: editedRecipe, user: user});
+    const editedRecipe = await Recipe.findByIdAndUpdate(recipeId, {name, image, time, cuisine, kcal, spices, lactose, gluten, meat, level, pax, ingredients, steps, owner}, {new: true});
+    res.render("recipe/recipeDetail", {recipe: editedRecipe, user });
   } catch(error) {
     next(error);
   }

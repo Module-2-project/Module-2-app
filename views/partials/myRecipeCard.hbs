@@ -8,14 +8,7 @@
     <li>Level: {{level}}</li>
     <li>Kcal: {{kcal}}</li>
     <li>Spices: {{spices}}</li>
-    <li>Lactose: {{lactose}}</li>
-    <li>Gluten: {{gluten}}</li>
-    <li>Meat: {{meat}}</li>
   </ul>
-  <h4>Ingredients:</h4>
-  <!-- this is a ul tag with li inside -->
-  {{{splitIngredients ingredients}}}
-  <h4>Steps:</h4>
-  <!-- this is a ol tag with li inside -->
-  {{{splitSteps steps}}}
+  <a href="/recipe/{{recipe._id}}{{_id}}">View more</a>
+  <a href="/recipe/edit/{{recipe._id}}{{_id}}">Edit this recipe</a>
 </div>

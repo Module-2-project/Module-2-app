@@ -3,6 +3,7 @@ const router = express.Router();
 const User = require('../models/User.js');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
+const isLoggedIn = require('../middlewares');
 
 // @desc    Displays form view to sign up
 // @route   GET /auth/signup
@@ -34,7 +35,8 @@ router.post('/signup', async (req, res, next) => {
   try {
     const salt = bcrypt.genSaltSync(saltRounds);
     const hashedPassword = bcrypt.hashSync(password, salt);
-    const user = await User.create({ username, firstName , lastName, email, hashedPassword, cookingLevel });
+    console.log(username, firstName , lastName, email, password, cookingLevel);
+    const user = await User.create({ username, firstName, lastName, email, hashedPassword, cookingLevel });
     res.render('auth/login');
   } catch (error) { 
     next (error);
@@ -66,7 +68,7 @@ router.post('/login', async (req, res, next) => {
       const match = await bcrypt.compare(password, user.hashedPassword);
       if (match) {
         req.session.currentUser = user;
-        res.render('auth/profile', user);
+        res.render('profile/profile', {user});
       } else {
         res.render('auth/login', { error: "Unable to authenticate user." });
       }
@@ -79,7 +81,7 @@ router.post('/login', async (req, res, next) => {
 // @desc    Destroy user session and log out
 // @route   POST /auth/logout
 // @access  User 
-router.post('/logout', (req, res, next) => {
+router.get('/logout', isLoggedIn, (req, res, next) => {
   req.session.destroy((err) => {
     if (err) {
       next(err)

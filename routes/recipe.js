@@ -19,7 +19,7 @@ router.get("/search", (req, res, next) => {
 // @access  Public
 router.get("/search-results", async (req, res, next) => {
   const user = req.session.currentUser;
-  const { name, cuisine, spices, lactose, gluten, meat, level, pax } = req.query;
+  const { name, cuisine, spices, lactose, gluten, meat, level, pax, sortBy } = req.query;
   // Define the query to search for and avoid error if blank field in search form
   let query = {};
   if (name) query.name = { $regex: `.*${name}.*`, $options: "i" };
@@ -30,8 +30,18 @@ router.get("/search-results", async (req, res, next) => {
   if (meat) query.meat = meat === "true" ? true : false;
   if (level) query.level = level;
   if (pax) query.pax = pax;
+  // used to pull any sort filters from front-end
+  let sort = {};
+  if (sortBy === "paxAsc") sort.pax = 1;
+  if (sortBy === "paxDesc") sort.pax = -1;
+  if (sortBy === "kcalAsc") sort.kcal = 1;
+  if (sortBy === "kcalDesc") sort.kcal = -1;
+  if (sortBy === "levelAsc") sort.level = 1;
+  if (sortBy === "levelDesc") sort.level = -1;
+  if (sortBy === "timeAsc") sort.time = 1;
+  if (sortBy === "timeDesc") sort.time = -1;
   try {
-    const recipe = await Recipe.find(query);
+    const recipe = await Recipe.find(query).sort(sort);
     res.render("recipe/searchResults", {recipe, user});
   } catch (error) {
     next(error);
@@ -44,8 +54,19 @@ router.get("/search-results", async (req, res, next) => {
 // @access  Public
 router.get("/all", async (req, res, next) => {
   const user = req.session.currentUser;
+  const {sortBy} = req.body;
+  // used to pull any sort filters from front-end
+  let sort = {};
+  if (sortBy === "paxAsc") sort.pax = 1;
+  if (sortBy === "paxDesc") sort.pax = -1;
+  if (sortBy === "kcalAsc") sort.kcal = 1;
+  if (sortBy === "kcalDesc") sort.kcal = -1;
+  if (sortBy === "levelAsc") sort.level = 1;
+  if (sortBy === "levelDesc") sort.level = -1;
+  if (sortBy === "timeAsc") sort.time = 1;
+  if (sortBy === "timeDesc") sort.time = -1;
   try {
-    const recipes = await Recipe.find({});
+    const recipes = await Recipe.find({}).sort(sort);
     res.render("recipe/searchResults", {recipe: recipes, user});
   } catch (error) {
     next(error);
@@ -99,8 +120,19 @@ router.post("/new", isLoggedIn, async (req, res, next) => {
 // @access  User
 router.get("/my-recipes", isLoggedIn, async (req, res, next) => {
   const user = req.session.currentUser;
+  const {sortBy} = req.body;
+  // used to pull any sort filters from front-end
+  let sort = {};
+  if (sortBy === "paxAsc") sort.pax = 1;
+  if (sortBy === "paxDesc") sort.pax = -1;
+  if (sortBy === "kcalAsc") sort.kcal = 1;
+  if (sortBy === "kcalDesc") sort.kcal = -1;
+  if (sortBy === "levelAsc") sort.level = 1;
+  if (sortBy === "levelDesc") sort.level = -1;
+  if (sortBy === "timeAsc") sort.time = 1;
+  if (sortBy === "timeDesc") sort.time = -1;
   try {
-    const recipes = await Recipe.find({owner: user._id});
+    const recipes = await Recipe.find({owner: user._id}).sort(sort);
     res.render("recipe/myRecipes", {recipe: recipes, user});
   } catch(error) {
     next(error);

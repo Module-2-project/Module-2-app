@@ -1,0 +1,21 @@
+<button onclick="history.back()"><img class="arrow-back" src="../images/back-arrow.png" />Go back</button>
+<h2>Add review</h2>
+
+<form method="POST" action="/review/new">
+  <label>Review name:</label>
+  <input required="true" type="text" name="title" placeholder="Amazing recipe" />
+  <label>Comments:</label>
+  <textarea required="true" name="comments" rows="10" columns="50"
+  placeholder="It was easy to cook and the result was amazing!"></textarea>
+  <label>Rate this recipe:</label>
+  <select name="stars">
+    <option value="1">⭐</option>
+    <option value="2">⭐⭐</option>
+    <option value="3">⭐⭐⭐</option>
+    <option value="4">⭐⭐⭐⭐</option>
+    <option value="5">⭐⭐⭐⭐⭐</option>
+  </select>
+  <label>Review from:</label>
+  <input value="{{user.username}}" />
+  <button type="submit">Add review</button>
+</form>

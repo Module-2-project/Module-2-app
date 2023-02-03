@@ -12,6 +12,7 @@ const MongoStore = require('connect-mongo');
 const indexRouter = require('./routes/index');
 const authRouter = require('./routes/auth');
 const recipeRouter = require("./routes/recipe");
+const reviewRouter = require("./routes/review");
 
 const app = express();
 
@@ -92,6 +93,7 @@ hbs.registerHelper('eq', function (value, otherValue, options) {
 app.use('/', indexRouter);
 app.use('/auth', authRouter);
 app.use("/recipe", recipeRouter);
+app.use("/review", reviewRouter);
 
 
 // catch 404 and forward to error handler 

@@ -13,4 +13,3 @@ res.render('profile/profile', {user : user})
 });
 
 module.exports = router;
-

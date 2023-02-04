@@ -38,7 +38,6 @@ nav ul {
 
 nav ul li a img {
   width: calc(60% - var(--margin-gap) * 4 / 5);
-  flex-wrap: wrap;
 }
 
 .home-icon {
@@ -99,4 +98,12 @@ a {
   top: 0;
   left: 0;
   transition: left 0.5s ease;
+}
+
+/* media query for mobile landscape */
+
+@media (orientation: landscape) {
+  nav ul li a img {
+    width: calc(35% - var(--margin-gap) * 4 / 5);
+  }
 }

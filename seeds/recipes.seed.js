@@ -6,7 +6,7 @@ const Recipe = require("../models/Recipe");
 const recipes = [
   {
     name: "Grandma's Famous Meatloaf",
-    image: "https://www.example.com/meatloaf.jpg",
+    image: "https://thestayathomechef.com/wp-content/uploads/2019/04/Mommas-Meatloaf.jpg",
     time: 60,
     cuisine: "American",
     kcal: 460,
@@ -22,7 +22,7 @@ const recipes = [
   },
   {
     name: "Grandma's Chicken Noodle Soup",
-    image: "https://www.example.com/chicken-noodle-soup.jpg",
+    image: "https://realfood.tesco.com/media/images/1400x919-NoChickenNoodleSoup-e35595a2-27c8-40a8-a04e-6b437015f32c-0-1400x919.jpg",
     time: 90,
     cuisine: "American",
     kcal: 540,
@@ -38,7 +38,7 @@ const recipes = [
   },
   {
     name: "Grandma's Apple Pie",
-    image: "https://www.example.com/apple-pie.jpg",
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQrBQ7iHltFkTuYzRC0nFeXNC5aCV3J82Xgg&usqp=CAU",
     time: 120,
     cuisine: "American",
     kcal: 400,
@@ -54,7 +54,7 @@ const recipes = [
   },
   {
     name: "Arroz con Pollo",
-    image: "https://www.example.com/images/arrozconpollo.jpg",
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyxmKHpSEhf0akg4Upta8uapDqZC3jzLJl3Q&usqp=CAU",
     time: 60,
     cuisine: "Colombian",
     kcal: 510,
@@ -70,7 +70,7 @@ const recipes = [
   },
   {
     name: "Moussaka",
-    image: "https://www.example.com/images/moussaka.jpg",
+    image: "https://www.schaer.com/sites/default/files/styles/landscape_xxl/public/2016-08/1097_Moussaka_0.jpg",
     time: 120,
     cuisine: "Greek",
     kcal: 490,

@@ -12,8 +12,11 @@ const MongoStore = require('connect-mongo');
 const indexRouter = require('./routes/index');
 const authRouter = require('./routes/auth');
 const recipeRouter = require("./routes/recipe");
+<<<<<<< HEAD
 const reviewRouter = require("./routes/review");
 //
+=======
+>>>>>>> prfile.js
 const profileRouter = require('./routes/profile');
 
 const app = express();
@@ -24,6 +27,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+//=====//
+app.use('/profile', function (req, res, next) { 
+  res.render('auth/profile') });
+// app.use('./profile', profileRouter);
+//-----//
 
 // For deployment
 app.set('trust proxy', 1);
@@ -58,6 +67,7 @@ const isLoggedIn = require("./middlewares/index");
 
 // lodash and custom helpers used to manipulate ingedients and steps coming from Recipe model
 const _ = require("lodash");
+const { profile } = require('console');
 // ingredients will show as an unordered list, all with capital letter
 const splitIngredients = _.template(
   '<ul>' +

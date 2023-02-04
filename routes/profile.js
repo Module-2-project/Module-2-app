@@ -5,8 +5,9 @@ const isLoggedIn = require('../middlewares');
 const recipe = require ('../models/Recipe');
 const userRouter = require('../models/User');
 
-// console.log('coming from profile.js');
-
+// @desc    App home page
+// @route   GET /
+// @access  Public
 router.get('/', isLoggedIn,  function (req,res,next) {
 const user = req.session.currentUser;
 res.render('profile/profile', {user}) 

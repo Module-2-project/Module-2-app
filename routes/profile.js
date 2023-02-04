@@ -7,9 +7,14 @@ const Recipe = require ('../models/Recipe');
 // @desc    Shows profile page
 // @route   GET /profile
 // @access  User
-router.get('/', isLoggedIn,  function (req,res,next) {
-const user = req.session.currentUser;
-res.render('profile/profile', {user}) 
+router.get('/', isLoggedIn,  async (req,res,next) => {
+  const user = req.session.currentUser;
+  try {
+    const userDB = await User.findOne({_id: user._id})
+    res.render("profile/profile", {user: userDB});
+  } catch(error) {
+    next(error);
+  }
 });
 
 // @desc    Shows profile edit page
@@ -18,8 +23,9 @@ res.render('profile/profile', {user})
 router.get("/edit", isLoggedIn, async (req, res, next) => {
   const user = req.session.currentUser;
   try {
-    const me = await User.find(user._id);
-    res.render("profile/editProfile", {user, me: user});
+    const userDB = await User.findOne({_id: user._id});
+    console.log(userDB);
+    res.render("profile/editProfile", {user: userDB});
   } catch(error) {
     next(error);
   }
@@ -31,15 +37,13 @@ router.get("/edit", isLoggedIn, async (req, res, next) => {
 router.post("/edit", isLoggedIn, async (req, res, next) => {
   const user = req.session.currentUser;
   const {username, firstName, lastName, email, cookingLevel} = req.body;
-  // if (!username || !firstName || !lastName || !email || !cookingLevel) {
-  //   res.render('profile/editProfile', {error: 'Please fill all data to sign up.', user});
-  //   return;
-  // }
+  if (!username || !firstName || !lastName || !email || !cookingLevel) {
+    res.render('profile/editProfile', {error: 'Please fill all data to sign up.', user});
+    return;
+  }
   try {
-    console.log(firstName);
     const editedProfile = await User.findByIdAndUpdate(user._id, {username, firstName, lastName, email, cookingLevel}, {new: true});
-    console.log(username, firstName, lastName, email, cookingLevel);
-    res.render("profile/profile", {editedProfile: user, user});
+    res.render("profile/profile", {user: editedProfile});
   } catch(error) {
     next(error);
   }

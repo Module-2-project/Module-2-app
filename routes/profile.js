@@ -9,7 +9,7 @@ const userRouter = require('../models/User');
 
 router.get('/', isLoggedIn,  function (req,res,next) {
 const user = req.session.currentUser;
-res.render('profile/profile', {user : user}) 
+res.render('profile/profile', {user}) 
 });
 
 module.exports = router;

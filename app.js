@@ -12,11 +12,7 @@ const MongoStore = require('connect-mongo');
 const indexRouter = require('./routes/index');
 const authRouter = require('./routes/auth');
 const recipeRouter = require("./routes/recipe");
-<<<<<<< HEAD
 const reviewRouter = require("./routes/review");
-//
-=======
->>>>>>> prfile.js
 const profileRouter = require('./routes/profile');
 
 const app = express();
@@ -27,12 +23,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
-//=====//
-app.use('/profile', function (req, res, next) { 
-  res.render('auth/profile') });
-// app.use('./profile', profileRouter);
-//-----//
 
 // For deployment
 app.set('trust proxy', 1);
@@ -106,7 +96,7 @@ app.use('/', indexRouter);
 app.use('/auth', authRouter);
 app.use('/recipe', recipeRouter);
 app.use('/review', reviewRouter);
-app.use('/profile' , profileRouter);
+app.use('/profile', profileRouter);
 
 
 // catch 404 and forward to error handler 

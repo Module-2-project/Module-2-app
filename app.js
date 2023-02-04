@@ -13,6 +13,8 @@ const indexRouter = require('./routes/index');
 const authRouter = require('./routes/auth');
 const recipeRouter = require("./routes/recipe");
 const reviewRouter = require("./routes/review");
+//
+const profileRouter = require('./routes/profile');
 
 const app = express();
 
@@ -92,8 +94,9 @@ hbs.registerHelper('eq', function (value, otherValue, options) {
 // routes intro
 app.use('/', indexRouter);
 app.use('/auth', authRouter);
-app.use("/recipe", recipeRouter);
-app.use("/review", reviewRouter);
+app.use('/recipe', recipeRouter);
+app.use('/review', reviewRouter);
+app.use('/profile' , profileRouter);
 
 
 // catch 404 and forward to error handler 

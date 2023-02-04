@@ -97,8 +97,8 @@ router.get("/new", isLoggedIn, (req, res, next) => {
 router.post("/new", isLoggedIn, async (req, res, next) => {
   const { name, image, time, cuisine, kcal, spices, lactose, gluten, meat, level, pax, ingredients, steps, owner } = req.body;
   const user = req.session.currentUser;
-  // regex to make sure the ingredients and steps strings start by a letter
-  if (!/^[a-zA-Z].*/.test(ingredients) || !/^[a-zA-Z].*/.test(steps)) {
+  // regex to make sure the ingredients and steps strings start by a letter or a number
+  if (!/^[0-9a-zA-Z].*/.test(ingredients) || !/^[0-9a-zA-Z].*/.test(steps)) {
     return next(new Error("You need to add ingredients and steps."));
   }
   try {
@@ -167,8 +167,8 @@ router.post("/edit/:recipeId", isLoggedIn, async (req, res, next) => {
   const {recipeId} = req.params;
   const user = req.session.currentUser;
   const {name, image, time, cuisine, kcal, spices, lactose, gluten, meat, level, pax, ingredients, steps, owner} = req.body;
-  // regex to make sure the ingredients and steps strings start by a letter
-  if (!/^[a-zA-Z].*/.test(ingredients) || !/^[a-zA-Z].*/.test(steps)) {
+  // regex to make sure the ingredients and steps strings start by a letter or a number
+  if (!/^[0-9a-zA-Z].*/.test(ingredients) || !/^[0-9a-zA-Z].*/.test(steps)) {
     return next(new Error("You need to add ingredients and steps."));
   }
   try {

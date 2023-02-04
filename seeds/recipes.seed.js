@@ -18,7 +18,7 @@ const recipes = [
     pax: 8,
     ingredients: "800gr of ground beef, bread crumbs, 5 eggs, 1 onion, ketchup, Worcestershire sauce, salt, pepper",
     steps: "Preheat oven to 350 degrees F. In a large bowl, combine ground beef, bread crumbs, eggs, onion, ketchup, Worcestershire sauce, salt, and pepper. Place mixture in a loaf pan and bake for 60 minutes. Let cool for 10 minutes before slicing and serving.",
-    owner: "63dc12f2c6f8b6d08ecc248c"
+    owner: "63de4961195f8c51b021d64f"
   },
   {
     name: "Grandma's Chicken Noodle Soup",
@@ -34,7 +34,7 @@ const recipes = [
     pax: 6,
     ingredients: "600gr of chicken breasts, 2 onion, 3 carrots, 50gr of celery, garlic, thyme, bay leaves, 300gr of egg noodles, salt, pepper",
     steps: "In a large pot, sauté onion, carrots, celery, and garlic until softened. Add chicken breasts, thyme, bay leaves, and enough water to cover. Bring to a boil, then reduce heat and simmer for 60 minutes. Remove chicken breasts and shred meat. Return meat to pot and add egg noodles. Cook for an additional 15 minutes. Season with salt and pepper before serving.",
-    owner: "63dc12f2c6f8b6d08ecc248c"
+    owner: "63de4961195f8c51b021d64f"
   },
   {
     name: "Grandma's Apple Pie",
@@ -50,7 +50,7 @@ const recipes = [
     pax: 8,
     ingredients: "Pie crust, 450gr of flour, 150gr of sugar, cinnamon, 75gr of butter, 4 Granny Smith apples",
     steps: "Preheat oven to 375 degrees F. Roll out pie crust and place in 9 inch pie dish. In a separate bowl, mix together flour, sugar, and cinnamon. Peel and thinly slice apples and toss in flour mixture. Arrange apple slices in pie crust and dot with butter. Roll out remaining pie crust and place on top of apples. Crimp edges and cut slits in top crust. Bake for 60 minutes, or until crust is golden brown.",
-    owner: "63dc12f2c6f8b6d08ecc248c"
+    owner: "63de4999c91bb74c3907345c"
   },
   {
     name: "Arroz con Pollo",
@@ -66,7 +66,7 @@ const recipes = [
     pax: 4,
     ingredients: "500gr of chicken, 250gr of rice, 1 onion, Garlic, Olive oil, chicken broth, 100gr of peas, 2 carrots, Saffron",
     steps: "In a large pot, heat olive oil and sauté onion and garlic. Add chicken and cook until browned. Add rice and sauté for 2 minutes. Add chicken broth, peas, carrots, saffron and bring to a boil. Reduce heat and cover, simmer for 20 minutes. Remove from heat and let stand for 10 minutes. Serve and enjoy!",
-    owner: "63dc12f2c6f8b6d08ecc248c"
+    owner: "63de4999c91bb74c3907345c"
   },
   {
     name: "Moussaka",
@@ -82,7 +82,7 @@ const recipes = [
     pax: 6,
     ingredients: "2 eggplant, 500gr of ground beef, 2 onions, Garlic, 3 tomatoes, Parsley, Basil, Thyme, Bay leaves, Salt, Pepper, Nutmeg, 100mL of milk, 200gr of flour, 3 eggs, Parmesan cheese, Mozzarella cheese",
     steps: "Preheat oven to 375 degrees F. Peel and slice eggplant. Salt eggplant slices and let sit for 30 minutes. In a large skillet, brown ground beef with onions and garlic. Add tomatoes, parsley, basil, thyme, bay leaves, salt, pepper and nutmeg and cook for 10 minutes. In a separate bowl, mix together milk, flour and eggs. In a 9x13 inch baking dish, layer eggplant slices, meat mixture, and milk mixture. Top with Parmesan cheese and mozzarella cheese. Bake in preheated oven for 45 minutes. Let cool for 10 minutes before serving.",
-    owner: "63dc12f2c6f8b6d08ecc248c"
+    owner: "63de4999c91bb74c3907345c"
   }
 ];
 

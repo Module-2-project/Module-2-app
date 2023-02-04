@@ -19,7 +19,7 @@ const recipeSchema = new Schema({
   cuisine: {
     type: String,
     enum: {
-      values: ["Asian", "Japanese", "Thai", "Italian", "Greek", "Mexican", "Argentinian", "Colombian", "South American", "Etiopian", "Marrocan", "Spanish", "Portuguese", "Indian", "American", "Other"],
+      values: ["Asian", "Japanese", "Thai", "Italian", "Greek", "Mexican", "Argentinian", "Colombian", "South American", "Ethiopian", "Marrocan", "Spanish", "Portuguese", "Indian", "American", "Other"],
       message: "Please select the cuisine type of your dish. If it is not in the list, select Other."
     }, 
   },
@@ -42,14 +42,14 @@ const recipeSchema = new Schema({
     type: Boolean,
     required: [true, "Please check this box if your meal contains gluten"],
   },
-  veggie: {
+  meat: {
     type: Boolean,
     required: [true, "Please check this box if your meal contains meat or fish - non vegetarian friendly"],
   },
   level: {
     type: String,
     enum: {
-      values: ["Begginner", "Medium", "Hard", "God", "Grandma"],
+      values: ["Beginner", "Medium", "Hard", "God", "Grandma"],
       message: "Please select the level of difficulty",
     },
   },
@@ -63,9 +63,9 @@ const recipeSchema = new Schema({
   },
   steps: {
     type: String,
-    required: [true, "Please add the cooking instructions, all separated by a comma and in the right order"],
+    required: [true, "Please add the cooking instructions, all separated by a dot and in the right order"],
   },
-    username: {
+    owner: {
     type: Schema.Types.ObjectId,
     ref: "User"
   }

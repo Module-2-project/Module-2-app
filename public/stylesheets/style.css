@@ -1,51 +1,109 @@
+/* GLOBAL STYLING  */
+
+:root {
+  --width-hundred: 100%;
+  --margin-gap: 10px;
+}
+
 body {
   padding: 0;
   margin: 0;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font: 16px "Lucida Grande", Helvetica, Arial, sans-serif;
+  /* margin for navbar not to cover text */
+  margin-bottom: 100px;
 }
 
-/* TBC temporal style  */
+main {
+  margin: var(--margin-gap);
+}
+
+.folio-icon {
+  width: 250px;
+  margin: var(--margin-gap);
+}
+
 footer {
-    display: flex;
-    justify-content: center;
-    align-items:center;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    background-color: #ddd;
-    
-  }
-
+  position: fixed;
+  bottom: 0%;
+  width: var(--width-hundred);
+  background-color: rgba(255, 166, 0, 0.24);
+}
   
-  nav ul {
-    display: flex;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    width: 100%;
-    justify-content: space-between;
-  }
+nav ul {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  list-style: none;
+}
 
-  nav ul li {
-    margin-left: 30px;
-    margin-right: 30px;
-    
-  }
+nav ul li a img {
+  width: calc(60% - var(--margin-gap) * 4 / 5);
+}
 
+.home-icon {
+  width: 120px;
+}
+
+.home-page-icons {
+  width: 30px;
+}
+
+.arrow-back {
+  width: 20px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--margin-gap);
+}
+
+button {
+  border: none;
+  background-color: rgba(255, 166, 0, 0.534);
+  border-radius: 8px;
+  padding: 2px;
+}
+
+a {
+  color: orange;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/* home page */
+
+.home-page-nav {
+  position: absolute;
+  top: 150px;
+  right: 10px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.recipeSlides {
+  width: var(--width-hundred);
+  height: 300px;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.recipeSlides img {
+  position: absolute;
+  width: var(--width-hundred);
+  height: var(--width-hundred);
+  top: 0;
+  left: 0;
+  transition: left 0.5s ease;
+}
+
+/* media query for mobile landscape */
+
+@media (orientation: landscape) {
   nav ul li a img {
-  width: 60%;
+    width: calc(35% - var(--margin-gap) * 4 / 5);
   }
-
-  #folioIcon {
-    width: 450px;
-  }
-
-  div { 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .homeIcon {
-    width: 150px;
-  }
+}

@@ -1,0 +1,64 @@
+<button onclick="history.back()"><img class="arrow-back" src="../images/back-arrow.png" />Go back</button>
+<h2>Search</h2>
+
+{{#if user}}
+<form class="search-form" method="GET" action="/recipe/search-results">
+  <label>Search for a recipe:</label>
+  <input type="text" name="name" />
+  <label for="cuisine">Cuisine:</label>
+  <select name="cuisine">
+    <option value="">None</option>
+    <option value="Asian">Asian</option>
+    <option value="Japanese">Japanese</option>
+    <option value="Thai">Thai</option>
+    <option value="Italian">Italian</option>
+    <option value="Greek">Greek</option>
+    <option value="Mexican">Mexican</option>
+    <option value="Argentinian">Argentinian</option>
+    <option value="Colombian">Colombian</option>
+    <option value="South American">South American</option>
+    <option value="Etiopian">Etiopian</option>
+    <option value="Marrocan">Marrocan</option>
+    <option value="Spanish">Spanish</option>
+    <option value="Portuguese">Portuguese</option>
+    <option value="Indian">Indian</option>
+    <option value="American">American</option>
+    <option value="Other">Other</option>
+  </select>
+  <label for="spices">Spiciness:</label>
+  <select name="spices">
+    <option value="Mild">🔥</option>
+    <option value="Medium">🔥🔥</option>
+    <option value="Spicy">🔥🔥🔥</option>
+    <option value="Very spicy">🐲</option>
+  </select>
+  <label>Does the recipe contain:</label>
+  <div>
+    <label>Lactose:</label>
+    <input type="radio" name="lactose" value="true" />Yes
+    <input type="radio" name="lactose" value="false" />No
+    <label>Gluten:</label>
+    <input type="radio" name="gluten" value="true" />Yes
+    <input type="radio" name="gluten" value="false" />No
+    <label>Meat:</label>
+    <input type="radio" name="meat" value="true" />Yes
+    <input type="radio" name="meat" value="false" />No
+  </div>
+  <label for="level">Cooking level:</label>
+  <select name="level">
+    <option value="">Not specified</option>
+    <option value="Beginner">Beginner 👶🏻</option>
+    <option value="Medium">Medium 👨🏻</option>
+    <option value="Experienced">Experienced 🧞‍♂️</option>
+    <option value="God">God 👨🏻‍🍳</option>
+    <option value="Grandma">Grandma 👵🏻</option>
+  </select>
+  <button type="submit">Search</button>
+</form>
+{{else}}
+<form class="search-form" method="GET" action="/recipe/search-results">
+  <label>Search for a recipe by name:</label>
+  <input type="text" name="name" />
+  <button type="submit">Search</button>
+</form>
+{{/if}}

@@ -1,13 +1,11 @@
 const { Schema, model } = require('mongoose');
  
 const userSchema = new Schema(
-  // Add whichever fields you need for your app
   {
     username: {
       type: String,
       trim: true,
-      required: [true, 'A username is required.'],
-      unique: true
+      required: [true, 'A username is required.']
     },
     firstName: {
       type: String,
@@ -36,8 +34,7 @@ const userSchema = new Schema(
         values: ["Beginner", "Medium","Hard", "God", "Grandma"],
         message: "Please tell us your cooking skill level",
       },
-      required: true,
-      unique: true,
+      required: true
     },
     favorites: {
       type: Schema.Types.ObjectId,

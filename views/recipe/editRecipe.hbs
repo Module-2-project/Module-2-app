@@ -1,69 +1,69 @@
+<button onclick="history.back()"><img class="arrow-back" src="../images/back-arrow.png" />Go back</button>
 <h2>Edit recipe</h2>
 
-<form method="POST" action="/recipe/:{{_id}}/edit">
+<form method="POST" action="/recipe/{{recipe._id}}/edit">
   <label>Dish name:</label>
-  <input required="true" type="text" name="name" value="{{name}}" />
+  <input required="true" type="text" name="name" value="{{recipe.name}}" />
   <label>Image URL:</label>
-  <input required="true" type="text" name="image" value="{{image}}"/>
+  <input required="true" type="text" name="image" value="{{recipe.image}}"/>
   <label>Time required in minutes:</label>
-  <input required="true" type="number" name="time" value="{{time}}" />
+  <input required="true" type="number" name="time" value="{{recipe.time}}" />
   <label>Cuisine type:</label>
   <select required="true" name="cuisine">
-    <option value="Asian">Asian</option>
-    <option value="Japanese">Japanese</option>
-    <option value="Thai">Thai</option>
-    <option value="Italian">Italian</option>
-    <option value="Greek">Greek</option>
-    <option value="Mexican">Mexican</option>
-    <option value="Argentinian">Argentinian</option>
-    <option value="Colombian">Colombian</option>
-    <option value="South American">South American</option>
-    <option value="Etiopian">Etiopian</option>
-    <option value="Marrocan">Marrocan</option>
-    <option value="Spanish">Spanish</option>
-    <option value="Portuguese">Portuguese</option>
-    <option value="Indian">Indian</option>
-    <option value="American">American</option>
-    <option value="Other">Other</option>
+    <option value="Asian" {{#eq recipe.cuisine "Asian" }}selected{{/eq}}>Asian</option>
+    <option value="Japanese" {{#eq recipe.cuisine "Japanese" }}selected{{/eq}}>Japanese</option>
+    <option value="Thai" {{#eq recipe.cuisine "Thai" }}selected{{/eq}}>Thai</option>
+    <option value="Italian" {{#eq recipe.cuisine "Italian" }}selected{{/eq}}>Italian</option>
+    <option value="Greek" {{#eq recipe.cuisine "Greek" }}selected{{/eq}}>Greek</option>
+    <option value="Mexican" {{#eq recipe.cuisine "Mexican" }}selected{{/eq}}>Mexican</option>
+    <option value="Argentinian" {{#eq recipe.cuisine "Argentinian" }}selected{{/eq}}>Argentinian</option>
+    <option value="Colombian" {{#eq recipe.cuisine "Colombian" }}selected{{/eq}}>Colombian</option>
+    <option value="South American" {{#eq recipe.cuisine "South American" }}selected{{/eq}}>South American</option>
+    <option value="Ethiopian" {{#eq recipe.cuisine "Ethiopian" }}selected{{/eq}}>Ethiopian</option>
+    <option value="Marrocan" {{#eq recipe.cuisine "Marrocan" }}selected{{/eq}}>Marrocan</option>
+    <option value="Spanish" {{#eq recipe.cuisine "Spanish" }}selected{{/eq}}>Spanish</option>
+    <option value="Portuguese" {{#eq recipe.cuisine "Portuguese" }}selected{{/eq}}>Portuguese</option>
+    <option value="Indian" {{#eq recipe.cuisine "Indian" }}selected{{/eq}}>Indian</option>
+    <option value="American" {{#eq recipe.cuisine "American" }}selected{{/eq}}>American</option>
+    <option value="Other" {{#eq recipe.cuisine "Other" }}selected{{/eq}}>Other</option>
   </select>
   <label>Kcal:</label>
-  <input required="true" type="number" name="kcal" value="{{kcal}}" />
+  <input required="true" type="number" name="kcal" value="{{recipe.kcal}}" />
   <label>Spices:</label>
   <select required="true" name="spices">
-    <option value="Mild">🔥</option>
-    <option value="Medium">🔥🔥</option>
-    <option value="Spicy">🔥🔥🔥</option>
-    <option value="Very spicy">🐲</option>
+    <option value="Mild" {{#eq recipe.spices "Mild" }}selected{{/eq}}>🔥</option>
+    <option value="Medium" {{#eq recipe.spices "Medium" }}selected{{/eq}}>🔥🔥</option>
+    <option value="Spicy" {{#eq recipe.spices "Spicy" }}selected{{/eq}}>🔥🔥🔥</option>
+    <option value="Very spicy" {{#eq recipe.spices "Very spicy" }}selected{{/eq}}>🐲</option>
   </select>
   <label>Does the recipe contain:</label>
   <div>
-    <label>Lactose</label>
-    <input type="checkbox" name="lactose" />
-  </div>
-  <div>
-    <label>Gluten</label>
-    <input type="checkbox" name="gluten" />
-  </div>
-  <div>
-    <label>Meet or fish:</label>
-    <input type="checkbox" name="veggie" />
+    <label>Lactose:</label>
+    <input type="radio" name="lactose" value="true" {{#eq recipe.lactose true }}checked{{/eq}}/>Yes
+    <input type="radio" name="lactose" value="false" {{#eq recipe.lactose false }}checked{{/eq}}/>No
+    <label>Gluten:</label>
+    <input type="radio" name="gluten" value="true" {{#eq recipe.gluten true }}checked{{/eq}}/>Yes
+    <input type="radio" name="gluten" value="false" {{#eq recipe.gluten false }}checked{{/eq}}/>No
+    <label>Meat:</label>
+    <input type="radio" name="meat" value="true" {{#eq recipe.meat true }}checked{{/eq}}/>Yes
+    <input type="radio" name="meat" value="false" {{#eq recipe.meat false }}checked{{/eq}}/>No
   </div>
   <label>Select your cooking level:</label>
   <select required="true" name="level">
-    <option value="Beginner">Beginner</option>
-    <option value="Medium">Medium</option>
-    <option value="Experienced">Experienced</option>
-    <option value="God">God</option>
-    <option value="Grandma">Grandma</option>
+    <option value="Beginner" {{#eq recipe.level "Beginner" }}selected{{/eq}}>Beginner 👶🏻</option>
+    <option value="Medium" {{#eq recipe.level "Medium" }}selected{{/eq}}>Medium 👨🏻</option>
+    <option value="Experienced" {{#eq recipe.level "Experienced" }}selected{{/eq}}>Experienced 🧞‍♂️</option>
+    <option value="God" {{#eq recipe.level "God" }}selected{{/eq}}>God 👨🏻‍🍳</option>
+    <option value="Grandma" {{#eq recipe.level "Grandma" }}selected{{/eq}}>Grandma 👵🏻</option>
   </select>
   <label>Number of servings:</label>
-  <input required="true" type="number" name="pax" value="{{pax}}" />
+  <input required="true" type="number" name="pax" value="{{recipe.pax}}" />
   <label>Ingredients:</label>
-  <textarea required="true" name="ingredients" rows="10" columns="25"
-    value="{{ingrdients}}"></textarea>
+  <textarea required="true" name="ingredients" rows="10" columns="50"
+    value="{{recipe.ingredients}}">{{recipe.ingredients}}</textarea>
   <label>Steps:</label>
-  <textarea required="true" name="ingredients" rows="10" columns="25"
-    value="{{steps}}"></textarea>
+  <textarea required="true" name="steps" rows="10" columns="50"
+    value="{{recipe.steps}}">{{recipe.steps}}</textarea>
   <label>Added by:</label>
   <input value="{{user.username}}" />
   <button type="submit">Save changes</button>

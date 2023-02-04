@@ -38,7 +38,7 @@ const recipes = [
   },
   {
     name: "Grandma's Apple Pie",
-    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQrBQ7iHltFkTuYzRC0nFeXNC5aCV3J82Xgg&usqp=CAU",
+    image: "https://www.inspiredtaste.net/wp-content/uploads/2019/11/Homemade-Apple-Pie-From-Scratch-1200.jpg",
     time: 120,
     cuisine: "American",
     kcal: 400,
@@ -54,7 +54,7 @@ const recipes = [
   },
   {
     name: "Arroz con Pollo",
-    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyxmKHpSEhf0akg4Upta8uapDqZC3jzLJl3Q&usqp=CAU",
+    image: "https://www.goya.com/media/3854/southwestern-chicken-and-rice.jpg?quality=80",
     time: 60,
     cuisine: "Colombian",
     kcal: 510,

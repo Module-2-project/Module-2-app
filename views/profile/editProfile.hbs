@@ -5,22 +5,21 @@
 </div>
 <form method="POST" action="/profile/edit">
   <label>Username:</label>
-  <input required="true" value="{{username}}"></input>
+  <input required="true" name="username" value="{{user.username}}"></input>
   <label>First name:</label>
-  <input required="true" value="{{firstName}}"></input>
+  <input required="true" name="firstName" value="{{user.firstName}}"></input>
   <label>Last name:</label>
-  <input required="true" value="{{lastName}}"></input>
+  <input required="true" name="lastName" value="{{user.lastName}}"></input>
   <label>Email:</label>
-  <input required="true" value="{{email}}"></input>
+  <input required="true" name ="email" value="{{user.email}}"></input>
   <label>Cooking level:</label>
-  <select required="true" name="level">
-    <option value="Beginner" {{#eq level "Beginner" }}selected{{/eq}}>Beginner</option>
-    <option value="Medium" {{#eq level "Medium" }}selected{{/eq}}>Medium</option>
-    <option value="Experienced" {{#eq level "Experienced" }}selected{{/eq}}>Experienced</option>
-    <option value="God" {{#eq level "God" }}selected{{/eq}}>God</option>
-    <option value="Grandma" {{#eq level "Grandma" }}selected{{/eq}}>Grandma</option>
+  <select required="true" name="cookingLevel">
+    <option value="Beginner" {{#eq user.cookingLevel "Beginner" }}selected{{/eq}}>Beginner</option>
+    <option value="Medium" {{#eq user.cookingLevel "Medium" }}selected{{/eq}}>Medium</option>
+    <option value="Experienced" {{#eq user.cookingLevel "Experienced" }}selected{{/eq}}>Experienced</option>
+    <option value="God" {{#eq user.cookingLevel "God" }}selected{{/eq}}>God</option>
+    <option value="Grandma" {{#eq user.cookingLevel "Grandma" }}selected{{/eq}}>Grandma</option>
   </select>
   <button type="submit">Save changes</button>
-</form>
 
 <a href="/profile/delete">Delete account</a>

@@ -35,8 +35,6 @@ router.get("/search-results", async (req, res, next) => {
   if (sortBy === "paxDesc") sort.pax = -1;
   if (sortBy === "kcalAsc") sort.kcal = 1;
   if (sortBy === "kcalDesc") sort.kcal = -1;
-  if (sortBy === "levelAsc") sort.level = 1;
-  if (sortBy === "levelDesc") sort.level = -1;
   if (sortBy === "timeAsc") sort.time = 1;
   if (sortBy === "timeDesc") sort.time = -1;
   try {
@@ -60,8 +58,6 @@ router.get("/all", async (req, res, next) => {
   if (sortBy === "paxDesc") sort.pax = -1;
   if (sortBy === "kcalAsc") sort.kcal = 1;
   if (sortBy === "kcalDesc") sort.kcal = -1;
-  if (sortBy === "levelAsc") sort.level = 1;
-  if (sortBy === "levelDesc") sort.level = -1;
   if (sortBy === "timeAsc") sort.time = 1;
   if (sortBy === "timeDesc") sort.time = -1;
   try {
@@ -126,8 +122,6 @@ router.get("/my-recipes", isLoggedIn, async (req, res, next) => {
   if (sortBy === "paxDesc") sort.pax = -1;
   if (sortBy === "kcalAsc") sort.kcal = 1;
   if (sortBy === "kcalDesc") sort.kcal = -1;
-  if (sortBy === "levelAsc") sort.level = 1;
-  if (sortBy === "levelDesc") sort.level = -1;
   if (sortBy === "timeAsc") sort.time = 1;
   if (sortBy === "timeDesc") sort.time = -1;
   try {

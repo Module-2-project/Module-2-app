@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
-const recipeSchema = new Schema({
+const reviewSchema = new Schema({
   title: {
     type: String,
     required: [true, "You need to add a review title."]
@@ -28,6 +28,6 @@ const recipeSchema = new Schema({
   }
 });
 
-const Recipe = model('Recipe', recipeSchema);
+const Review = model('Review', reviewSchema);
 
-module.exports = Recipe;
+module.exports = Review;

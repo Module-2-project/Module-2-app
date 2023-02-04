@@ -94,7 +94,7 @@ a {
 .recipeSlides img {
   position: absolute;
   width: var(--width-hundred);
-  height: var(--width-hundred);
+  height: 300px;
   top: 0;
   left: 0;
   transition: left 0.5s ease;

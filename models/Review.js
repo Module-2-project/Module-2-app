@@ -12,7 +12,7 @@ const reviewSchema = new Schema({
   },
   stars: {
     type: Number,
-    min: 0,
+    min: 1,
     max: 5,
     required: [true, "Add a rating."]
   },
@@ -28,9 +28,13 @@ const reviewSchema = new Schema({
   recipeRated: {
     type: Schema.Types.ObjectId,
     ref: "Recipe",
-    required: [true]
+    required: [true],
+  },
+},
+  {
+    timestamps: true
   }
-});
+);
 
 const Review = mongoose.model('Review', reviewSchema);
 

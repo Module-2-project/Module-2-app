@@ -2,7 +2,7 @@
 <div class="recipeDetail">
   <h3>{{recipe.name}}</h3>
   <p>Cuisine: {{recipe.cuisine}}</p>
-  <img src="{{recipe.image}}" alt="Dish image" />
+  <img class="recipe-images" src="{{recipe.image}}" alt="Dish image" />
   <ul>
     <li>{{recipe.time}} min</li>
     <li>Servings: {{recipe.pax}}</li>
@@ -27,4 +27,13 @@
 </div>
 {{#if user}}
   <a href="/review/new/{{recipe._id}}">Add a review</a>
+{{/if}}
+
+<h3>Reviews</h3>
+{{#if review}}
+  {{#each review}}
+    {{> reviewCard}}
+  {{/each}}
+{{else}}
+<p>No reviews have been added for this recipe yet.</p>
 {{/if}}

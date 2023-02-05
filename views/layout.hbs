@@ -4,16 +4,16 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href='../stylesheets/style.css' rel="stylesheet"/>
+  <link href='/stylesheets/style.css' rel="stylesheet"/>
   <title>Project module 2</title>
 </head>
 <body>
-  <img class="folio-icon" src="../images/app-logo.png" alt="FoodFolio icon">
+  <img class="folio-icon" src="/images/app-logo.png" alt="FoodFolio icon">
   <header class="top-navbar">
     {{#if user}}
     <div class="home-page-nav">
-      <a href="/recipe/new"><img class="home-page-icons" src="../images/add-icon.png" alt="Add icon" /></a>
-      <a href="/recipe/all"><img class="home-page-icons" src="../images/chef-hat.png" alt="All recipes" /></a>
+      <a href="/recipe/new"><img class="home-page-icons" src="/images/add-icon.png" alt="Add icon" /></a>
+      <a href="/recipe/all"><img class="home-page-icons" src="/images/chef-hat.png" alt="All recipes" /></a>
     </div>
     {{else}}
     {{/if}}
@@ -25,15 +25,15 @@
     <nav>
       <ul>
         {{#if user}}
-        <li class="home-icon"><a href="/"><img src="../images/home-icon.png"></a></li>
-        <li><a href="/recipe/random"><img src="../images/question-icon-box.png"></a></li>
-        <li><a href="/recipe/search"><img src="../images/search-icon.png"></a></li>
-        <li><a href="#"><img src="../images/heart-icon-navbar.png"></a></li>
-        <li><a href="/profile"><img src="../images/chef-icon.png"></a></li>
+        <li class="home-icon"><a href="/"><img src="/images/home-icon.png"></a></li>
+        <li><a href="/recipe/random"><img src="/images/question-icon-box.png"></a></li>
+        <li><a href="/recipe/search"><img src="/images/search-icon.png"></a></li>
+        <li><a href="#"><img src="/images/heart-icon-navbar.png"></a></li>
+        <li><a href="/profile"><img src="/images/chef-icon.png"></a></li>
         {{else}}
-        <li class="home-icon"><a href="/"><img src="../images/home-icon.png"></a></li>
-        <li><a href="/recipe/random"><img src="../images/question-icon-box.png"></a></li>
-        <li><a href="/recipe/search"><img src="../images/search-icon.png"></a></li>
+        <li class="home-icon"><a href="/"><img src="/images/home-icon.png"></a></li>
+        <li><a href="/recipe/random"><img src="/images/question-icon-box.png"></a></li>
+        <li><a href="/recipe/search"><img src="/images/search-icon.png"></a></li>
         {{/if}}
       </ul>
     </nav>

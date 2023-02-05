@@ -16,6 +16,10 @@ const reviewSchema = new Schema({
     max: 5,
     required: [true, "Add a rating."]
   },
+  reviewerName: {
+    type: String,
+    required: [true, "You need to add your username to rate this recipe"],
+  },
   reviewer: {
     type: Schema.Types.ObjectId,
     ref: "User",
@@ -28,6 +32,6 @@ const reviewSchema = new Schema({
   }
 });
 
-const Review = model('Review', reviewSchema);
+const Review = mongoose.model('Review', reviewSchema);
 
 module.exports = Review;

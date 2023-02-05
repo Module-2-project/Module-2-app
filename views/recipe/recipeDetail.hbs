@@ -25,3 +25,6 @@
       <p>Created by: {{user.username}}</p>
   {{/if}}
 </div>
+{{#if user}}
+  <a href="/review/new/{{recipe._id}}">Add a review</a>
+{{/if}}

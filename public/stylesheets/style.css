@@ -83,21 +83,29 @@ a {
 }
 
 .recipeSlides {
-  width: var(--width-hundred);
-  height: 300px;
-  overflow: hidden;
   position: relative;
-  display: flex;
-  justify-content: center;
+  width: var(--width-hundred);
+  overflow: hidden;
 }
 
-.recipeSlides img {
+.slide {
   position: absolute;
-  width: var(--width-hundred);
-  height: 300px;
-  top: 0;
   left: 0;
-  transition: left 0.5s ease;
+  top: 200px;
+  width: var(--width-hundred);
+  height: 350px;
+  display: none;
+}
+
+.slide img {
+  width: var(--width-hundred);
+  height: 350px;
+  object-fit: cover;
+}
+
+.slide.active {
+  display: block;
+  transform: translateX(0%);
 }
 
 /* media query for mobile landscape */

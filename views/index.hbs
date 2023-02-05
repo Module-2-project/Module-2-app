@@ -1,8 +1,25 @@
 <h2>Welcome {{user.firstName}}</h2>
 
-<div class="recipeSlides">
-  <img src="" alt="Dish image">
-  <button class="nextBtn">Next</button>
+<div class="slideshow">
+  {{#each recipe}}
+    <div class="slide">
+      <img src="{{this.image}}" alt="{{this.name}}">
+    </div>
+  {{/each}}
 </div>
 
-<script src="/js/index.js"></script>
+<script>
+  const slides = document.querySelectorAll(".slide");
+  let index = 0;
+  slides[index].classList.add("active");
+  function showSlide() {
+    slides[index].classList.remove("active");
+    index++;
+    if (index >= slides.length)
+    {
+      index = 0;
+    }
+    slides[index].classList.add("active");
+  }
+  setInterval(showSlide, 3000);
+</script>

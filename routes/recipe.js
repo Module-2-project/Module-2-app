@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const router = express.Router();
 const User = require('../models/User');
 const Recipe = require("../models/Recipe");
+const Review = require("../models/Review");
 const isLoggedIn = require('../middlewares');
 
 // @desc    Displays search form for recipes
@@ -140,7 +141,8 @@ router.get("/:recipeId", isLoggedIn, async (req, res, next) => {
   const user = req.session.currentUser;
   try {
     const recipe = await Recipe.findById(recipeId);
-    res.render("recipe/recipeDetail", {recipe, user});
+    const reviews = await Review.find({ratedRecipe: recipe._id});
+    res.render("recipe/recipeDetail", {recipe, user, review: reviews});
   } catch (error) {
     next(error);
   }

@@ -1,4 +1,4 @@
-# App name
+# Food Folio
 
 ## Description
 
@@ -237,7 +237,7 @@ const recipeSchema = new Schema({
 | All recipes    | GET    | /recipe/all            | No        |                                                                                                            | recipe/searchResults    |
 | Random recipe  | GET    | /recipe/random         | No        |                                                                                                            | recipe/randomRecipe     |
 | My recipes     | GET    | /recipe/my-recipes     | Yes       |                                                                                                            | recipe/myRecipes        |
-| Recipe         | GET    | /recipe/:recipeId      | Yes       |                                                                                                            | recipe/recipeDetail     |
+| Recipe detail  | GET    | /recipe/:recipeId      | Yes       |                                                                                                            | recipe/recipeDetail     |
 | Edit recipe    | GET    | /recipe/edit/:recipeId | Yes       |                                                                                                            | recipe/editRecipe       |
 | Edit recipe    | POST   | /recipe/edit/:recipeId | yes       | { name, image, time, cuisine, kcal, spices, lactose, gluten, meat, level, pax, ingredients, steps, owner } | recipe/recipeDetail     |
 | Profile        | GET    | /profile               | Yes       |                                                                                                            | profile/profile         |

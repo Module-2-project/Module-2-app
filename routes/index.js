@@ -10,8 +10,7 @@ router.get('/', async (req, res, next) => {
   const user = req.session.currentUser;
   try {
     const recipes = await Recipe.find();
-    const userDB = await User.findOne({_id: user._id});
-    res.render('index', {recipe: recipes, user: userDB});
+    res.render('index', {recipe: recipes, user});
   } catch(error) {
     next(error);
   }

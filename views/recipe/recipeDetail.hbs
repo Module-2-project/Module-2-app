@@ -21,9 +21,6 @@
   <!-- this is a ol tag with li inside -->
     {{{splitSteps recipe.steps}}}
   <!-- allow this field not to be shown if user is blank -->
-  {{#if user.username}}
-      <p>Created by: {{user.username}}</p>
-  {{/if}}
 </div>
 {{#if user}}
   <a href="/review/new/{{recipe._id}}">Add a review</a>

@@ -1,8 +1,26 @@
 /* GLOBAL STYLING  */
+/* 
+text: #333
+background: #E7E8D1
+primary: #B85042
+secondary:  #A7BEAE
+accent: #FC766AFF
+highlight: #E3B448
+muted: #CBD18F */
 
 :root {
   --width-hundred: 100%;
   --margin-gap: 10px;
+  --navbar-color: rgb(255, 172, 130);
+  --text-color :#333;
+  --background-color : #e3b44813;
+  --primary-color: #B85042;
+  --secondary-color:  #A7BEAE;
+  --accent-color: #FC766AFF;
+  --highlight: #E3B448;
+  --muted-color: #CBD18F;
+  --button-color: #ffb3007b;
+
 }
 
 body {
@@ -11,6 +29,9 @@ body {
   font: 16px "Lucida Grande", Helvetica, Arial, sans-serif;
   /* margin for navbar not to cover text */
   margin-bottom: 100px;
+  background-color: #e3b44813;
+  color: var(--text-color);
+  
 }
 
 main {
@@ -26,7 +47,7 @@ footer {
   position: fixed;
   bottom: 0%;
   width: var(--width-hundred);
-  background-color: rgba(255, 166, 0, 0.24);
+  background-color: var(--navbar-color);
 }
   
 nav ul {
@@ -34,10 +55,12 @@ nav ul {
   justify-content: space-evenly;
   align-items: center;
   list-style: none;
+  
 }
 
 nav ul li a img {
   width: calc(60% - var(--margin-gap) * 4 / 5);
+  
 }
 
 .home-icon {
@@ -49,7 +72,7 @@ nav ul li a img {
 }
 
 .arrow-back {
-  width: 20px;
+  width: 12px;
 }
 
 form {
@@ -61,7 +84,7 @@ form {
 
 button {
   border: none;
-  background-color: rgba(255, 166, 0, 0.534);
+  background-color: var(--button-color); /* previous color button rgba(255, 166, 0, 0.534);*/
   border-radius: 8px;
   padding: 2px;
 }

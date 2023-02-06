@@ -2,6 +2,8 @@
 <h2>Add review</h2>
 
 <form method="POST" action="/review/new/{{recipe._id}}">
+  <label>Recipe rated:</label>
+  <input required="true" name="recipeName" value="{{recipe.name}}"/>
   <label>Review name:</label>
   <input required="true" type="text" name="title" placeholder="Amazing recipe" />
   <label>Comments:</label>

@@ -14,8 +14,8 @@ router.get("/my-reviews", isLoggedIn, async (req, res, next) => {
   try {
     const userDB = await User.findOne({_id: user._id});
     const reviews = await Review.find({reviewer: user._id});
-    const recipe = await Recipe.findOne({_id: reviews.recipeRated});
-    res.render("review/myReviews", {review: reviews, user: userDB, recipe: recipe});
+    console.log(reviews);
+    res.render("review/myReviews", {review: reviews, user: userDB});
   } catch(error) {
     next(error);
   }
@@ -29,9 +29,8 @@ router.get("/new/:recipeId", isLoggedIn, async (req, res, next) => {
   const user = req.session.currentUser;
   try {
     const recipe = await Recipe.findOne({_id: recipeId});
-    console.log(recipe);
     const userDB = await User.findOne({_id: user._id});
-    res.render("review/addReview", {user: userDB, recipe: recipe});
+    res.render("review/addReview", {user: userDB, recipe});
   } catch(error) {
     next(error);
   }
@@ -42,14 +41,13 @@ router.get("/new/:recipeId", isLoggedIn, async (req, res, next) => {
 // @access  User
 router.post("/new/:recipeId", isLoggedIn, async (req, res, next) => {
   const user = req.session.currentUser;
-  const {title, comment, stars, reviewerName} = req.body;
+  const {title, comment, stars, reviewerName, recipeName } = req.body;
   const {recipeId} = req.params;
   try {
     const userDB = await User.findOne({_id: user._id});
     const recipe = await Recipe.findOne({_id: recipeId});
-    console.log(recipe);
-    const review = await Review.create({title, comment, stars, reviewerName, reviewer: userDB._id, recipeRated: recipeId});
-    res.render("recipe/recipeDetail", {recipe: recipe, review: review, user: userDB});
+    const review = await Review.create({title, comment, stars, reviewerName, reviewer: userDB._id, recipeName, recipeRated: recipeId});
+    res.render("recipe/recipeDetail", {recipe, review, user: userDB});
   } catch(error) {
     next(error)
 ;  }

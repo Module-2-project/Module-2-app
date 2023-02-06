@@ -24,7 +24,6 @@ router.get("/edit", isLoggedIn, async (req, res, next) => {
   const user = req.session.currentUser;
   try {
     const userDB = await User.findOne({_id: user._id});
-    console.log(userDB);
     res.render("profile/editProfile", {user: userDB});
   } catch(error) {
     next(error);

@@ -4,14 +4,22 @@
   <img src="../images/chef-icon.png" alt="Profile avatar" />
 </div>
 <form method="POST" action="/profile/edit">
-  <label>Username:</label>
-  <input required="true" name="username" value="{{user.username}}"></input>
-  <label>First name:</label>
-  <input required="true" name="firstName" value="{{user.firstName}}"></input>
-  <label>Last name:</label>
-  <input required="true" name="lastName" value="{{user.lastName}}"></input>
-  <label>Email:</label>
-  <input required="true" name ="email" value="{{user.email}}"></input>
+  <div class="profile-items">
+    <label>Username:</label>
+    <input required="true" name="username" value="{{user.username}}"></input>
+  </div>
+  <div class="profile-items"></div>
+    <label>First name:</label>
+    <input required="true" name="firstName" value="{{user.firstName}}"></input>
+  </div>
+  <div class="profile-items"></div>
+    <label>Last name:</label>
+    <input required="true" name="lastName" value="{{user.lastName}}"></input>
+  </div>
+  <div class="profile-items"></div>
+    <label>Email:</label>
+    <input required="true" name="email" value="{{user.email}}"></input>
+  </div>
   <label>Cooking level:</label>
   <select required="true" name="cookingLevel">
     <option value="Beginner" {{#eq user.cookingLevel "Beginner" }}selected{{/eq}}>Beginner</option>

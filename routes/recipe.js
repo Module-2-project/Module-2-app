@@ -141,7 +141,7 @@ router.get("/:recipeId", isLoggedIn, async (req, res, next) => {
   const user = req.session.currentUser;
   try {
     const recipe = await Recipe.findById(recipeId);
-    const reviews = await Review.find({ratedRecipe: recipe._id});
+    const reviews = await Review.find({recipeRated: recipe._id});
     res.render("recipe/recipeDetail", {recipe, user, review: reviews});
   } catch (error) {
     next(error);

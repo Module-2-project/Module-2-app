@@ -79,6 +79,7 @@ If logged in, these are extra features:
 - User can search for recipes with different filters
 - User can send a review to rate a recipe
 - User can see all his/her reviews in his profile
+- User can reset his/her password
 
 ---
 

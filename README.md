@@ -48,20 +48,37 @@ npm run dev
 
 What can the user do with the app?
 
+If not logged in:
+
 - User can sign up and create an account
 - User can login
-- User can log out (if logged in)
-- User can see his/her profile and edit the information there, as well as delete the account (if logged in)
-- User can create recipe and edit them (if logged in)
-- User can access all recipes stored in the DB (if logged in - otherwise only sees a summary)
-- User can access his/her own recipes from the profile page
+- User can access all recipes stored in the DB but can only see a summary
+- User can get a random recipe suggestion, again only the summary
+- If user tries to access a ptotected route, he/she will be redirected to the sign up page
+
+If logged in, these are extra features:
+
+- User can log out
+- User can see his/her profile and edit the information there, as well as delete the account
+- User can see recipe detail (additional data on ingredients and steps etc)
+- User can create recipe and edit them
+- User can access all his/her recipes in his/her profile
 
 ---
 
 ## User stories (Backlog)
 
-- User can search for recipes with different filters (if logged in - otherwise can only search by name)
+If not logged in:
+
+- User can search for recipes by name
 - User can sort results by different fields - ascending and descending
+- User can view all reviews linked to a recipe
+
+If logged in, these are extra features:
+
+- User can search for recipes with different filters
+- User can send a review to rate a recipe
+- User can see all his/her reviews in his profile
 
 ---
 
@@ -218,6 +235,46 @@ const recipeSchema = new Schema({
 });
 ```
 
+Review:
+
+```js
+const reviewSchema = new Schema(
+  {
+    title: {
+      type: String,
+      required: [true, "You need to add a review title."],
+    },
+    comment: {
+      type: String,
+      required: [true, "Add your review in this field."],
+    },
+    stars: {
+      type: Number,
+      min: 1,
+      max: 5,
+      required: [true, "Add a rating."],
+    },
+    reviewerName: {
+      type: String,
+      required: [true, "You need to add your username to rate this recipe"],
+    },
+    reviewer: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+      required: [true],
+    },
+    recipeRated: {
+      type: Schema.Types.ObjectId,
+      ref: "Recipe",
+      required: [true],
+    },
+  },
+  {
+    timestamps: true,
+  }
+);
+```
+
 ---
 
 ## Routes
@@ -244,6 +301,9 @@ const recipeSchema = new Schema({
 | Edit profile   | GET    | /profile/edit          | Yes       |                                                                                                            | profile/editProfile     |
 | Edit profile   | POST   | /profile/edit          | Yes       | { username, firstName, lastName, email, cookingLevel }                                                     | profile/edit            |
 | Delete profile | GET    | /profile/delete        | Yes       |                                                                                                            | auth/signup             |
+| Add review     | GET    | /review/new/:recipeId  | Yes       |                                                                                                            | review/addReview        |
+| Add review     | POST   | /review/new/:recipeId  | Yes       | { title, comment, stars, reviewerName }                                                                    | recipe/recipeDetail     |
+| My reviews     | GET    | /review/my-reviews     | Yes       |                                                                                                            | review/my-reviews       |
 
 ---
 

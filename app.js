@@ -90,6 +90,15 @@ hbs.registerHelper('eq', function (value, otherValue, options) {
     return options.inverse(this);
   }
 });
+// helper to display stars in reviews
+hbs.registerHelper('displayStarEmoji', function(starCount) {
+  let starEmoji = '';
+  for (let i=0; i<starCount; i++) {
+    starEmoji += '⭐️';
+  }
+  return starEmoji;
+});
+
 
 // routes intro
 app.use('/', indexRouter);

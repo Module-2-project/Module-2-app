@@ -29,7 +29,8 @@ router.get("/new/:recipeId", isLoggedIn, async (req, res, next) => {
   try {
     const recipe = await Recipe.findOne({_id: recipeId});
     const userDB = await User.findOne({_id: user._id});
-    if (recipe.owner === userDB._id) {
+    // toString used because otherwise the validation will work even though they are the same values
+    if (recipe.owner.toString() === userDB._id.toString()) {
       res.render("recipe/recipeDetail", {error: "You cannot rate your own recipe", recipe, userDB, user});
     } else {
       res.render("review/addReview", {user: userDB, recipe});

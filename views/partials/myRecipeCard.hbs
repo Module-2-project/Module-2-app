@@ -1,14 +1,14 @@
 <div class="myRecipeCard">
-  <h3>{{recipe.name}}</h3>
-  <img class="recipe-images" src={{recipe.image}}alt="Dish image" />
-  <p>Cuisine: {{recipe.cuisine}}</p>
+  <h3>{{name}}</h3>
+  <img class="recipe-images" src={{image}}alt="Dish image" />
+  <p>Cuisine: {{cuisine}}</p>
   <ul>
-    <li>Level: {{recipe.level}}</li>
-    <li>Preparation time: {{recipe.time}} min</li>
-    <li>Spiciness: {{recipe.spices}} </li>
-    <li>{{recipe.pax}} servings</li>
-    <li>{{recipe.kcal}} kcal</li>
+    <li>Level: {{level}}</li>
+    <li>Preparation time: {{time}} min</li>
+    <li>Spiciness: {{spices}} </li>
+    <li>{{pax}} servings</li>
+    <li>{{kcal}} kcal</li>
   </ul>
-  <a href="/recipe/{{recipe._id}}">View more</a>
-  <a href="/recipe/edit/{{recipe._id}}">Edit this recipe</a>
+  <a href="/recipe/{{_id}}">View more</a>
+  <a href="/recipe/edit/{{_id}}">Edit this recipe</a>
 </div>

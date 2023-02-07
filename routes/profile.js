@@ -59,6 +59,21 @@ router.get("/delete", isLoggedIn, async (req, res, next) => {
   } catch(error) {
     next(error);
   }
-})
+});
+
+// @desc    Shows another user's profile page
+// @route   GET /profile/:userId
+// @access  User
+router.get("/:userId", isLoggedIn, async (req, res, next) => {
+  const user = req.session.currentUser;
+  const { userId } = req.params;
+  try {
+    const otherUser = await User.findById(userId);
+    const recipes = await Recipe.find({owner: otherUser._id});
+    res.render("profile/otherUser", {user, otherUser, recipe: recipes})
+  } catch(error) {
+    next(error);
+  }
+});
 
 module.exports = router;

@@ -1,0 +1,8 @@
+<h2>Welcome to {{otherUser.username}}'s<br>profile</h2>
+
+<h3>Recipes:</h3>
+{{#if recipe}}
+  {{#each recipe}}
+    {{> recipeCard}}
+  {{/each}}
+{{/if}}

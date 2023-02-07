@@ -23,6 +23,7 @@
   <!-- allow this field not to be shown if user is blank -->
 </div>
 {{#if user}}
+  <a href="/profile/{{recipe.owner}}">See more recipes from this user</a>
   <a href="/review/new/{{recipe._id}}">Add a review</a>
 {{/if}}
 

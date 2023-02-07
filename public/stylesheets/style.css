@@ -184,9 +184,9 @@ a {
   position: absolute;
 
 }
-.catch-phrase2 span {
+/* .catch-phrase2 span {
 
-}
+} */
 
 /*Profile Page */
 .profile-intro {
@@ -277,7 +277,13 @@ a {
   padding-bottom: 0px;
 }
 
+/* Recipe Random Page/Chef's proposal */
 
+.random-arrow-deco {
+  width: 35%;
+  display: flex;
+  justify-items: center;
+}
 /* media query for mobile landscape */
 
 @media (orientation: landscape) {

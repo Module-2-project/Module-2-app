@@ -70,7 +70,11 @@ router.get("/:userId", isLoggedIn, async (req, res, next) => {
   try {
     const otherUser = await User.findById(userId);
     const recipes = await Recipe.find({owner: otherUser._id});
-    res.render("profile/otherUser", {user, otherUser, recipe: recipes})
+    if (otherUser._id === user._id) {
+      res.render("profile/profile", {user: otherUser, recipe: recipes});
+    } else {
+      res.render("profile/otherUser", {user, otherUser, recipe: recipes});
+    }
   } catch(error) {
     next(error);
   }

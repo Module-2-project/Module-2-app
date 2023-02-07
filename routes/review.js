@@ -14,7 +14,6 @@ router.get("/my-reviews", isLoggedIn, async (req, res, next) => {
   try {
     const userDB = await User.findOne({_id: user._id});
     const reviews = await Review.find({reviewer: user._id});
-    console.log(reviews);
     res.render("review/myReviews", {review: reviews, user: userDB});
   } catch(error) {
     next(error);
@@ -30,7 +29,11 @@ router.get("/new/:recipeId", isLoggedIn, async (req, res, next) => {
   try {
     const recipe = await Recipe.findOne({_id: recipeId});
     const userDB = await User.findOne({_id: user._id});
-    res.render("review/addReview", {user: userDB, recipe});
+    if (recipe.owner === userDB._id) {
+      res.render("recipe/recipeDetail", {error: "You cannot rate your own recipe", recipe, userDB, user});
+    } else {
+      res.render("review/addReview", {user: userDB, recipe});
+    }
   } catch(error) {
     next(error);
   }

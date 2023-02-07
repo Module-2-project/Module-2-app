@@ -18,7 +18,7 @@ const recipes = [
     pax: 8,
     ingredients: "800gr of ground beef, bread crumbs, 5 eggs, 1 onion, ketchup, Worcestershire sauce, salt, pepper",
     steps: "Preheat oven to 350 degrees F. In a large bowl, combine ground beef, bread crumbs, eggs, onion, ketchup, Worcestershire sauce, salt, and pepper. Place mixture in a loaf pan and bake for 60 minutes. Let cool for 10 minutes before slicing and serving.",
-    owner: "63de4961195f8c51b021d64f"
+    owner: "63e20978a639bc8be8553c3c"
   },
   {
     name: "Grandma's Chicken Noodle Soup",
@@ -34,7 +34,7 @@ const recipes = [
     pax: 6,
     ingredients: "600gr of chicken breasts, 2 onion, 3 carrots, 50gr of celery, garlic, thyme, bay leaves, 300gr of egg noodles, salt, pepper",
     steps: "In a large pot, sauté onion, carrots, celery, and garlic until softened. Add chicken breasts, thyme, bay leaves, and enough water to cover. Bring to a boil, then reduce heat and simmer for 60 minutes. Remove chicken breasts and shred meat. Return meat to pot and add egg noodles. Cook for an additional 15 minutes. Season with salt and pepper before serving.",
-    owner: "63de4961195f8c51b021d64f"
+    owner: "63e20978a639bc8be8553c3c"
   },
   {
     name: "Grandma's Apple Pie",

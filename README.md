@@ -80,6 +80,7 @@ If logged in, these are extra features:
 - User can send a review to rate a recipe
 - User can see all his/her reviews in his profile
 - User can reset his/her password
+- User can access other users' profiles through their recipes or reviews, they will only see the other user's username and recipes
 
 ---
 
@@ -264,6 +265,10 @@ const reviewSchema = new Schema(
       ref: "User",
       required: [true],
     },
+    recipeName: {
+      type: String,
+      required: [true],
+    },
     recipeRated: {
       type: Schema.Types.ObjectId,
       ref: "Recipe",
@@ -280,31 +285,32 @@ const reviewSchema = new Schema(
 
 ## Routes
 
-| Name           | Method | Endpoint               | Protected | Req.body                                                                                                   | Renders                 |
-| -------------- | ------ | ---------------------- | --------- | ---------------------------------------------------------------------------------------------------------- | ----------------------- |
-| Home           | GET    | /                      | No        |                                                                                                            |                         |
-| Login          | GET    | /auth/login            | No        |                                                                                                            |                         |
-| Login          | POST   | /auth/login            | No        | { email, password }                                                                                        | index                   |
-| Signup         | GET    | /auth/signup           | No        |                                                                                                            |                         |
-| Signup         | POST   | /auth/signup           | No        | { username, firstName, lastName, email, password, cookingLevel }                                           | /auth/login             |
-| Logout         | GET    | /auth/logout           | Yes       |                                                                                                            | auth/login              |
-| New recipe     | GET    | /recipe/new            | Yes       |                                                                                                            |                         |
-| New recipe     | POST   | /recipe/new            | Yes       | { name, image, time, cuisine, kcal, spices, lactose, gluten, meat, level, pax, ingredients, steps }        | /recipe/justAddedRecipe |
-| Search         | GET    | /recipe/search         | No        |                                                                                                            |                         |
-| Search results | GET    | /recipe/search-results | No        |                                                                                                            | recipe/searchResults    |
-| All recipes    | GET    | /recipe/all            | No        |                                                                                                            | recipe/searchResults    |
-| Random recipe  | GET    | /recipe/random         | No        |                                                                                                            | recipe/randomRecipe     |
-| My recipes     | GET    | /recipe/my-recipes     | Yes       |                                                                                                            | recipe/myRecipes        |
-| Recipe detail  | GET    | /recipe/:recipeId      | Yes       |                                                                                                            | recipe/recipeDetail     |
-| Edit recipe    | GET    | /recipe/edit/:recipeId | Yes       |                                                                                                            | recipe/editRecipe       |
-| Edit recipe    | POST   | /recipe/edit/:recipeId | yes       | { name, image, time, cuisine, kcal, spices, lactose, gluten, meat, level, pax, ingredients, steps, owner } | recipe/recipeDetail     |
-| Profile        | GET    | /profile               | Yes       |                                                                                                            | profile/profile         |
-| Edit profile   | GET    | /profile/edit          | Yes       |                                                                                                            | profile/editProfile     |
-| Edit profile   | POST   | /profile/edit          | Yes       | { username, firstName, lastName, email, cookingLevel }                                                     | profile/edit            |
-| Delete profile | GET    | /profile/delete        | Yes       |                                                                                                            | auth/signup             |
-| Add review     | GET    | /review/new/:recipeId  | Yes       |                                                                                                            | review/addReview        |
-| Add review     | POST   | /review/new/:recipeId  | Yes       | { title, comment, stars, reviewerName }                                                                    | recipe/recipeDetail     |
-| My reviews     | GET    | /review/my-reviews     | Yes       |                                                                                                            | review/my-reviews       |
+| Name               | Method | Endpoint               | Protected | Req.body                                                                                                   | Renders                 |
+| ------------------ | ------ | ---------------------- | --------- | ---------------------------------------------------------------------------------------------------------- | ----------------------- |
+| Home               | GET    | /                      | No        |                                                                                                            |                         |
+| Login              | GET    | /auth/login            | No        |                                                                                                            |                         |
+| Login              | POST   | /auth/login            | No        | { email, password }                                                                                        | index                   |
+| Signup             | GET    | /auth/signup           | No        |                                                                                                            |                         |
+| Signup             | POST   | /auth/signup           | No        | { username, firstName, lastName, email, password, cookingLevel }                                           | /auth/login             |
+| Logout             | GET    | /auth/logout           | Yes       |                                                                                                            | auth/login              |
+| New recipe         | GET    | /recipe/new            | Yes       |                                                                                                            |                         |
+| New recipe         | POST   | /recipe/new            | Yes       | { name, image, time, cuisine, kcal, spices, lactose, gluten, meat, level, pax, ingredients, steps }        | /recipe/justAddedRecipe |
+| Search             | GET    | /recipe/search         | No        |                                                                                                            |                         |
+| Search results     | GET    | /recipe/search-results | No        |                                                                                                            | recipe/searchResults    |
+| All recipes        | GET    | /recipe/all            | No        |                                                                                                            | recipe/searchResults    |
+| Random recipe      | GET    | /recipe/random         | No        |                                                                                                            | recipe/randomRecipe     |
+| My recipes         | GET    | /recipe/my-recipes     | Yes       |                                                                                                            | recipe/myRecipes        |
+| Recipe detail      | GET    | /recipe/:recipeId      | Yes       |                                                                                                            | recipe/recipeDetail     |
+| Edit recipe        | GET    | /recipe/edit/:recipeId | Yes       |                                                                                                            | recipe/editRecipe       |
+| Edit recipe        | POST   | /recipe/edit/:recipeId | yes       | { name, image, time, cuisine, kcal, spices, lactose, gluten, meat, level, pax, ingredients, steps, owner } | recipe/recipeDetail     |
+| Profile            | GET    | /profile               | Yes       |                                                                                                            | profile/profile         |
+| Edit profile       | GET    | /profile/edit          | Yes       |                                                                                                            | profile/editProfile     |
+| Edit profile       | POST   | /profile/edit          | Yes       | { username, firstName, lastName, email, cookingLevel }                                                     | profile/edit            |
+| Delete profile     | GET    | /profile/delete        | Yes       |                                                                                                            | auth/signup             |
+| Add review         | GET    | /review/new/:recipeId  | Yes       |                                                                                                            | review/addReview        |
+| Add review         | POST   | /review/new/:recipeId  | Yes       | { title, comment, stars, reviewerName }                                                                    | recipe/recipeDetail     |
+| My reviews         | GET    | /review/my-reviews     | Yes       |                                                                                                            | review/my-reviews       |
+| Other user profile | GET    | /profile/:userId       | Yes       |                                                                                                            | /profile/otherUser      |
 
 ---
 

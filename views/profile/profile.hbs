@@ -1,39 +1,48 @@
-<h2>Profile</h2>
-
 <div class="profile-intro">
-  <img src="/images/chef-icon.png" alt="Profile avatar" />
-  <h3>Hello {{user.firstName}}</h3>
+  <h2>My Profile</h2>
+  <img  id="profile-avatar" src="/images/chef-icon.png" alt="Profile avatar" />
+  <h2>¡Hello {{user.firstName}}!</h2>
+  <a href="/profile/edit">Edit profile</a>
+
 </div>
-<a href="/profile/edit">Edit profile</a>
 <div class="profile-data">
-  <div class="profile-items"></div>
+  <div class="profile-items">
+    <hr class="profile-divider">
     <h4>Username:</h4>
     <p>{{user.username}}</p>
   </div>
-  <div class="profile-items"></div>
+  <div class="profile-items">
+    <hr class="profile-divider">
     <h4>First name:</h4>
     <p>{{user.firstName}}</p>
   </div>
-  <div class="profile-items"></div>
+  <div class="profile-items">
+    <hr class="profile-divider">
     <h4>Last name:</h4>
     <p>{{user.lastName}}</p>
   </div>
-  <div class="profile-items"></div>
+  <div class="profile-items">
+    <hr class="profile-divider">
     <h4>Email:</h4>
     <p>{{user.email}}</p>
   </div>
-  <div class="profile-items"></div>
+  <div class="profile-items">
+    <hr class="profile-divider">
     <h4>Cooking level:</h4>
     <p>{{user.cookingLevel}}</p>
   </div>
-  <div class="profile-items"></div>
+  <div class="profile-items">
+    <hr class="profile-divider">
     <h4>Password:</h4>
     <p>********</p>
     <a href="/auth/password-reset"><img src="/images/edit-button.png" alt="Edit button" /></a>
+    <hr class="profile-divider">
   </div>
 </div>
 
-<a href="/recipe/my-recipes">My recipes</a>
-<a href="/review/my-reviews">My reviews</a>
-<a href="/auth/logout">Log out</a>
-<a href="/profile/delete">Delete account</a>
+<div class="profile-anchors">
+<a href="/recipe/my-recipes">My recipes |</a>
+<a href="/review/my-reviews">My reviews |</a>
+<a href="/auth/logout">Log out |</a>
+<a href="/profile/delete">Delete account </a>
+</div>

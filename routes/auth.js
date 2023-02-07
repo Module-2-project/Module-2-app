@@ -37,7 +37,7 @@ router.post('/signup', async (req, res, next) => {
     const salt = bcrypt.genSaltSync(saltRounds);
     const hashedPassword = bcrypt.hashSync(password, salt);
     const user = await User.create({username, firstName, lastName, email, hashedPassword, cookingLevel});
-    res.render('auth/login');
+    res.redirect('/auth/login');
   } catch (error) { 
     next (error);
   }
@@ -121,7 +121,7 @@ router.post("/password-reset", isLoggedIn, async (req, res, next) => {
     const hashedPassword = bcrypt.hashSync(newPassword, salt);
     const userDB = await User.findByIdAndUpdate({_id: user._id}, {hashedPassword});
     req.session.currentUser = userDB;
-    res.render('auth/login');
+    res.redirect('/auth/login');
   } catch(error) {
     next(error);
   }

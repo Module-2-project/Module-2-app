@@ -143,6 +143,51 @@ a {
   transform: translateX(100%);
 }
 
+
+/* Catch phrases */
+.phrase-container {
+  display: flex;
+  align-content: flex-end;
+  margin-top: 430px;
+  gap: 10px;
+  font-size: 14px;
+
+}
+
+.phrase-container img {
+  position: relative;
+  width: 100%;
+  margin-top: -30px;
+}
+
+.catch-phrase1 {
+  text-align: center;
+  margin-top: 18px;
+  font-family:'Montserrat';
+  font-style: italic;
+  position: absolute;
+}
+
+.catch-phrase1  p {
+  text-shadow: 0px 0px 1px rgba(0, 0, 0, 0.229);
+}
+
+.catch-phrase1 p span{
+  font-style:oblique;
+  font-size: 15px;
+  font-weight: 200;
+  font-family: 'Montserrat';
+
+}
+
+.catch-phrase2 {
+  position: absolute;
+
+}
+.catch-phrase2 span {
+
+}
+
 /*Profile Page */
 .profile-intro {
   display: block;

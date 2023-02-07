@@ -173,8 +173,10 @@ a {
 }
 .profile-anchors {
   display: flex;
-  justify-content: center;
+  font-size: 15px;
+  /* justify-content: center; */
   margin-top: 20px;
+  max-width:fit-content;
 }
 .profile-anchors a {
   margin-left: auto;

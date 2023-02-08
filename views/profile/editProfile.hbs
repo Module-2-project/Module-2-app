@@ -1,34 +1,31 @@
-<button onclick="history.back()"><img class="arrow-back" src="/images/back-arrow.png" />Go back</button>
+<button onclick="history.back()"><img class="arrow-back" src="/images/back-arrow.png" /> Go back</button>
 <h2 class="titles">Edit profile</h2>
 
 <div class="profile-intro">
-  <img src="../images/chef-icon.png" alt="Profile avatar" />
+  <img class="profile-avatar" src="/images/chef-icon.png" alt="Profile avatar" />
 </div>
 <form method="POST" action="/profile/edit">
-  <div class="profile-items">
-    <label>Username:</label>
-    <input required="true" name="username" value="{{user.username}}"></input>
-  </div>
-  <div class="profile-items"></div>
-    <label>First name:</label>
-    <input required="true" name="firstName" value="{{user.firstName}}"></input>
-  </div>
-  <div class="profile-items"></div>
-    <label>Last name:</label>
-    <input required="true" name="lastName" value="{{user.lastName}}"></input>
-  </div>
-  <div class="profile-items"></div>
-    <label>Email:</label>
-    <input required="true" name="email" value="{{user.email}}"></input>
-  </div>
-  <label>Cooking level:</label>
-  <select required="true" name="cookingLevel">
-    <option value="Beginner" {{#eq user.cookingLevel "Beginner" }}selected{{/eq}}>Beginner</option>
-    <option value="Medium" {{#eq user.cookingLevel "Medium" }}selected{{/eq}}>Medium</option>
-    <option value="Experienced" {{#eq user.cookingLevel "Experienced" }}selected{{/eq}}>Experienced</option>
-    <option value="God" {{#eq user.cookingLevel "God" }}selected{{/eq}}>God</option>
-    <option value="Grandma" {{#eq user.cookingLevel "Grandma" }}selected{{/eq}}>Grandma</option>
-  </select>
-  <button type="submit">Save changes</button>
-
+  <label>Username:</label>
+  <input required="true" name="username" value="{{user.username}}"></input>
+<div class="profile-items"></div>
+  <label>First name:</label>
+  <input required="true" name="firstName" value="{{user.firstName}}"></input>
+</div>
+<div class="profile-items"></div>
+  <label>Last name:</label>
+  <input required="true" name="lastName" value="{{user.lastName}}"></input>
+</div>
+<div class="profile-items"></div>
+  <label>Email:</label>
+  <input required="true" name="email" value="{{user.email}}"></input>
+</div>
+<label>Cooking level:</label>
+<select required="true" name="cookingLevel">
+  <option value="Beginner" {{#eq user.cookingLevel "Beginner" }}selected{{/eq}}>Beginner 👶🏻</option>
+  <option value="Medium" {{#eq user.cookingLevel "Medium" }}selected{{/eq}}>Medium 👨🏻</option>
+  <option value="Experienced" {{#eq user.cookingLevel "Experienced" }}selected{{/eq}}>Experienced 🧞‍♂️</option>
+  <option value="God" {{#eq user.cookingLevel "God" }}selected{{/eq}}>God 👨🏻‍🍳</option>
+  <option value="Grandma" {{#eq user.cookingLevel "Grandma" }}selected{{/eq}}>Grandma 👵🏻</option>
+</select>
+<button type="submit">Save changes</button>
 <a class="anchors" href="/profile/delete">Delete account</a>

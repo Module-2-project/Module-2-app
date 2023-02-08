@@ -23,16 +23,11 @@
   <img class="folio-icon" src="/images/app-logo.png" alt="FoodFolio icon">
   <header class="top-navbar">
     {{#if user}}
-    <div class="home-page-nav">
+    <div class="signed-in-nav">
       <a href="/recipe/new"><img class="home-page-icons" src="/images/add-icon.png" alt="Add icon" /></a>
       <a href="/recipe/all"><img class="home-page-icons" src="/images/chef-hat.png" alt="All recipes" /></a>
     </div>
     {{else}}
-      <div>
-        <a href="/auth/signup">Sign up</a>
-        <a href="/auth/login">Log in</a>
-      </div>
-      <a href="/recipe/all"><img class="home-page-icons" src="/images/chef-hat.png" alt="All recipes" /></a>
     {{/if}}
   </header>
   <main>

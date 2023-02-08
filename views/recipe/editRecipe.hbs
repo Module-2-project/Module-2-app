@@ -1,4 +1,4 @@
-<button onclick="history.back()"><img class="arrow-back" src="/images/back-arrow.png" />Go back</button>
+<button onclick="history.back()"><img class="arrow-back" src="/images/back-arrow.png" /> Go back</button>
 <h2 class="titles">Edit recipe</h2>
 
 <form method="POST" action="/recipe/edit/{{recipe._id}}">
@@ -37,16 +37,22 @@
     <option value="Very spicy" {{#eq recipe.spices "Very spicy" }}selected{{/eq}}>🐲</option>
   </select>
   <label>Does the recipe contain:</label>
-  <div>
-    <label>Lactose:</label>
-    <input type="radio" name="lactose" value="true" {{#eq recipe.lactose true }}checked{{/eq}}/>Yes
-    <input type="radio" name="lactose" value="false" {{#eq recipe.lactose false }}checked{{/eq}}/>No
-    <label>Gluten:</label>
-    <input type="radio" name="gluten" value="true" {{#eq recipe.gluten true }}checked{{/eq}}/>Yes
-    <input type="radio" name="gluten" value="false" {{#eq recipe.gluten false }}checked{{/eq}}/>No
-    <label>Meat:</label>
-    <input type="radio" name="meat" value="true" {{#eq recipe.meat true }}checked{{/eq}}/>Yes
-    <input type="radio" name="meat" value="false" {{#eq recipe.meat false }}checked{{/eq}}/>No
+  <div class="recipe-contain">
+    <div>
+      <label>Lactose:</label>
+      <input type="radio" name="lactose" value="true" {{#eq recipe.lactose true }}checked{{/eq}} />Yes
+      <input type="radio" name="lactose" value="false" {{#eq recipe.lactose false }}checked{{/eq}} />No
+    </div>
+    <div>
+      <label>Gluten:</label>
+      <input type="radio" name="gluten" value="true" {{#eq recipe.gluten true }}checked{{/eq}} />Yes
+      <input type="radio" name="gluten" value="false" {{#eq recipe.gluten false }}checked{{/eq}} />No
+    </div>
+    <div>
+      <label>Meat:</label>
+      <input type="radio" name="meat" value="true" {{#eq recipe.meat true }}checked{{/eq}} />Yes
+      <input type="radio" name="meat" value="false" {{#eq recipe.meat false }}checked{{/eq}} />No
+    </div>
   </div>
   <label>Select your cooking level:</label>
   <select required="true" name="level">

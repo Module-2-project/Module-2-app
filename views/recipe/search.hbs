@@ -1,4 +1,9 @@
-<button onclick="history.back()"><img class="arrow-back" src="/images/back-arrow.png" />Go back</button>
+{{#if user}}
+{{else}}
+  {{> authOptions}}
+{{/if}}
+
+<button onclick="history.back()"><img class="arrow-back" src="/images/back-arrow.png" /> Go back</button>
 <h2 class="titles">Search</h2>
 
 {{#if user}}
@@ -32,16 +37,22 @@
     <option value="Very spicy">🐲</option>
   </select>
   <label>Does the recipe contain:</label>
-  <div>
-    <label>Lactose:</label>
-    <input type="radio" name="lactose" value="true" />Yes
-    <input type="radio" name="lactose" value="false" />No
-    <label>Gluten:</label>
-    <input type="radio" name="gluten" value="true" />Yes
-    <input type="radio" name="gluten" value="false" />No
-    <label>Meat:</label>
-    <input type="radio" name="meat" value="true" />Yes
-    <input type="radio" name="meat" value="false" />No
+  <div class="recipe-contain">
+    <div class="element-contain">
+      <label>Lactose:</label>
+      <input type="radio" name="lactose" value="true" />Yes
+      <input type="radio" name="lactose" value="false" />No
+    </div>
+    <div>
+      <label>Gluten:</label>
+      <input type="radio" name="gluten" value="true" />Yes
+      <input type="radio" name="gluten" value="false" />No
+    </div>
+    <div>
+      <label>Meat:</label>
+      <input type="radio" name="meat" value="true" />Yes
+      <input type="radio" name="meat" value="false" />No
+    </div>
   </div>
   <label for="level">Cooking level:</label>
   <select name="level">

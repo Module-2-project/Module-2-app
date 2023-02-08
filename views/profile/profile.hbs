@@ -1,7 +1,7 @@
-<button onclick="history.back()"><img class="arrow-back" src="/images/back-arrow.png" />Go back</button>
+<button onclick="history.back()"><img class="arrow-back" src="/images/back-arrow.png" /> Go back</button>
 
 <div class="profile-intro">
-  <img  id="profile-avatar" src="/images/chef-icon.png" alt="Profile avatar" />
+  <img class="profile-avatar" src="/images/chef-icon.png" alt="Profile avatar" />
   <h2>Hello {{user.firstName}}!</h2>
   <a href="/profile/edit">Edit profile</a>
   <img class="arrow-deco" src="/images/Menu-frame-arrow.png" alt="Arrow deco">
@@ -11,28 +11,28 @@
     <h4>Username:</h4>
     <p>{{user.username}}</p>
   </div>
+  <hr class="profile-divider">
   <div class="profile-items">
-    <hr class="profile-divider">
     <h4>First name:</h4>
     <p>{{user.firstName}}</p>
   </div>
+  <hr class="profile-divider">
   <div class="profile-items">
-    <hr class="profile-divider">
     <h4>Last name:</h4>
     <p>{{user.lastName}}</p>
   </div>
+  <hr class="profile-divider">
   <div class="profile-items">
-    <hr class="profile-divider">
     <h4>Email:</h4>
     <p>{{user.email}}</p>
   </div>
+  <hr class="profile-divider">
   <div class="profile-items">
-    <hr class="profile-divider">
     <h4>Cooking level:</h4>
     <p>{{user.cookingLevel}}</p>
   </div>
+  <hr class="profile-divider">
   <div class="profile-items">
-    <hr class="profile-divider">
     <h4>Password:</h4>
     <p>********</p>
     <a href="/auth/password-reset"><img src="/images/edit-button.png" alt="Edit button" /></a>

@@ -99,14 +99,12 @@ hbs.registerHelper('displayStarEmoji', function(starCount) {
   return starEmoji;
 });
 
-
 // routes intro
 app.use('/', indexRouter);
 app.use('/auth', authRouter);
 app.use('/recipe', recipeRouter);
 app.use('/review', reviewRouter);
 app.use('/profile', profileRouter);
-
 
 // catch 404 and forward to error handler 
 app.use(function(req, res, next) {

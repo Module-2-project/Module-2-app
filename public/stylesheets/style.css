@@ -221,22 +221,30 @@ h1 {
   margin-top: -30px;
 }
 
-.catch-phrase {
+.catch-phrase1 {
+  display: flex;
+  max-width: 370px;
+  max-height: 140px;
   text-align: center;
-  margin: 18px 10px 0 0;
-  font-family:'Montserrat';
+  margin-top: 30px;
+  margin-left: auto;
+  margin-right: auto;
+  font-family:'Montserrat', Times, serif;
   font-style: italic;
   position: absolute;
 }
 
-.catch-phrase p {
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.229);
+.catch-phrase1  q {
+  text-shadow: 0px 0px 1px rgba(0, 0, 0, 0.229);
+  font-weight:200;
 }
 
-.catch-phrase p span {
-  font-style: oblique;
+.catch-phrase1 p span{
+  font-style:oblique;
+  font-size: 15px;
   font-weight: 200;
   font-family: 'Montserrat';
+
 }
 
 /*Profile page */

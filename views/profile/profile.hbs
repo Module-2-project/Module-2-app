@@ -1,13 +1,13 @@
-<div class="profile-intro">
-  <h2>My Profile</h2>
-  <img  id="profile-avatar" src="/images/chef-icon.png" alt="Profile avatar" />
-  <h2>¡Hello {{user.firstName}}!</h2>
-  <a href="/profile/edit">Edit profile</a>
+<button onclick="history.back()"><img class="arrow-back" src="/images/back-arrow.png" />Go back</button>
 
+<div class="profile-intro">
+  <img  id="profile-avatar" src="/images/chef-icon.png" alt="Profile avatar" />
+  <h2>Hello {{user.firstName}}!</h2>
+  <a href="/profile/edit">Edit profile</a>
+  <img class="arrow-deco" src="/images/Menu-frame-arrow.png" alt="Arrow deco">
 </div>
 <div class="profile-data">
   <div class="profile-items">
-    <hr class="profile-divider">
     <h4>Username:</h4>
     <p>{{user.username}}</p>
   </div>
@@ -36,13 +36,11 @@
     <h4>Password:</h4>
     <p>********</p>
     <a href="/auth/password-reset"><img src="/images/edit-button.png" alt="Edit button" /></a>
-    <hr class="profile-divider">
   </div>
 </div>
 
 <div class="profile-anchors">
-<a href="/recipe/my-recipes">My recipes |</a>
-<a href="/review/my-reviews">My reviews |</a>
-<a href="/auth/logout">Log out |</a>
-<a href="/profile/delete">Delete account </a>
+<a class="anchors" href="/recipe/my-recipes">My recipes</a>
+<a class="anchors" href="/review/my-reviews">My reviews</a>
+<a class="anchors" href="/auth/logout">Log out</a>
 </div>

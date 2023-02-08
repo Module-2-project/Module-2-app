@@ -1,5 +1,5 @@
 <button onclick="history.back()"><img class="arrow-back" src="/images/back-arrow.png" />Go back</button>
-<h2>Recipes</h2>
+<h2 class="titles">Recipe</h2>
 
 {{#if user}}
 {{else}}
@@ -8,6 +8,7 @@
 {{/if}}
 
 <h3>{{recipe.name}}</h3>
+<hr class="bigger-hr">
 <p>Cuisine: {{recipe.cuisine}}</p>
 <img src="{{recipe.image}}" alt="Dish image" />
 <ul>
@@ -27,8 +28,4 @@
 <h4>Steps:</h4>
 <!-- this is a ol tag with li inside -->
 {{{splitSteps recipe.steps}}}
-<!-- allow this field not to be shown if user is blank -->
-{{#if user.username}}
-  <p>Created by: {{user.username}}</p>
-{{/if}}
 </div>

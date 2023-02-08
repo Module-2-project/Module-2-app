@@ -1,10 +1,9 @@
 <button onclick="history.back()"><img class="arrow-back" src="/images/back-arrow.png" />Go back</button>
-<h2>Search</h2>
+<h2 class="titles">Search</h2>
 
 {{#if user}}
 <form class="search-form" method="GET" action="/recipe/search-results">
-  <label>Search for a recipe:</label>
-  <input type="text" name="name" />
+  <input type="text" name="name" placeholder="Type the recipe's name" />
   <label for="cuisine">Cuisine:</label>
   <select name="cuisine">
     <option value="">None</option>

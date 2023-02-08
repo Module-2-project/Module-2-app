@@ -1,14 +1,27 @@
-<div class="myRecipeCard">
-  <h3>{{name}}</h3>
-  <img class="recipe-images" src={{image}} alt="Dish image" />
-  <p>Cuisine: {{cuisine}}</p>
-  <ul>
-    <li>Level: {{level}}</li>
-    <li>Preparation time: {{time}} min</li>
-    <li>Spiciness: {{spices}} </li>
-    <li>{{pax}} servings</li>
-    <li>{{kcal}} kcal</li>
+<div class="my-recipe-card">
+  <img class="recipe-images" src={{recipe.image}}{{image}} alt="Dish image" />
+  <h3>{{recipe.name}}{{name}}</h3>
+  <p>Cuisine: {{recipe.cuisine}}{{cuisine}}</p>
+  <p>Level: {{recipe.level}}{{level}}</p>
+  <p>{{recipe.kcal}}{{kcal}} kcal</p>
+  <hr class="bigger-hr">
+  <ul class="recipe-summary">
+    <div class="recipe-logos">
+      <img src="/images/clock.png" alt="Clock logo" />
+      <li>{{recipe.time}}{{time}} min</li>
+    </div>
+    <div class="recipe-logos">
+      <img src="/images/flame.png" alt="Flame logo" />
+      <li>{{recipe.spices}}{{spices}}</li>
+    </div>
+    <div class="recipe-logos">
+      <img src="/images/pax.png" alt="Pax logo">
+      <li>{{recipe.pax}}{{pax}}</li>
+    </div>
   </ul>
-  <a href="/recipe/{{_id}}">View more</a>
-  <a href="/recipe/edit/{{_id}}">Edit this recipe</a>
+  <hr class="bigger-hr">
+  <div class="recipe-options">
+    <a href="/recipe/{{_id}}"> > See recipe</a>
+    <a href="/recipe/edit/{{_id}}"> > Edit recipe</a>
+  </div>
 </div>

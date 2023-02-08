@@ -1,9 +1,11 @@
 <button onclick="history.back()"><img class="arrow-back" src="/images/back-arrow.png" />Go back</button>
 <h2>My reviews</h2>
+<hr class="title-hr">
 
 {{#if review}}
   {{#each review}}
     {{> myReviewCard}}
+    <hr class="review-hr">
   {{/each}}
 {{else}}
   <p>It seems you didn't rate any recipe yet.</p>

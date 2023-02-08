@@ -1,4 +1,4 @@
-<h2>Welcome {{user.firstName}}</h2>
+<h1 class="home-title">Welcome {{user.firstName}}</h1>
 
 <div class="slideshow">
   {{#each recipe}}
@@ -6,6 +6,12 @@
       <img src="{{this.image}}" alt="{{this.name}}">
     </div>
   {{/each}}
+</div>
+
+{{!-- this should be fed by a js function that takes a random phrase from an array. --}}
+<div class="phrase-container">
+  <img src="../images/Menu-frame.png" alt="Phrase-background-img">
+  <div class="catch-phrase"><p>"Thanks to Food Folio, we can finally get rid of grandma." <br><span> — Gordon Ramsay</span></p></div>
 </div>
 
 <script>
@@ -25,12 +31,3 @@
   }
   setInterval(showSlide, 5000);
 </script>
-
-{{!-- this should be fed by a js function that takes a random phrase from an array. --}}
-<section>
-<div class="phrase-container">
-  <img src="../images/Menu-frame.png" alt="Phrase-background-img">
-  <div class="catch-phrase1" ><p>"Thanks to Food-Folio, we could finally get rid of Grandma" <br><span> — Gordon Ramsay</span> </p></div>
-  {{!-- <div class="catch-phrase2" ><p>"All of my favourite recipies are always handy, no more cooking notes! <br><span> — Ferran Adrià</span> </p></div> --}}
-</div>
-</section>

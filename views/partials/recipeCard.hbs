@@ -1,13 +1,24 @@
-<div class="recipeCard">
-  <h3>{{recipe.name}}{{name}}</h3>
+<div class="recipe-card">
   <img class="recipe-images" src={{recipe.image}}{{image}} alt="Dish image" />
+  <h3>{{recipe.name}}{{name}}</h3>
   <p>Cuisine: {{recipe.cuisine}}{{cuisine}}</p>
-  <ul>
-    <li>Level: {{recipe.level}}{{level}}</li>
-    <li>Preparation time: {{recipe.time}}{{time}} min</li>
-    <li>Spiciness: {{recipe.spices}}{{spices}} </li>
-    <li>{{recipe.pax}}{{pax}} servings</li>
-    <li>{{recipe.kcal}}{{kcal}} kcal</li>
+  <p>Level: {{recipe.level}}{{level}}</p>
+  <p>{{recipe.kcal}}{{kcal}} kcal</p>
+  <hr class="small-hr">
+  <ul class="recipe-summary">
+    <div class="recipe-logos">
+      <img src="/images/clock.png" alt="Clock logo" />
+      <li>{{recipe.time}}{{time}} min</li>
+    </div>
+    <div class="recipe-logos">
+      <img src="/images/flame.png" alt="Flame logo" />
+      <li>{{recipe.spices}}{{spices}}</li>
+    </div>
+    <div class="recipe-logos">
+      <img src="/images/pax.png" alt="Pax logo">
+      <li>{{recipe.pax}}{{pax}}</li>
+    </div>
   </ul>
-  <a href="/recipe/{{recipe._id}}{{_id}}">View more</a>
+  <hr class="small-hr">
+  <a class="recipe-button" href="/recipe/{{recipe._id}}{{_id}}">> See recipe</a>
 </div>

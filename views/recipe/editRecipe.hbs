@@ -70,5 +70,8 @@
   <label>Steps:</label>
   <textarea required="true" name="steps" rows="10" columns="50"
     value="{{recipe.steps}}">{{recipe.steps}}</textarea>
+    {{#if error}}
+      <p style="color:rgb(218, 90, 90)">{{ error }}</p>
+    {{/if}}
   <button type="submit">Save changes</button>
 </form>

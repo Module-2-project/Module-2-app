@@ -104,16 +104,16 @@ router.post("/password-reset", isLoggedIn, async (req, res, next) => {
   }
   const match = await bcrypt.compare(oldPassword, user.hashedPassword);
   if (!match) {
-    res.render("auth/passwordReset", {error: "Old password isn't correct."});
+    res.render("auth/passwordReset", {error: "Old password isn't correct.", user});
     return;
   };
   const regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/;
   if (!regex.test(newPassword)) {
-    res.render("auth/passwordReset", {error: "Password needs to contain at least 6 characters, one number, one special character and one lowercase and uppercase character."});
+    res.render("auth/passwordReset", {error: "Password needs to contain at least 6 characters, one number, one special character and one lowercase and uppercase character.", user});
     return;
   }
   if (newPassword !== confirmPassword) {
-    res.render("auth/passwordReset", {error: "You need to confirm your password by re-writing the same password as the new desired one."});
+    res.render("auth/passwordReset", {error: "You need to confirm your password by re-writing the same password as the new desired one.", user});
     return;
   }
   try {

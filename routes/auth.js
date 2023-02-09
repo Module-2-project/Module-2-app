@@ -24,6 +24,11 @@ router.post('/signup', async (req, res, next) => {
     return;
   } 
   const regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/;
+  const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+  if (!emailRegex.test(email)) {
+    res.render("auth/signup", {error: "Please enter a valid email."});
+    return;
+  }
   if (!regex.test(password)) {
     res.render("auth/signup", {error: "Password needs to contain at least 6 characters, one number, one special character and one lowercase and uppercase character."});
     return;
@@ -98,28 +103,29 @@ router.get("/password-reset", isLoggedIn, async (req, res, next) => {
 router.post("/password-reset", isLoggedIn, async (req, res, next) => {
   const user = req.session.currentUser;
   const {oldPassword, newPassword, confirmPassword} = req.body;
-  if (!oldPassword || !newPassword || !confirmPassword) {
-    res.render("auth/passwordReset", {error: "You need to fill the 3 fields in order to reset your password"});
-    return;
-  }
-  const match = await bcrypt.compare(oldPassword, user.hashedPassword);
-  if (!match) {
-    res.render("auth/passwordReset", {error: "Old password isn't correct.", user});
-    return;
-  };
-  const regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/;
-  if (!regex.test(newPassword)) {
-    res.render("auth/passwordReset", {error: "Password needs to contain at least 6 characters, one number, one special character and one lowercase and uppercase character.", user});
-    return;
-  }
-  if (newPassword !== confirmPassword) {
-    res.render("auth/passwordReset", {error: "You need to confirm your password by re-writing the same password as the new desired one.", user});
-    return;
-  }
   try {
+    const userDB = await User.findById(user._id);
+    if (!oldPassword || !newPassword || !confirmPassword) {
+      res.render("auth/passwordReset", {error: "You need to fill the 3 fields in order to reset your password"});
+      return;
+    }
+    const match = await bcrypt.compare(oldPassword, user.hashedPassword);
+    if (!match) {
+      res.render("auth/passwordReset", {error: "Old password isn't correct.", user: userDB});
+      return;
+    };
+    const regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/;
+    if (!regex.test(newPassword)) {
+      res.render("auth/passwordReset", {error: "Password needs to contain at least 6 characters, one number, one special character and one lowercase and uppercase character.", user: userDB});
+      return;
+    }
+    if (newPassword !== confirmPassword) {
+      res.render("auth/passwordReset", {error: "You need to confirm your password by re-writing the same password as the new desired one.", user: userDB});
+      return;
+    };
     const salt = bcrypt.genSaltSync(saltRounds);
     const hashedPassword = bcrypt.hashSync(newPassword, salt);
-    const userDB = await User.findByIdAndUpdate({_id: user._id}, {hashedPassword});
+    await User.findByIdAndUpdate({_id: user._id}, {hashedPassword});
     req.session.currentUser = userDB;
     res.redirect('/auth/login');
   } catch(error) {

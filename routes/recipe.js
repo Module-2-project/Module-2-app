@@ -19,7 +19,7 @@ router.get("/search", (req, res, next) => {
 // @access  Public
 router.get("/search-results", async (req, res, next) => {
   const user = req.session.currentUser;
-  const { name, cuisine, spices, lactose, gluten, meat, level, pax, sortBy } = req.query;
+  const {name, cuisine, spices, lactose, gluten, meat, level, pax, sortBy} = req.query;
   // Define the query to search for and avoid error if blank field in search form
   let query = {};
   if (name) query.name = { $regex: `.*${name}.*`, $options: "i" };
@@ -39,8 +39,9 @@ router.get("/search-results", async (req, res, next) => {
   if (sortBy === "timeAsc") sort.time = 1;
   if (sortBy === "timeDesc") sort.time = -1;
   try {
+    const userDB = await User.findById(user._id);
     const recipe = await Recipe.find(query).sort(sort);
-    res.render("recipe/searchResults", {recipe, user});
+    res.render("recipe/searchResults", {recipe, user: userDB});
   } catch (error) {
     next(error);
   }
@@ -100,12 +101,13 @@ router.post("/new", isLoggedIn, async (req, res, next) => {
   const user = req.session.currentUser;
   // regex to make sure the ingredients and steps strings start by a letter or a number
   if (!/^[0-9a-zA-Z].*/.test(ingredients) || !/^[0-9a-zA-Z].*/.test(steps)) {
-    return next(new Error("You need to add ingredients and steps."));
+    res.render("recipe/newRecipe", {error: "You need to add ingredients and steps."});
+    return;
   }
   try {
     const owner = await User.findOne({_id: user._id});
-    const newRecipe = await Recipe.create({ name, image, time, cuisine, kcal, spices, lactose, gluten, meat, level, pax, ingredients, steps, owner });
-    res.render("recipe/justAddedRecipe", {recipe: newRecipe, user});
+    const newRecipe = await Recipe.create({ name, image, time, cuisine, kcal, spices, lactose, gluten, meat, level, pax, ingredients, steps, owner});
+    res.render("recipe/justAddedRecipe", {recipe: newRecipe, user: owner});
   } catch(error) {
     next(error);
   }
@@ -126,8 +128,9 @@ router.get("/my-recipes", isLoggedIn, async (req, res, next) => {
   if (sortBy === "timeAsc") sort.time = 1;
   if (sortBy === "timeDesc") sort.time = -1;
   try {
+    const userDB = await User.findById(user._id);
     const recipes = await Recipe.find({owner: user._id}).sort(sort);
-    res.render("recipe/myRecipes", {recipe: recipes, user});
+    res.render("recipe/myRecipes", {recipe: recipes, user: userDB});
   } catch(error) {
     next(error);
   }
@@ -140,9 +143,10 @@ router.get("/:recipeId", isLoggedIn, async (req, res, next) => {
   const {recipeId} = req.params;
   const user = req.session.currentUser;
   try {
+    const userDB = await User.findById(user._id);
     const recipe = await Recipe.findById(recipeId);
     const reviews = await Review.find({recipeRated: recipe._id});
-    res.render("recipe/recipeDetail", {recipe, user, review: reviews});
+    res.render("recipe/recipeDetail", {recipe, user: userDB, review: reviews});
   } catch (error) {
     next(error);
   }
@@ -156,7 +160,8 @@ router.get("/edit/:recipeId", isLoggedIn, async (req, res, next) => {
   const user = req.session.currentUser;
   try {
     const recipe = await Recipe.findById(recipeId);
-    res.render("recipe/editRecipe", {recipe, user});
+    const userDB = await User.findById(user._id);
+    res.render("recipe/editRecipe", {recipe, user: userDB});
   } catch(error) {
     next(error);
   }
@@ -174,8 +179,10 @@ router.post("/edit/:recipeId", isLoggedIn, async (req, res, next) => {
     return next(new Error("You need to add ingredients and steps."));
   }
   try {
+    const userDB = await User.findById(user._id);
     const editedRecipe = await Recipe.findByIdAndUpdate(recipeId, {name, image, time, cuisine, kcal, spices, lactose, gluten, meat, level, pax, ingredients, steps, owner}, {new: true});
-    res.render("recipe/recipeDetail", {recipe: editedRecipe, user});
+    const reviews = await Review.find({recipeRated: editedRecipe._id});
+    res.render("recipe/recipeDetail", {recipe: editedRecipe, review: reviews, user: userDB});
   } catch(error) {
     next(error);
   }

@@ -36,11 +36,17 @@ router.get("/edit", isLoggedIn, async (req, res, next) => {
 router.post("/edit", isLoggedIn, async (req, res, next) => {
   const user = req.session.currentUser;
   const {username, firstName, lastName, email, cookingLevel} = req.body;
-  if (!username || !firstName || !lastName || !email || !cookingLevel) {
-    res.render('profile/editProfile', {error: 'Please fill all data to sign up.', user});
-    return;
-  }
   try {
+    const userDB = await User.findById(user._id);
+    if (!username || !firstName || !lastName || !email || !cookingLevel) {
+      res.render('profile/editProfile', {error: 'Please fill all data to sign up.', user: userDB});
+      return;
+    };
+    const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    if (!emailRegex.test(email)) {
+      res.render("profile/editProfile", {error: "Please enter a valid email.", user: userDB});
+      return;
+    };
     const editedProfile = await User.findByIdAndUpdate(user._id, {username, firstName, lastName, email, cookingLevel}, {new: true});
     res.render("profile/profile", {user: editedProfile});
   } catch(error) {
@@ -66,7 +72,7 @@ router.get("/delete", isLoggedIn, async (req, res, next) => {
 // @access  User
 router.get("/:userId", isLoggedIn, async (req, res, next) => {
   const user = req.session.currentUser;
-  const { userId } = req.params;
+  const {userId} = req.params;
   try {
     const otherUser = await User.findById(userId);
     const recipes = await Recipe.find({owner: otherUser._id});
@@ -74,7 +80,7 @@ router.get("/:userId", isLoggedIn, async (req, res, next) => {
     if (otherUser._id.toString() === user._id.toString()) {
       res.render("recipe/myRecipes", {user: otherUser, recipe: recipes});
     } else {
-      res.render("profile/otherUser", {user, otherUser, recipe: recipes});
+      res.render("profile/otherUser", {user: otherUser, recipe: recipes});
     }
   } catch(error) {
     next(error);

@@ -29,9 +29,14 @@ router.get("/new/:recipeId", isLoggedIn, async (req, res, next) => {
   try {
     const recipe = await Recipe.findOne({_id: recipeId});
     const userDB = await User.findOne({_id: user._id});
+    const allReviews = await Review.find({recipeRated: recipe._id});
+    const reviewCheck = await Review.find({recipeRated: recipe._id, reviewer: userDB._id});
     // toString used because otherwise the validation will work even though they are the same values
     if (recipe.owner.toString() === userDB._id.toString()) {
-      res.render("recipe/recipeDetail", {error: "You cannot rate your own recipe", recipe, user: userDB, user});
+      res.render("recipe/recipeDetail", {error: "You cannot rate your own recipe.", recipe, user: userDB, user});
+    }
+    if(reviewCheck) {
+      res.render("recipe/recipeDetail", {error: "You already rated this recipe.", recipe, user: userDB, user, review: allReviews});
     } else {
       res.redirect(`/recipe/${recipeId}`);
     }
@@ -51,7 +56,7 @@ router.post("/new/:recipeId", isLoggedIn, async (req, res, next) => {
     const userDB = await User.findOne({_id: user._id});
     const recipe = await Recipe.findOne({_id: recipeId});
     const review = await Review.create({title, comment, stars, reviewerName, reviewer: userDB._id, recipeName, recipeRated: recipeId});
-    res.render("recipe/recipeDetail", {recipe, review, user: userDB});
+    res.redirect(`/recipe/${recipeId}`);
   } catch(error) {
     next(error)
 ;  }

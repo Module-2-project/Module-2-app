@@ -106,8 +106,8 @@ router.post("/new", isLoggedIn, async (req, res, next) => {
   }
   try {
     const owner = await User.findOne({_id: user._id});
-    const newRecipe = await Recipe.create({ name, image, time, cuisine, kcal, spices, lactose, gluten, meat, level, pax, ingredients, steps, owner});
-    res.render("recipe/justAddedRecipe", {recipe: newRecipe, user: owner});
+    await Recipe.create({ name, image, time, cuisine, kcal, spices, lactose, gluten, meat, level, pax, ingredients, steps, owner});
+    res.redirect(`/recipe/${recipeId}`);
   } catch(error) {
     next(error);
   }
@@ -180,9 +180,8 @@ router.post("/edit/:recipeId", isLoggedIn, async (req, res, next) => {
   }
   try {
     const userDB = await User.findById(user._id);
-    const editedRecipe = await Recipe.findByIdAndUpdate(recipeId, {name, image, time, cuisine, kcal, spices, lactose, gluten, meat, level, pax, ingredients, steps, owner}, {new: true});
-    const reviews = await Review.find({recipeRated: editedRecipe._id});
-    res.render("recipe/recipeDetail", {recipe: editedRecipe, review: reviews, user: userDB});
+    await Recipe.findByIdAndUpdate(recipeId, {name, image, time, cuisine, kcal, spices, lactose, gluten, meat, level, pax, ingredients, steps, owner}, {new: true});
+    res.redirect(`/recipe/${recipeId}`);
   } catch(error) {
     next(error);
   }

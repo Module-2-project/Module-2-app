@@ -4,7 +4,7 @@ const User = require('../models/User.js');
 const Recipe = require("../models/Recipe");
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
-const isLoggedIn = require('../middlewares/index');
+const isLoggedIn = require('../middlewares');
 
 // @desc    Displays form view to sign up
 // @route   GET /auth/signup
@@ -61,7 +61,7 @@ router.get('/login', async (req, res, next) => {
 router.post('/login', async (req, res, next) => {
   const {email, password} = req.body;
   if (!email || !password) {
-    res.render("auth/login", {error: "Introduce all the fields requested in order to log in"});
+    res.render("auth/login", {error: "Introduce all the fields requested in order to log in."});
     return;
   }
   try {
@@ -74,7 +74,7 @@ router.post('/login', async (req, res, next) => {
       if (match) {
         req.session.currentUser = user;
         const recipes = await Recipe.find();
-        res.render('index', {user, recipe: recipes});
+        res.redirect("/");
       } else {
         res.render('auth/login', {error: "Unable to authenticate user."});
       }
@@ -106,7 +106,7 @@ router.post("/password-reset", isLoggedIn, async (req, res, next) => {
   try {
     const userDB = await User.findById(user._id);
     if (!oldPassword || !newPassword || !confirmPassword) {
-      res.render("auth/passwordReset", {error: "You need to fill the 3 fields in order to reset your password"});
+      res.render("auth/passwordReset", {error: "You need to fill the 3 fields in order to reset your password."});
       return;
     }
     const match = await bcrypt.compare(oldPassword, user.hashedPassword);
@@ -125,8 +125,8 @@ router.post("/password-reset", isLoggedIn, async (req, res, next) => {
     };
     const salt = bcrypt.genSaltSync(saltRounds);
     const hashedPassword = bcrypt.hashSync(newPassword, salt);
-    await User.findByIdAndUpdate({_id: user._id}, {hashedPassword});
-    req.session.currentUser = userDB;
+    const userUpdated = await User.findByIdAndUpdate({_id: user._id}, {hashedPassword});
+    req.session.currentUser = userUpdated;
     res.redirect('/auth/login');
   } catch(error) {
     next(error);

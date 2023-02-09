@@ -48,7 +48,7 @@ router.post("/edit", isLoggedIn, async (req, res, next) => {
       return;
     };
     const editedProfile = await User.findByIdAndUpdate(user._id, {username, firstName, lastName, email, cookingLevel}, {new: true});
-    res.render("profile/profile", {user: editedProfile});
+    res.redirect("/profile");
   } catch(error) {
     next(error);
   }
@@ -78,7 +78,7 @@ router.get("/:userId", isLoggedIn, async (req, res, next) => {
     const recipes = await Recipe.find({owner: otherUser._id});
     // toString used because otherwise the validation will work even though they are the same values
     if (otherUser._id.toString() === user._id.toString()) {
-      res.render("recipe/myRecipes", {user: otherUser, recipe: recipes});
+      res.redirect("/recipe/my-recipes");
     } else {
       res.render("profile/otherUser", {user: otherUser, recipe: recipes});
     }

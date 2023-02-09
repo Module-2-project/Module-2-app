@@ -27,5 +27,8 @@
   <option value="God" {{#eq user.cookingLevel "God" }}selected{{/eq}}>God 👨🏻‍🍳</option>
   <option value="Grandma" {{#eq user.cookingLevel "Grandma" }}selected{{/eq}}>Grandma 👵🏻</option>
 </select>
+{{#if error}}
+  <p style="color:rgb(218, 90, 90)">{{ error }}</p>
+{{/if}}
 <button type="submit">Save changes</button>
 <a class="anchors" href="/profile/delete">Delete account</a>

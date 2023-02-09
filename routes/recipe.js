@@ -47,7 +47,6 @@ router.get("/search-results", async (req, res, next) => {
   }
 });
 
-
 // @desc    Displays all recipes in preview mode
 // @route   GET /recipe/all
 // @access  Public
@@ -107,7 +106,7 @@ router.post("/new", isLoggedIn, async (req, res, next) => {
   try {
     const owner = await User.findOne({_id: user._id});
     const newRecipe = await Recipe.create({ name, image, time, cuisine, kcal, spices, lactose, gluten, meat, level, pax, ingredients, steps, owner});
-    res.render("recipe/justAddedRecipe", {recipe: newRecipe, user: owner});
+    res.redirect(`/recipe/${newRecipe._id}`);
   } catch(error) {
     next(error);
   }
@@ -179,10 +178,9 @@ router.post("/edit/:recipeId", isLoggedIn, async (req, res, next) => {
     return next(new Error("You need to add ingredients and steps."));
   }
   try {
-    const userDB = await User.findById(user._id);
     const editedRecipe = await Recipe.findByIdAndUpdate(recipeId, {name, image, time, cuisine, kcal, spices, lactose, gluten, meat, level, pax, ingredients, steps, owner}, {new: true});
     const reviews = await Review.find({recipeRated: editedRecipe._id});
-    res.render("recipe/recipeDetail", {recipe: editedRecipe, review: reviews, user: userDB});
+    res.redirect(`/recipe/${recipeId}`);
   } catch(error) {
     next(error);
   }

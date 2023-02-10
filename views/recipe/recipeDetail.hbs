@@ -3,7 +3,7 @@
   {{> authOptions}}
 {{/if}}
 
-<button onclick="history.back()"><img class="arrow-back" src="/images/back-arrow.png" /> Go back</button>
+<button id="back-btn" onclick="history.back()"><img class="arrow-back" src="/images/back-arrow.png" /> Go back</button>
 <div class="recipe-detail">
   <h2 class="titles">{{recipe.name}}</h2>
   <p>Cuisine: {{recipe.cuisine}}</p>

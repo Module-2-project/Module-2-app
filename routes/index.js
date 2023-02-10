@@ -23,7 +23,7 @@ const catchPhrases = [
   "The secret ingredient for cooking used to be love, now it's Food Folio.",
   "It says only 5gr! Make it 20gr fam... Yoh! Where are my herbs at?!",
   "I cook with wine, sometimes I even add it to the food while cooking.",
-  "My one regret in life is that I'm not someone else.",
+  // "My one regret in life is that I'm not someone else.",
   "Like the rest of the important stuff in life... Just do it smarter, not harder",
   "Food Folio brings your kitchen to your fingertips...",
 ]
@@ -48,8 +48,8 @@ const catchAuthors = [
   "— Snoop Dogg",
   "— Woody Allen",
   "— Elon Musk",
+  // "— Tupac Shakur",
   "— Nicholas James Vujicic",
-  "— Tupac Shakur"
 ]
 function orderPhrase () { 
   return Math.floor(Math.random() * catchPhrases.length)

@@ -283,6 +283,21 @@ const reviewSchema = new Schema(
 );
 ```
 
+Favorite:
+
+```js
+const favoriteSchema = new Schema({
+  favRecipe: {
+    type: Schema.Types.ObjectId,
+    ref: "Recipe",
+  },
+  favOwner: {
+    type: Schema.Types.ObjectId,
+    ref: "User",
+  },
+});
+```
+
 ---
 
 ## Routes

@@ -41,7 +41,7 @@ router.get("/add/:recipeId", isLoggedIn, async (req, res, next) => {
   try {
     const userDB = await User.findById(user._id);
     await Favorite.create({favRecipe: recipeId, favOwner: userDB._id});
-    res.redirect(`/recipe/${recipeId}`);
+    res.redirect(`/favorites`);
   } catch(error) {
     next(error);
   }
@@ -56,7 +56,7 @@ router.get("/delete/:recipeId", isLoggedIn, async (req, res, next) => {
   try {
     const userDB = await User.findById(user._id);
     await Favorite.deleteOne({favRecipe: recipeId, favOwner: userDB._id});
-    res.redirect(`/recipe/${recipeId}`);
+    res.redirect(`/favorites`);
   } catch(error) {
     next(error);
   }

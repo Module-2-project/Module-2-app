@@ -13,7 +13,7 @@ router.get("/", isLoggedIn, async (req, res, next) => {
   const user = req.session.currentUser;
   try {
     const userDB = await User.findById(user._id);
-    const favorites = await Favorite.find({ favOwner: userDB._id });
+    const favorites = await Favorite.find({favOwner: userDB._id});
     const favIds = favorites.map(favorite => favorite.favRecipe);
     const recipePromises = [];
     for (let i=0; i<favIds.length; i++) {

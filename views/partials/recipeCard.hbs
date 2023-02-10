@@ -1,8 +1,16 @@
 <div class="recipe-card">
   <img class="recipe-images" src={{recipe.image}}{{image}} alt="Dish image" />
-  <h3>{{recipe.name}}{{name}}</h3>
-  <div class="add-favorite">
+  <div class="add-favorite-card">
+    {{#if favoriteCount}}
+      <a href="/favorites/delete/{{recipe._id}}"><img class="fav-icon" src="/images/red-heart-icon.png"
+      alt="Fav logo" /></a>
+      <p>{{favoriteCount}}</p>
+    {{else}}
+      <a href="/favorites/add/{{recipe._id}}"><img class="fav-icon" src="/images/black-heart-icon.png"
+      alt="Fav logo" /></a>
+    {{/if}}
   </div>
+  <h3>{{recipe.name}}{{name}}</h3>
   <p>Cuisine: {{recipe.cuisine}}{{cuisine}}</p>
   <p>Level: {{recipe.level}}{{level}}</p>
   <p>{{recipe.kcal}}{{kcal}} kcal</p>

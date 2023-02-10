@@ -11,7 +11,8 @@
   <div class="add-favorite">
     {{#if recipeInFavorites}}
       <a href="/favorites/delete/{{recipe._id}}"><img class="fav-icon" src="/images/red-heart-icon.png"
-          alt="Fav logo" /></a>
+      alt="Fav logo" /></a>
+      <p>{{favoriteCount}}</p>
     {{else}}
       <a href="/favorites/add/{{recipe._id}}"><img class="fav-icon" src="/images/black-heart-icon.png" alt="Fav logo" /></a>
     {{/if}}

@@ -426,10 +426,32 @@ label {
   margin-bottom: 30px;
 }
 
-.add-favorite {
+.add-favorite,
+.add-favorite-card {
   position: relative;
-  top: -250px;
   right: -7px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  background-color: rgba(255, 255, 255, 0.603);
+  padding: 3px;
+  width: 60px;
+  border-radius: var(--border-radius);
+}
+
+.add-favorite {
+  top: -250px;
+}
+
+.add-favorite-card {
+  top: -247px;
+}
+
+.add-favorite > p,
+.add-favorite-card > p {
+  color: red;
 }
 
 .fav-icon {

@@ -20,11 +20,17 @@ router.get("/", isLoggedIn, async (req, res, next) => {
       recipePromises.push(Recipe.findById(favIds[i]));
     }
     const recipes = await Promise.all(recipePromises);
-    res.render("favorite/myFavorites", {user: userDB, recipe: recipes});
+    const promises = recipes.map(async recipe => {
+      const favoriteCount = await Favorite.countDocuments({favRecipe: recipe._id});
+      return {...recipe.toObject(), favoriteCount};
+    });
+    const recipesWithFavorites = await Promise.all(promises);
+    res.render("favorite/myFavorites", {user: userDB, recipe: recipesWithFavorites});
   } catch (error) {
     next(error);
   }
 });
+
 
 // @desc    Adds recipe to favorites
 // @route   GET /favorites/add/:recipeId

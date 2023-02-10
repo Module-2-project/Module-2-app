@@ -77,11 +77,16 @@ router.get("/:userId", isLoggedIn, async (req, res, next) => {
   try {
     const otherUser = await User.findById(userId);
     const recipes = await Recipe.find({owner: otherUser._id});
+    const promises = recipes.map(async recipe => {
+      const favoriteCount = await Favorite.countDocuments({favRecipe: recipe._id});
+      return {...recipe.toObject(), favoriteCount};
+    });
+    const recipesWithFavorites = await Promise.all(promises);
     // toString used because otherwise the validation will work even though they are the same values
     if (otherUser._id.toString() === user._id.toString()) {
       res.redirect("/recipe/my-recipes");
     } else {
-      res.render("profile/otherUser", {user: otherUser, recipe: recipes});
+      res.render("profile/otherUser", {user: otherUser, recipe: recipesWithFavorites});
     }
   } catch(error) {
     next(error);

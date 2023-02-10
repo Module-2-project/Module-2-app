@@ -84,7 +84,7 @@ button {
    /* background-image: linear-gradient(to right,var(--background-color)5%,rgba(142, 183, 38, 0.996), rgba(208, 245, 116, 0.999),var(--background-color) ); */
    background-image: linear-gradient(to right,#fdeab0bd , #fff4d5 );
    box-shadow: 0px 3px 7px var(--navbar-buttons);
-   margin-top: -3px;
+   margin-top: -2px;
   
 }
 
@@ -114,7 +114,7 @@ a {
   letter-spacing: 2px;
   text-shadow: 0px 0px 4px rgb(155, 27, 48);
   background-image: linear-gradient(to right, var(--navbar-buttons), var(--accent-color), var(--navbar-buttons));
-  background-image: url('/images/Chef-Proposal-background.png');
+  background-image: url('/images/Chef-proposal2.png');
   background-repeat: no-repeat;
   background-size: 390px 50px;
 

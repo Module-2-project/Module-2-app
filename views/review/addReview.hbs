@@ -4,7 +4,7 @@
 
 <form method="POST" action="/review/new/{{recipe._id}}">
   <label>Recipe rated:</label>
-  <input required="true" name="recipeName" value="{{recipe.name}}"/>
+  <p class="input">{{recipe.name}}</p>
   <label>Review name:</label>
   <input required="true" type="text" name="title" placeholder="Amazing recipe" />
   <label>Comments:</label>
@@ -19,7 +19,7 @@
     <option value="5">⭐⭐⭐⭐⭐</option>
   </select>
   <label>Review from:</label>
-  <input name="reviewerName" value="{{user.username}}" />
+  <p class="input">{{user.username}}</p>
   {{#if error}}
     <p style="color:rgb(218, 90, 90)">{{ error }}</p>
   {{/if}}

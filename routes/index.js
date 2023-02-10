@@ -1,7 +1,6 @@
 const router = require('express').Router();
 const Recipe = require("../models/Recipe");
 const User = require("../models/User");
-const isLoggedIn = require("../middlewares");
 
 const catchPhrases = [
   "Thanks to Food Folio, we can finally get rid of grandma. Well done.",

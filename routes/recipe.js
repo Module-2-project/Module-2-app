@@ -178,8 +178,7 @@ router.post("/edit/:recipeId", isLoggedIn, async (req, res, next) => {
     return next(new Error("You need to add ingredients and steps."));
   }
   try {
-    const editedRecipe = await Recipe.findByIdAndUpdate(recipeId, {name, image, time, cuisine, kcal, spices, lactose, gluten, meat, level, pax, ingredients, steps, owner}, {new: true});
-    const reviews = await Review.find({recipeRated: editedRecipe._id});
+    await Recipe.findByIdAndUpdate(recipeId, {name, image, time, cuisine, kcal, spices, lactose, gluten, meat, level, pax, ingredients, steps, owner}, {new: true});
     res.redirect(`/recipe/${recipeId}`);
   } catch(error) {
     next(error);

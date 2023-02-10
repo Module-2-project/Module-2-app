@@ -56,7 +56,7 @@ router.post("/new/:recipeId", isLoggedIn, async (req, res, next) => {
   try {
     const userDB = await User.findOne({_id: user._id});
     const recipe = await Recipe.findOne({_id: recipeId});
-    const review = await Review.create({title, comment, stars, reviewerName, reviewer: userDB._id, recipeName, recipeRated: recipeId});
+    const review = await Review.create({title, comment, stars, reviewerName: userDB.username, reviewer: userDB._id, recipeName: recipe.name, recipeRated: recipeId});
     res.redirect(`/recipe/${recipeId}`);
   } catch(error) {
     next(error)

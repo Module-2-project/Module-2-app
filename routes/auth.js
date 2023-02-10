@@ -41,7 +41,7 @@ router.post('/signup', async (req, res, next) => {
   try {
     const salt = bcrypt.genSaltSync(saltRounds);
     const hashedPassword = bcrypt.hashSync(password, salt);
-    const user = await User.create({username, firstName, lastName, email, hashedPassword, cookingLevel});
+    await User.create({username, firstName, lastName, email, hashedPassword, cookingLevel});
     res.redirect('/auth/login');
   } catch (error) { 
     next (error);
@@ -67,7 +67,7 @@ router.post('/login', async (req, res, next) => {
   try {
     const user = await User.findOne({email});
     if (!user) {
-      res.render('auth/login', {error: `There is no user signed up for the following email: ${email}`});
+      res.render('auth/login', {error: `There is no user registered under the following email: ${email}`});
       return;
     } else {
       const match = await bcrypt.compare(password, user.hashedPassword);
@@ -146,4 +146,5 @@ router.get('/logout', isLoggedIn, (req, res, next) => {
   });
 })
 
+module.exports = router;
 module.exports = router;

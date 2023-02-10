@@ -8,6 +8,9 @@
   <h2 class="titles">{{recipe.name}}</h2>
   <p>Cuisine: {{recipe.cuisine}}</p>
   <img class="recipe-images" src="{{recipe.image}}" alt="Dish image" />
+  <div class="add-favorite">
+    <a href="/favorites/add/{{recipe._id}}{{_id}}"><img class="fav-icon" src="/images/empty-heart-icon.png" alt="Fav logo" /></a>
+  </div>
   <ul class="recipe-summary">
     <div class="recipe-logos">
       <img src="/images/clock.png" alt="Clock logo" />

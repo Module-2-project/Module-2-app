@@ -420,6 +420,20 @@ label {
   padding: var(--padding);
 }
 
+.add-favorite {
+  position: absolute;
+  right: 20px;
+  top: 270px;
+}
+
+.fav-icon {
+  height: 40px;
+}
+
+.hidden {
+  display: none;
+}
+
 /* reviews */
 
 .review-card {

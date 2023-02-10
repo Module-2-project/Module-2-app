@@ -47,7 +47,8 @@ router.post("/edit", isLoggedIn, async (req, res, next) => {
       res.render("profile/editProfile", {error: "Please enter a valid email.", user: userDB});
       return;
     };
-    await User.findByIdAndUpdate(user._id, {username, firstName, lastName, email, cookingLevel}, {new: true});
+    const updatedUser = await User.findByIdAndUpdate(user._id, {username, firstName, lastName, email, cookingLevel}, {new: true});
+    req.session.currentUser = updatedUser;
     res.redirect("/profile");
   } catch(error) {
     next(error);

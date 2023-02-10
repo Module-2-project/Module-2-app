@@ -83,7 +83,6 @@ If logged in, these are extra features:
 - User can access other users' profiles through their recipes or reviews, they will only see the other user's username and recipes
 - User can add or remove recipes to his/her favorites
 - User can see how many times a recipe has been saved to favorites from all other users
-- Admins users can delete reviews and see a list of them all.
 
 ---
 

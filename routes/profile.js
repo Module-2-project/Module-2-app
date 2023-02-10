@@ -3,6 +3,7 @@ const router = express.Router();
 const User = require('../models/User');
 const isLoggedIn = require('../middlewares');
 const Recipe = require ('../models/Recipe');
+const Favorite = require("../models/Favorite");
 
 // @desc    Shows profile page
 // @route   GET /profile

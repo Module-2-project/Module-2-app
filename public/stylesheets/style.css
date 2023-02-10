@@ -423,15 +423,11 @@ label {
 .add-favorite {
   position: absolute;
   right: 20px;
-  top: 520px;
+  top: 370px;
 }
 
 .fav-icon {
   height: 40px;
-}
-
-.hidden {
-  display: none;
 }
 
 /* reviews */

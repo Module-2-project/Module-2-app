@@ -13,9 +13,15 @@ router.get("/", isLoggedIn, async (req, res, next) => {
   const user = req.session.currentUser;
   try {
     const userDB = await User.findById(user._id);
-    const favorites = await Favorite.find({favOwner: userDB._id}).populate("Recipe");
-    res.render("favorite/myFavorites", {recipe: favorites, user: userDB});
-  } catch(error) {
+    const favorites = await Favorite.find({ favOwner: userDB._id });
+    const favIds = favorites.map(favorite => favorite.favRecipe);
+    const recipePromises = [];
+    for (let i = 0; i < favIds.length; i++) {
+      recipePromises.push(Recipe.findById(favIds[i]));
+    }
+    const recipes = await Promise.all(recipePromises);
+    res.render("favorite/myFavorites", { user: userDB, recipe: recipes });
+  } catch (error) {
     next(error);
   }
 });

@@ -105,11 +105,17 @@ a {
   background-image: url('/images/Chef-Proposal-background.png');
   background-repeat: no-repeat;
   background-size: 390px 50px;
-  
 
 }
 .gradient {
 box-shadow: 0px 15px 25px #333333b8;
+}
+
+.gradient h2 {
+  /* background-image: linear-gradient(60deg, #E21143, #FFB03A); */
+  /* background-clip: text; */
+  color: linear-gradient(60deg, #E21143, #FFB03A);
+  
 }
 
 .small-hr {
@@ -206,9 +212,9 @@ label {
 
 .home-page-icons {
   width: 30px;
-  background-color: var(--navbar-buttons);
-  padding: var(--padding);
-  border-radius: var(--border-radius);
+  background-image: radial-gradient(circle, rgba(255, 127, 80, 0.751) 50%, rgb(255, 68, 0));
+  padding: 5px 5px;
+  border-radius: 100%;
 }
 
 .recipeSlides {

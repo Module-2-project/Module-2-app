@@ -383,6 +383,7 @@ label {
 
 .recipe-images {
   width: var(--width-hundred);
+  height: 250px;
   border-radius: var(--border-radius);
   box-shadow: 3px 3px 6px grey;
 }
@@ -421,9 +422,9 @@ label {
 }
 
 .add-favorite {
-  position: absolute;
-  right: 20px;
-  top: 370px;
+  position: relative;
+  top: -250px;
+  right: -325px;
 }
 
 .fav-icon {

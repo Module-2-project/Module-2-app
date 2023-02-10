@@ -421,10 +421,15 @@ label {
   padding: var(--padding);
 }
 
+.cuisine {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
 .add-favorite {
   position: relative;
   top: -250px;
-  right: -325px;
+  right: -7px;
 }
 
 .fav-icon {

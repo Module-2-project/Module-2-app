@@ -4,6 +4,7 @@ const router = express.Router();
 const User = require('../models/User');
 const Recipe = require("../models/Recipe");
 const Review = require("../models/Review");
+const Favorite = require("../models/Favorite");
 const isLoggedIn = require('../middlewares');
 
 // @desc    Displays search form for recipes
@@ -145,7 +146,8 @@ router.get("/:recipeId", isLoggedIn, async (req, res, next) => {
     const userDB = await User.findById(user._id);
     const recipe = await Recipe.findById(recipeId);
     const reviews = await Review.find({recipeRated: recipe._id});
-    res.render("recipe/recipeDetail", {recipe, user: userDB, review: reviews});
+    const recipeInFavorites = await Favorite.find({favRecipe: recipeId, favOwner: userDB._id});
+    res.render("recipe/recipeDetail", {recipe, user: userDB, review: reviews, recipeInFavorites});
   } catch (error) {
     next(error);
   }

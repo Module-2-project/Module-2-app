@@ -21,9 +21,9 @@ router.get("/", isLoggedIn, async (req, res, next) => {
 });
 
 // @desc    Adds recipe to favorites
-// @route   POST /favorites/add/:recipeId
+// @route   GET /favorites/add/:recipeId
 // @access  User
-router.post("/add/:recipeId", isLoggedIn, async (req, res, next) => {
+router.get("/add/:recipeId", isLoggedIn, async (req, res, next) => {
   const user = req.session.currentUser;
   const {recipeId} = req.params;
   try {
@@ -36,9 +36,9 @@ router.post("/add/:recipeId", isLoggedIn, async (req, res, next) => {
 });
 
 // @desc    Removes recipe from favorites
-// @route   POST /favorites/delete/:recipeId
+// @route   GET /favorites/delete/:recipeId
 // @access  User
-router.post("/delete/:recipeId", isLoggedIn, async (req, res, next) => {
+router.get("/delete/:recipeId", isLoggedIn, async (req, res, next) => {
   const user = req.session.currentUser;
   const {recipeId} = req.params;
   try {

@@ -326,4 +326,4 @@ const reviewSchema = new Schema(
 - [Github Repo](https://github.com/Module-2-project/Module-2-app)
 - [Trello kanban]()
 - [Deployed version]()
-- [Presentation slides](https://www.slides.com)
+- [Presentation slides](https://slides.com/patriciacostadacruz/minimal)

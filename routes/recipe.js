@@ -5,7 +5,7 @@ const User = require('../models/User');
 const Recipe = require("../models/Recipe");
 const Review = require("../models/Review");
 const Favorite = require("../models/Favorite");
-const isLoggedIn = require('../middlewares');
+const {isLoggedIn} = require('../middlewares');
 
 // @desc    Displays search form for recipes
 // @route   GET /recipe/search

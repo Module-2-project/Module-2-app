@@ -4,7 +4,7 @@ const router = express.Router();
 const User = require('../models/User');
 const Recipe = require("../models/Recipe");
 const Favorite = require("../models/Favorite");
-const isLoggedIn = require('../middlewares');
+const {isLoggedIn} = require('../middlewares');
 
 // @desc    Shows favorites
 // @route   GET /favorites

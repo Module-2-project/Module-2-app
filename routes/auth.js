@@ -4,7 +4,7 @@ const User = require('../models/User.js');
 const Recipe = require("../models/Recipe");
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
-const isLoggedIn = require('../middlewares');
+const {isLoggedIn} = require('../middlewares');
 
 // @desc    Displays form view to sign up
 // @route   GET /auth/signup

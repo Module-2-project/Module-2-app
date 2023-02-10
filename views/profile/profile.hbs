@@ -3,6 +3,9 @@
 <div class="profile-intro">
   <img class="profile-avatar" src="/images/chef-icon.png" alt="Profile avatar" />
   <h2>Hello {{user.firstName}}!</h2>
+  {{#if error}}
+    <p style="color:rgb(218, 90, 90)">{{ error }}</p>
+  {{/if}}
   <a href="/profile/edit">Edit profile</a>
   <img class="arrow-deco" src="/images/Menu-frame-arrow.png" alt="Arrow deco">
 </div>

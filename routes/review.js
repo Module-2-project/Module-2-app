@@ -4,7 +4,8 @@ const router = express.Router();
 const User = require('../models/User');
 const Recipe = require("../models/Recipe");
 const Review = require("../models/Review");
-const isLoggedIn = require('../middlewares');
+const {isLoggedIn} = require('../middlewares');
+const {isAdmin} = require("../middlewares");
 
 // @desc    Displays user reviews
 // @route   GET /review/my-reviews
@@ -61,6 +62,33 @@ router.post("/new/:recipeId", isLoggedIn, async (req, res, next) => {
   } catch(error) {
     next(error)
 ;  }
+});
+
+// @desc    Gets all reviews
+// @route   GET /review/all
+// @access  Admin
+router.get("/all", isAdmin, async(req, res, next) => {
+  const user = req.session.currentUser;
+  try {
+    const allReviews = await Review.find();
+    res.render("review/allReviews", {review: allReviews});
+  } catch(error) {
+    next(error);
+  }
+});
+
+// @desc    Delete review
+// @route   GET /review/delete/:reviewId
+// @access  Admin
+router.get("/delete/:reviewId", isAdmin, async(req, res, next) => {
+  const user = req.session.currentUser;
+  const {reviewId} = req-params;
+  try {
+    const deletedReview = await Review.findByIdAndDelete(reviewId);
+    res.redirect("/review/all");
+  } catch(error) {
+    next(error);
+  }
 });
 
 module.exports = router;

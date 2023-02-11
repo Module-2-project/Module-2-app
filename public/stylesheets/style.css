@@ -180,18 +180,19 @@ label {
 /* home page */
 
 .home-title {
-  font-family: "Montserrat";
-  z-index: 1;
-  /* display: flex; */
-  position:absolute;
-  justify-content: center;
-  text-align: center;
-  margin-top: 80px;
-  margin-left: 70px;
-  margin-right: auto;
-  font-size: 24px;
+  font-family: "Dancing Script";
+  /* z-index: 1; */
+  /* position:absolute; */
+  /* justify-content: center;
+  text-align: center; */
+  margin-top: 0px;
+  margin-left: -10px; 
+  margin-right:  0px;
+  font-size: 44px;
   color: var(--background-color);
-  text-shadow: 1px 1px 3px grey;
+  text-shadow: 1px 1px 3px rgb(62, 62, 62);
+  width: 390px;
+  background-image: linear-gradient( to right, rgba(153, 25, 51, 0.132), rgba(127, 56, 73, 0.108));
 }
 
 .signed-in-nav,

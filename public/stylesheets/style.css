@@ -83,7 +83,7 @@ button {
   /* background-image: linear-gradient(to right,var(--muted-color), #e5ec98,rgba(213, 249, 214, 0.596)); */
    /* background-image: linear-gradient(to right,var(--background-color)5%,rgba(142, 183, 38, 0.996), rgba(208, 245, 116, 0.999),var(--background-color) ); */
    background-image: linear-gradient(to right,#fdeab0bd , #fff4d5 );
-   box-shadow: 0px 3px 7px var(--navbar-buttons);
+   box-shadow: 0px 3px 5px #333;
    margin-top: -2px;
   
 }

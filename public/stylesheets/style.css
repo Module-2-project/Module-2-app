@@ -149,6 +149,7 @@ label {
   font-size: 24px;
   color: var(--background-color);
   text-shadow: 1px 1px 3px grey;
+  font-family: "Lato";
 }
 
 .signed-in-nav,

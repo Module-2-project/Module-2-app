@@ -37,7 +37,7 @@ router.get("/new/:recipeId", isLoggedIn, async (req, res, next) => {
       res.render("recipe/recipeDetail", {error: "You cannot rate your own recipe.", recipe, user: userDB, user});
     }
     // prevents user from sending multiple reviews for same recipe
-    if (reviewCheck) {
+    if (reviewCheck.length !== 0) {
       res.render("recipe/recipeDetail", {error: "You already rated this recipe.", review: allReviews, recipe, user: userDB, user});
     } else {
       res.render("review/addReview", {recipe, user: userDB, user});

@@ -10,9 +10,8 @@ const isLoggedIn = (req, res, next) => {
 };
 
 const isAdmin = (req, res, next) => {
-  if (req.session.username !== "admin") {
+  if (req.session.currentUser.username !== "admin") {
     const user = req.session.currentUser;
-    console.log(user);
     res.render("profile/profile", {user: user, error: "Unauthorized, you only have basic user access."});
   } else {
     next();

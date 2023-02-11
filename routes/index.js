@@ -64,8 +64,7 @@ router.get('/', async (req, res, next) => {
   const catchAuthor = catchAuthors[randomPhrase];
   try {
     const recipes = await Recipe.find();
-    const userDB = await User.findById(user._id);
-    res.render('index', {recipe: recipes, user: userDB, catchPhrase, catchAuthor});
+    res.render('index', {recipe: recipes, user, catchPhrase, catchAuthor});
   } catch(error) {
     next(error);
   }

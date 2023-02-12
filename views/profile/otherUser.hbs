@@ -1,14 +1,16 @@
 <button onclick="history.back()"><img class="arrow-back" src="/images/back-arrow.png" /> Go back</button>
 
-<h2 class="otherUser">Welcome to<br>{{user.username}}'s profile</h2>
+<h2 class="otherUser">Welcome to {{user.username}}'s profile</h2>
 <div class="profile-intro-other">
   <img class="arrow-deco" src="/images/Menu-frame-arrow.png" alt="Arrow deco">
 </div>
 
-<h3>Recipes:</h3>
 {{#if recipe}}
+<h3>Recipes:</h3>
   {{#each recipe}}
     {{> recipeCard}}
     <hr class="bigger-hr">
   {{/each}}
+  {{else}}
+  <p>Ooops, it seems that this user hasn't shared any recipe yet.</p>
 {{/if}}

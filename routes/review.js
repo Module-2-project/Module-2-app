@@ -13,9 +13,8 @@ const {isAdmin} = require("../middlewares");
 router.get("/my-reviews", isLoggedIn, async (req, res, next) => {
   const user = req.session.currentUser;
   try {
-    const userDB = await User.findOne({_id: user._id});
     const reviews = await Review.find({reviewer: user._id});
-    res.render("review/myReviews", {review: reviews, user: userDB});
+    res.render("review/myReviews", {review: reviews, user});
   } catch(error) {
     next(error);
   }
@@ -29,18 +28,17 @@ router.get("/new/:recipeId", isLoggedIn, async (req, res, next) => {
   const user = req.session.currentUser;
   try {
     const recipe = await Recipe.findOne({_id: recipeId});
-    const userDB = await User.findOne({_id: user._id});
     const allReviews = await Review.find({recipeRated: recipe._id});
-    const reviewCheck = await Review.find({recipeRated: recipe._id, reviewer: userDB._id});
+    const reviewCheck = await Review.find({recipeRated: recipe._id, reviewer: user._id});
     // toString used because otherwise the validation will work even though they are the same values
-    if (recipe.owner.toString() === userDB._id.toString()) {
-      res.render("recipe/recipeDetail", {error: "You cannot rate your own recipe.", recipe, user: userDB, user});
+    if (recipe.owner.toString() === user._id.toString()) {
+      res.render("recipe/recipeDetail", {error: "You cannot rate your own recipe.", recipe, user, user});
     }
     // prevents user from sending multiple reviews for same recipe
     if (reviewCheck.length !== 0) {
-      res.render("recipe/recipeDetail", {error: "You already rated this recipe.", review: allReviews, recipe, user: userDB, user});
+      res.render("recipe/recipeDetail", {error: "You already rated this recipe.", review: allReviews, recipe, user});
     } else {
-      res.render("review/addReview", {recipe, user: userDB, user});
+      res.render("review/addReview", {recipe, user});
     }
   } catch(error) {
     next(error);
@@ -55,9 +53,8 @@ router.post("/new/:recipeId", isLoggedIn, async (req, res, next) => {
   const {title, comment, stars, reviewerName, recipeName } = req.body;
   const {recipeId} = req.params;
   try {
-    const userDB = await User.findOne({_id: user._id});
     const recipe = await Recipe.findOne({_id: recipeId});
-    const review = await Review.create({title, comment, stars, reviewerName: userDB.username, reviewer: userDB._id, recipeName: recipe.name, recipeRated: recipeId});
+    await Review.create({title, comment, stars, reviewerName: user.username, reviewer: user._id, recipeName: recipe.name, recipeRated: recipeId});
     res.redirect(`/recipe/${recipeId}`);
   } catch(error) {
     next(error)
@@ -71,7 +68,7 @@ router.get("/all", isAdmin, async(req, res, next) => {
   const user = req.session.currentUser;
   try {
     const allReviews = await Review.find();
-    res.render("review/allReviews", {review: allReviews});
+    res.render("review/allReviews", {review: allReviews, user});
   } catch(error) {
     next(error);
   }
@@ -82,9 +79,9 @@ router.get("/all", isAdmin, async(req, res, next) => {
 // @access  Admin
 router.get("/delete/:reviewId", isAdmin, async(req, res, next) => {
   const user = req.session.currentUser;
-  const {reviewId} = req-params;
+  const {reviewId} = req.params;
   try {
-    const deletedReview = await Review.findByIdAndDelete(reviewId);
+    await Review.findByIdAndDelete(reviewId);
     res.redirect("/review/all");
   } catch(error) {
     next(error);

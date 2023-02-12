@@ -12,12 +12,6 @@
     </div>
   {{/each}}
 </div>
-
-<div class="phrase-container">
-  <img src="../images/Menu-frame.png" alt="Phrase-background-img">
-  <div class="catch-phrase" ><q>{{catchPhrase}} <br><span>{{catchAuthor}}</span></q></div>
-</div>
-
 <script>
   const slides = document.querySelectorAll(".slide");
   let index = 0;
@@ -35,3 +29,12 @@
   }
   setInterval(showSlide, 5000);
 </script>
+
+{{#eq user.username "admin"}}
+<p class="admin-phrase">Remember to do the daily reviews checkup.</p>
+{{else}}
+  <div class="phrase-container">
+    <img src="/images/Menu-frame.png" alt="Phrase-background-img">
+    <div class="catch-phrase"><q>{{catchPhrase}} <br><span>{{catchAuthor}}</span></q></div>
+  </div>
+{{/eq}}

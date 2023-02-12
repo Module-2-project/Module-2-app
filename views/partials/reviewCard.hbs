@@ -3,4 +3,7 @@
   <h5>Rating: {{{displayStarEmoji stars}}}</h5>
   <p>{{comment}}</p>
   <p class="review-from">From: <a href="/profile/{{reviewer}}">{{reviewerName}}</a></p>
+  {{#eq user.username "admin"}}
+    <a href="/review/delete/{{_id}}">Delete review</a>
+  {{/eq}}
 </div>

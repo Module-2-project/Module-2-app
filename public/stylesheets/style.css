@@ -51,7 +51,7 @@ nav ul {
 }
 
 nav ul li a img {
-  width: calc(60% - var(--margin-gap) * 4 / 5);
+  width: calc(55% - var(--margin-gap) * 4 / 5);
 }
 
 .home-icon {
@@ -142,6 +142,12 @@ label {
 }
 
 /* home page */
+
+.admin-phrase {
+font-weight: bold;
+margin-top: 450px;
+text-align: center;
+}
 
 .home-title {
   position: absolute;

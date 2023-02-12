@@ -40,14 +40,13 @@ router.get("/search-results", async (req, res, next) => {
   if (sortBy === "timeAsc") sort.time = 1;
   if (sortBy === "timeDesc") sort.time = -1;
   try {
-    const userDB = await User.findById(user._id);
     const recipes = await Recipe.find(query).sort(sort);
     const promises = recipes.map(async recipe => {
     const favoriteCount = await Favorite.countDocuments({favRecipe: recipe._id});
     return {...recipe.toObject(), favoriteCount};
     });
       const recipesWithFavorites = await Promise.all(promises);
-      res.render("recipe/searchResults", {recipe: recipesWithFavorites, user: userDB});
+      res.render("recipe/searchResults", {recipe: recipesWithFavorites, user});
   } catch (error) {
     next(error);
   }
@@ -112,7 +111,7 @@ router.post("/new", isLoggedIn, async (req, res, next) => {
   const user = req.session.currentUser;
   // regex to make sure the ingredients and steps strings start by a letter or a number
   if (!/^[0-9a-zA-Z].*/.test(ingredients) || !/^[0-9a-zA-Z].*/.test(steps)) {
-    res.render("recipe/newRecipe", {error: "You need to add ingredients and steps."});
+    res.render("recipe/newRecipe", {error: "You need to add ingredients and steps."}, user);
     return;
   }
   try {
@@ -139,14 +138,13 @@ router.get("/my-recipes", isLoggedIn, async (req, res, next) => {
   if (sortBy === "timeAsc") sort.time = 1;
   if (sortBy === "timeDesc") sort.time = -1;
   try {
-    const userDB = await User.findById(user._id);
     const recipes = await Recipe.find({owner: user._id}).sort(sort);
     const promises = recipes.map(async recipe => {
       const favoriteCount = await Favorite.countDocuments({favRecipe: recipe._id});
       return {...recipe.toObject(), favoriteCount};
     });
     const recipesWithFavorites = await Promise.all(promises);
-    res.render("recipe/myRecipes", {recipe: recipesWithFavorites, user: userDB});
+    res.render("recipe/myRecipes", {recipe: recipesWithFavorites, user});
   } catch(error) {
     next(error);
   }
@@ -159,12 +157,11 @@ router.get("/:recipeId", isLoggedIn, async (req, res, next) => {
   const { recipeId } = req.params;
   const user = req.session.currentUser;
   try {
-    const userDB = await User.findById(user._id);
     const recipe = await Recipe.findById(recipeId);
-    const reviews = await Review.find({ recipeRated: recipe._id });
-    const recipeInFavorites = await Favorite.find({ favRecipe: recipeId, favOwner: userDB._id });
+    const reviews = await Review.find({recipeRated: recipe._id});
+    const recipeInFavorites = await Favorite.find({ favRecipe: recipeId, favOwner: user._id });
     const favoriteCount = await Favorite.countDocuments({favRecipe: recipeId});
-    res.render("recipe/recipeDetail", {recipe, user: userDB, review: reviews, recipeInFavorites, favoriteCount});
+    res.render("recipe/recipeDetail", {recipe, user, review: reviews, recipeInFavorites, favoriteCount});
   } catch (error) {
     next(error);
   }
@@ -179,8 +176,7 @@ router.get("/edit/:recipeId", isLoggedIn, async (req, res, next) => {
   const user = req.session.currentUser;
   try {
     const recipe = await Recipe.findById(recipeId);
-    const userDB = await User.findById(user._id);
-    res.render("recipe/editRecipe", {recipe, user: userDB});
+    res.render("recipe/editRecipe", {recipe, user});
   } catch(error) {
     next(error);
   }
@@ -190,8 +186,8 @@ router.get("/edit/:recipeId", isLoggedIn, async (req, res, next) => {
 // @route   POST /recipe/edit/:recipeId
 // @access  User
 router.post("/edit/:recipeId", isLoggedIn, async (req, res, next) => {
-  const {recipeId} = req.params;
   const user = req.session.currentUser;
+  const {recipeId} = req.params;
   const {name, image, time, cuisine, kcal, spices, lactose, gluten, meat, level, pax, ingredients, steps, owner} = req.body;
   // regex to make sure the ingredients and steps strings start by a letter or a number
   if (!/^[0-9a-zA-Z].*/.test(ingredients) || !/^[0-9a-zA-Z].*/.test(steps)) {

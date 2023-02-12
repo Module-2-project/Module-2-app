@@ -8,14 +8,9 @@ const Favorite = require("../models/Favorite");
 // @desc    Shows profile page
 // @route   GET /profile
 // @access  User
-router.get('/', isLoggedIn,  async (req,res,next) => {
+router.get('/', isLoggedIn, (req,res,next) => {
   const user = req.session.currentUser;
-  try {
-    const userDB = await User.findOne({_id: user._id})
-    res.render("profile/profile", {user: userDB});
-  } catch(error) {
-    next(error);
-  }
+  res.render("profile/profile", {user});
 });
 
 // @desc    Shows profile edit page
@@ -23,12 +18,7 @@ router.get('/', isLoggedIn,  async (req,res,next) => {
 // @access  User
 router.get("/edit", isLoggedIn, async (req, res, next) => {
   const user = req.session.currentUser;
-  try {
-    const userDB = await User.findOne({_id: user._id});
-    res.render("profile/editProfile", {user: userDB});
-  } catch(error) {
-    next(error);
-  }
+  res.render("profile/editProfile", {user});
 });
 
 // @desc    Send new data to profile

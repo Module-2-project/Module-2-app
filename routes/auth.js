@@ -87,14 +87,9 @@ router.post('/login', async (req, res, next) => {
 // @desc    Shows reset password page
 // @route   GET /auth/password-reset
 // @access  User
-router.get("/password-reset", isLoggedIn, async (req, res, next) => {
+router.get("/password-reset", isLoggedIn, (req, res, next) => {
   const user = req.session.currentUser;
-  try {
-    const userDB = await User.findOne({_id: user._id});
-    res.render("auth/passwordReset", {user: userDB});
-  } catch(error) {
-    next(error);
-  }
+  res.render("auth/passwordReset", {user});
 });
 
 // @desc    Resets password 
@@ -146,5 +141,4 @@ router.get('/logout', isLoggedIn, (req, res, next) => {
   });
 })
 
-module.exports = router;
 module.exports = router;

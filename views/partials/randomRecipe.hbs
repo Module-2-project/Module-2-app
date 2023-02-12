@@ -1,0 +1,34 @@
+<div class="recipe-card">
+  <img class="recipe-images" src={{recipe.image}}{{image}} alt="Dish image" />
+  <div class="add-favorite-card">
+    {{#if recipe.recipeInFavorites}}
+      <a href="/favorites/delete/{{recipe._id}}{{_id}}"><img class="fav-icon" src="/images/red-heart-icon.png"
+          alt="Fav logo" /></a>
+    {{else}}
+      <a href="/favorites/add/{{recipe._id}}{{_id}}"><img class="fav-icon" src="/images/empty-heart-icon.png"
+          alt="Fav logo" /></a>
+    {{/if}}
+    <p class="fav-count">{{recipe.favoriteCount}}{{favoriteCount}}</p>
+  </div>
+  <h3>{{recipe.name}}{{name}}</h3>
+  <p>Cuisine: {{recipe.cuisine}}{{cuisine}}</p>
+  <p>Level: {{recipe.level}}{{level}}</p>
+  <p>{{recipe.kcal}}{{kcal}} kcal</p>
+  <hr class="small-hr">
+  <ul class="recipe-summary">
+    <div class="recipe-logos">
+      <img src="/images/clock.png" alt="Clock logo" />
+      <li>{{recipe.time}}{{time}} min</li>
+    </div>
+    <div class="recipe-logos">
+      <img src="/images/flame.png" alt="Flame logo" />
+      <li>{{recipe.spices}}{{spices}}</li>
+    </div>
+    <div class="recipe-logos">
+      <img src="/images/pax.png" alt="Pax logo">
+      <li>{{recipe.pax}}{{pax}}</li>
+    </div>
+  </ul>
+  <hr class="small-hr">
+  <a class="recipe-button" href="/recipe/{{recipe._id}}{{_id}}">> See recipe</a>
+</div>

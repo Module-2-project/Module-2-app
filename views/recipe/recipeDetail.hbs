@@ -9,7 +9,7 @@
   <p class="cuisine">Cuisine: {{recipe.cuisine}}</p>
   <img class="recipe-images" src="{{recipe.image}}" alt="Dish image" />
   <div class="add-favorite-card">
-    {{#if recipeInFavorites}}
+    {{#if recipe.recipeInFavorites}}
       <a href="/favorites/delete/{{recipe._id}}{{_id}}"><img class="fav-icon" src="/images/red-heart-icon.png"
           alt="Fav logo" /></a>
     {{else}}

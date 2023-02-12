@@ -83,6 +83,7 @@ If logged in, these are extra features:
 - User can access other users' profiles through their recipes or reviews, they will only see the other user's username and recipes
 - User can add or remove recipes to his/her favorites
 - User can see how many times a recipe has been saved to favorites from all other users
+- User can select a profile picture
 
 ---
 
@@ -93,6 +94,10 @@ User:
 ```js
 const userSchema = new Schema(
   {
+    profilePic: {
+      type: String,
+      required: [true, "Please select a profile picture or avatar."],
+    },
     username: {
       type: String,
       trim: true,
@@ -149,8 +154,7 @@ const recipeSchema = new Schema({
   },
   image: {
     type: String,
-    required: [true, "Please add recipe image URL"],
-    unique: true,
+    required: [true, "Please add recipe's image"],
   },
   time: {
     type: Number,
@@ -323,6 +327,8 @@ const favoriteSchema = new Schema({
 | Profile            | GET    | /profile                    | Yes       |                                                                                                            |                           |
 | Edit profile       | GET    | /profile/edit               | Yes       |                                                                                                            |                           |
 | Edit profile       | POST   | /profile/edit               | Yes       | { username, firstName, lastName, email, cookingLevel }                                                     | /profile                  |
+| Edit picture       | GET    | /profile/change-picture     | Yes       |                                                                                                            |                           |
+| Edit picture       | POST   | /profile/change-picture     | Yes       |                                                                                                            | /profile                  |
 | Delete profile     | GET    | /profile/delete             | Yes       |                                                                                                            | /auth/signup              |
 | Add review         | GET    | /review/new/:recipeId       | Yes       |                                                                                                            |                           |
 | Add review         | POST   | /review/new/:recipeId       | Yes       | { title, comment, stars, reviewerName }                                                                    | /recipe/${recipeId}       |

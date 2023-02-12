@@ -1,12 +1,13 @@
 <button onclick="history.back()"><img class="arrow-back" src="/images/back-arrow.png" /> Go back</button>
 
 <div class="profile-intro">
-  <img class="profile-avatar" src="/images/chef-icon.png" alt="Profile avatar" />
+  <img class="profile-avatar" src="{{user.profilePic}}" alt="Profile avatar" />
+  <a href="/profile/change-picture"><img src="" alt=""/>Edit picture</a>
   <h2>Hello {{user.firstName}}!</h2>
   {{#if error}}
     <p style="color:rgb(218, 90, 90)">{{ error }}</p>
   {{/if}}
-  <a href="/profile/edit">Edit profile</a>
+  <a href="profile/edit">Edit information</a>
   <img class="arrow-deco" src="/images/Menu-frame-arrow.png" alt="Arrow deco">
 </div>
 <div class="profile-data">

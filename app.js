@@ -100,6 +100,9 @@ hbs.registerHelper('displayStarEmoji', function(starCount) {
   return starEmoji;
 });
 
+// file upload
+const cloudinary = require("./config/cloudinary.config");
+
 // routes intro
 app.use('/', indexRouter);
 app.use('/auth', authRouter);

@@ -381,7 +381,9 @@ text-align: center;
 
 .recipe-options {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 .recipe-options {
   gap: var(--margin-gap);

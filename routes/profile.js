@@ -72,7 +72,7 @@ router.get("/:userId", isLoggedIn, async (req, res, next) => {
     const promises = recipes.map(async recipe => {
       const favoriteCount = await Favorite.countDocuments({favRecipe: recipe._id});
       const recipeInFavorites = await Favorite.find({favRecipe: recipe._id, favOwner: user._id});
-      return {...recipe.toObject(), favoriteCount,recipeInFavorites: !!recipeInFavorites};
+      return {...recipe.toObject(), favoriteCount, recipeInFavorites};
     });
     const recipesWithFavorites = await Promise.all(promises);
     // toString used because otherwise the validation will work even though they are the same values

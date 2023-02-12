@@ -164,10 +164,11 @@ router.get("/:recipeId", isLoggedIn, async (req, res, next) => {
   try {
     const recipe = await Recipe.findById(recipeId);
     const reviews = await Review.find({recipeRated: recipe._id});
-    const favoriteCount = await Favorite.countDocuments({favRecipe: recipeId});
-    const recipeInFavorites = await Favorite.find({favRecipe: recipeId, favOwner: user._id});
+    const favoriteCount = await Favorite.countDocuments({favRecipe: recipe._id});
+    const recipeInFavorites = await Favorite.find({favRecipe: recipe._id, favOwner: user._id});
     const recipeViewed = {...recipe.toObject(), favoriteCount, recipeInFavorites};
     res.render("recipe/recipeDetail", {recipe: recipeViewed, user, review: reviews});
+    console.log(recipeViewed);
   } catch (error) {
     next(error);
   }

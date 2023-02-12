@@ -2,21 +2,13 @@
   <img class="recipe-images" src={{recipe.image}}{{image}} alt="Dish image" />
   <div class="add-favorite-card">
     {{#if recipeInFavorites}}
-      {{#eq user.username "admin"}}
-        <img class="fav-icon" src="/images/red-heart-icon.png" alt="Fav logo" />
-        <p>{{favoriteCount}}</p>
-    {{else}}
-      <a href="/favorites/delete/{{recipe._id}}"><img class="fav-icon" src="/images/red-heart-icon.png"
+      <a href="/favorites/delete/{{recipe._id}}{{_id}}"><img class="fav-icon" src="/images/red-heart-icon.png"
           alt="Fav logo" /></a>
-      <p>{{favoriteCount}}</p>
-      {{/eq}}
     {{else}}
-      {{#eq user.username "admin"}}
-        <img class="fav-icon" src="/images/empty-heart-icon.png" alt="Fav logo" />
-    {{else}}
-      <a href="/favorites/add/{{recipe._id}}"><img class="fav-icon" src="/images/empty-heart-icon.png" alt="Fav logo" /></a>
-      {{/eq}}
+      <a href="/favorites/add/{{recipe._id}}{{_id}}"><img class="fav-icon" src="/images/empty-heart-icon.png"
+          alt="Fav logo" /></a>
     {{/if}}
+    <p class="fav-count">{{recipe.favoriteCount}}{{favoriteCount}}</p>
   </div>
   <h3>{{recipe.name}}{{name}}</h3>
   <p>Cuisine: {{recipe.cuisine}}{{cuisine}}</p>

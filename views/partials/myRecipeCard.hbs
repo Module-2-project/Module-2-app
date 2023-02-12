@@ -1,14 +1,14 @@
 <div class="my-recipe-card">
   <img class="recipe-images" src={{recipe.image}}{{image}} alt="Dish image" />
   <div class="add-favorite-card">
-    {{#if favoriteCount}}
+    {{#if recipeInFavorites}}
       <a href="/favorites/delete/{{recipe._id}}{{_id}}"><img class="fav-icon" src="/images/red-heart-icon.png"
           alt="Fav logo" /></a>
-      <p>{{favoriteCount}}</p>
     {{else}}
       <a href="/favorites/add/{{recipe._id}}{{_id}}"><img class="fav-icon" src="/images/empty-heart-icon.png"
           alt="Fav logo" /></a>
     {{/if}}
+    <p class="fav-count">{{recipe.favoriteCount}}{{favoriteCount}}</p>
   </div>
   <h3>{{recipe.name}}{{name}}</h3>
   <p>Cuisine: {{recipe.cuisine}}{{cuisine}}</p>

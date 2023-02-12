@@ -21,7 +21,8 @@ router.get("/", isLoggedIn, async (req, res, next) => {
     const recipes = await Promise.all(recipePromises);
     const promises = recipes.map(async recipe => {
       const favoriteCount = await Favorite.countDocuments({favRecipe: recipe._id});
-      return {...recipe.toObject(), favoriteCount};
+      const recipeInFavorites = await Favorite.find({favRecipe: recipe._id, favOwner: user._id});
+      return {...recipe.toObject(), favoriteCount, recipeInFavorites};
     });
     const recipesWithFavorites = await Promise.all(promises);
     res.render("favorite/myFavorites", {user, recipe: recipesWithFavorites});
@@ -38,8 +39,14 @@ router.get("/add/:recipeId", isLoggedIn, async (req, res, next) => {
   const user = req.session.currentUser;
   const {recipeId} = req.params;
   try {
-    await Favorite.create({favRecipe: recipeId, favOwner: user._id});
-    res.redirect("back");
+    const favCheck = await Favorite.find({favRecipe: recipeId, favOwner: user._id});
+    if (favCheck.length !== 0) {
+      res.redirect("/favorites");
+      return;
+    } else {
+      await Favorite.create({favRecipe: recipeId, favOwner: user._id});
+      res.redirect("back");
+    }
   } catch(error) {
     next(error);
   }
@@ -52,8 +59,13 @@ router.get("/delete/:recipeId", isLoggedIn, async (req, res, next) => {
   const user = req.session.currentUser;
   const {recipeId} = req.params;
   try {
-    await Favorite.deleteOne({favRecipe: recipeId, favOwner: user._id});
-    res.redirect("back");
+    const favCheck = await Favorite.find({favRecipe: recipeId, favOwner: user._id});
+    if (favCheck.length === 0) {
+      res.redirect("favorites");
+    } else {
+      await Favorite.findOneAndDelete({favRecipe: recipeId, favOwner: user._id});
+      res.redirect("back");
+    }
   } catch(error) {
     next(error);
   }

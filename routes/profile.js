@@ -52,6 +52,7 @@ router.post("/edit", isLoggedIn, async (req, res, next) => {
 router.get("/delete", isLoggedIn, async (req, res, next) => {
   const user = req.session.currentUser;
   try {
+    await Favorite.deleteMany({favOwner: user._id});
     await User.findByIdAndDelete(user._id);
     res.redirect("/auth/signup");
   } catch(error) {
@@ -70,7 +71,8 @@ router.get("/:userId", isLoggedIn, async (req, res, next) => {
     const recipes = await Recipe.find({owner: otherUser._id});
     const promises = recipes.map(async recipe => {
       const favoriteCount = await Favorite.countDocuments({favRecipe: recipe._id});
-      return {...recipe.toObject(), favoriteCount};
+      const recipeInFavorites = await Favorite.find({favRecipe: recipe._id, favOwner: user._id});
+      return {...recipe.toObject(), favoriteCount,recipeInFavorites: !!recipeInFavorites};
     });
     const recipesWithFavorites = await Promise.all(promises);
     // toString used because otherwise the validation will work even though they are the same values

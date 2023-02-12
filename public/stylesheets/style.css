@@ -456,9 +456,8 @@ text-align: center;
   top: -247px;
 }
 
-.add-favorite > p,
-.add-favorite-card > p {
-  color: red;
+.fav-count {
+  color: var(--text-color);
 }
 
 .fav-icon {

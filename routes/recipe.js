@@ -42,11 +42,12 @@ router.get("/search-results", async (req, res, next) => {
   try {
     const recipes = await Recipe.find(query).sort(sort);
     const promises = recipes.map(async recipe => {
-    const favoriteCount = await Favorite.countDocuments({favRecipe: recipe._id});
-    return {...recipe.toObject(), favoriteCount};
+      const favoriteCount = await Favorite.countDocuments({favRecipe: recipe._id});
+      const recipeInFavorites = await Favorite.find({favRecipe: recipe._id, favOwner: user._id});
+      return {...recipe.toObject(), favoriteCount, recipeInFavorites};
     });
-      const recipesWithFavorites = await Promise.all(promises);
-      res.render("recipe/searchResults", {recipe: recipesWithFavorites, user});
+    const recipesWithFavorites = await Promise.all(promises);
+    res.render("recipe/searchResults", {recipe: recipesWithFavorites, user});
   } catch (error) {
     next(error);
   }
@@ -70,7 +71,8 @@ router.get("/all", async (req, res, next) => {
     const recipes = await Recipe.find({}).sort(sort);
     const promises = recipes.map(async recipe => {
       const favoriteCount = await Favorite.countDocuments({favRecipe: recipe._id});
-      return {...recipe.toObject(), favoriteCount};
+      const recipeInFavorites = await Favorite.find({favRecipe: recipe._id, favOwner: user._id});
+      return {...recipe.toObject(), favoriteCount, recipeInFavorites};
     });
     const recipesWithFavorites = await Promise.all(promises);
     res.render("recipe/searchResults", {recipe: recipesWithFavorites, user});
@@ -89,7 +91,9 @@ router.get("/random", async (req, res, next) => {
     const randomIndex = Math.floor(Math.random() * count);
     const randomRecipe = await Recipe.findOne().skip(randomIndex);
     const favoriteCount = await Favorite.countDocuments({favRecipe: randomRecipe._id});
-    res.render("recipe/randomRecipe", {recipe: randomRecipe, user, favoriteCount});
+    const recipeInFavorites = await Favorite.find({favRecipe: randomRecipe._id, favOwner: user._id});
+    const recipe = {...randomRecipe.toObject(), favoriteCount, recipeInFavorites};
+    res.render("recipe/randomRecipe", {recipe, user});
   } catch(error) {
     next(error);
   }
@@ -141,7 +145,8 @@ router.get("/my-recipes", isLoggedIn, async (req, res, next) => {
     const recipes = await Recipe.find({owner: user._id}).sort(sort);
     const promises = recipes.map(async recipe => {
       const favoriteCount = await Favorite.countDocuments({favRecipe: recipe._id});
-      return {...recipe.toObject(), favoriteCount};
+      const recipeInFavorites = await Favorite.find({favRecipe: recipe._id, favOwner: user._id});
+      return {...recipe.toObject(), favoriteCount, recipeInFavorites};
     });
     const recipesWithFavorites = await Promise.all(promises);
     res.render("recipe/myRecipes", {recipe: recipesWithFavorites, user});
@@ -154,14 +159,15 @@ router.get("/my-recipes", isLoggedIn, async (req, res, next) => {
 // @route   GET /recipe/:recipeId
 // @access  User
 router.get("/:recipeId", isLoggedIn, async (req, res, next) => {
-  const { recipeId } = req.params;
+  const {recipeId} = req.params;
   const user = req.session.currentUser;
   try {
     const recipe = await Recipe.findById(recipeId);
     const reviews = await Review.find({recipeRated: recipe._id});
-    const recipeInFavorites = await Favorite.find({ favRecipe: recipeId, favOwner: user._id });
     const favoriteCount = await Favorite.countDocuments({favRecipe: recipeId});
-    res.render("recipe/recipeDetail", {recipe, user, review: reviews, recipeInFavorites, favoriteCount});
+    const recipeInFavorites = await Favorite.find({favRecipe: recipeId, favOwner: user._id});
+    const recipeViewed = {...recipe.toObject(), favoriteCount, recipeInFavorites};
+    res.render("recipe/recipeDetail", {recipe: recipeViewed, user, review: reviews});
   } catch (error) {
     next(error);
   }

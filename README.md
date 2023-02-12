@@ -340,5 +340,5 @@ const favoriteSchema = new Schema({
 
 - [Github Repo](https://github.com/Module-2-project/Module-2-app)
 - [Trello kanban]()
-- [Deployed version]()
+- [Deployed version](https://food-folio.fly.dev/)
 - [Presentation slides](https://slides.com/patriciacostadacruz/minimal)

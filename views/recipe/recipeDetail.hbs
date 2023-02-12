@@ -8,13 +8,13 @@
   <h2 class="titles">{{recipe.name}}</h2>
   <p class="cuisine">Cuisine: {{recipe.cuisine}}</p>
   <img class="recipe-images" src="{{recipe.image}}" alt="Dish image" />
-  <div class="add-favorite">
+  <div class="add-favorite-card">
     {{#if recipeInFavorites}}
-      <a href="/favorites/delete/{{recipe._id}}"><img class="fav-icon" src="/images/red-heart-icon.png"
-      alt="Fav logo" /></a>
-      <p>{{favoriteCount}}</p>
+      <a href="/favorites/delete/{{recipe._id}}{{_id}}"><img class="fav-icon" src="/images/red-heart-icon.png" alt="Fav logo" /></a>
+      <p class="fav-count">{{favoriteCount}}</p>
     {{else}}
-      <a href="/favorites/add/{{recipe._id}}"><img class="fav-icon" src="/images/empty-heart-icon.png" alt="Fav logo" /></a>
+      <a href="/favorites/add/{{recipe._id}}{{_id}}"><img class="fav-icon" src="/images/empty-heart-icon.png" alt="Fav logo" /></a>
+      <p class="fav-count-empty">{{favoriteCount}}</p>
     {{/if}}
   </div>
   <ul class="recipe-summary">

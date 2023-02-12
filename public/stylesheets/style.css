@@ -361,6 +361,10 @@ text-align: center;
   padding: 10px 20px;
 }
 
+.option-buttons {
+  height: 20px;
+}
+
 .otherUser {
   position: absolute;
   top: 180px;

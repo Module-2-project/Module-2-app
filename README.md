@@ -54,7 +54,7 @@ If not logged in:
 - User can login
 - User can access all recipes stored in the DB but can only see a summary
 - User can get a random recipe suggestion, again only the summary
-- If user tries to access a ptotected route, he/she will be redirected to the sign up page
+- If user tries to access a protected route, he/she will be redirected to the sign up page
 
 If logged in, these are extra features:
 

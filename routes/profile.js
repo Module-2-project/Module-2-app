@@ -51,7 +51,8 @@ router.post("/edit", isLoggedIn, async (req, res, next) => {
 // @route   GET /profile/change-picture
 // @access  User
 router.get("/change-picture", isLoggedIn, cloudinary.single("profilePic"), (req, res, next) => {
-  const user = req.session.currentUser;res.render("profile/pictureEdit", {user});
+  const user = req.session.currentUser;
+  res.render("profile/pictureEdit", {user});
 });
 
 // @desc    Submits profile picture change to DB
@@ -61,6 +62,7 @@ router.post("/change-picture", isLoggedIn, cloudinary.single("profilePic"), asyn
   const user = req.session.currentUser;
   try {
     const updatedUser = await User.findByIdAndUpdate(user._id, {profilePic: req.file.path});
+    req.session.currentUser = updatedUser;
     res.redirect("/profile");
   } catch(error) {
     next(error);

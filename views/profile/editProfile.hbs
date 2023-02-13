@@ -4,7 +4,7 @@
 <div class="profile-intro">
   <img class="profile-avatar" src="{{user.profilePic}}" alt="Profile avatar" />
 </div>
-<form method="POST" action="/profile/edit">
+<form method="POST" action="/profile/edit" enctype="multipart/form-data">
   <input required="true" name="username" value="{{user.username}}"></input>
 <div class="profile-items"></div>
   <label>First name:</label>

@@ -5,13 +5,13 @@
   --padding: 10px 20px;
   --border-radius: 8px;
   --navbar-buttons: rgb(255, 172, 130);
-  /* --text-color :#333; */
-  /* --background-color : #eeece6; */
+  --text-color :#333; 
+  --background-color : #eeece6;
   /* --primary-color: #B85042; */
   --grey-color:  rgb(89,78,72);
   --Beige-color-: rgb(238,225,197);
   --Ocre-highlight: rgb(183,127,69);
-  /* --muted-color: #CBD18F; */
+  --muted-color: #CBD18F;
   --Granate-color: rgb(121,0,20);
   --Vino-color :rgb(57,0,14);
 
@@ -108,19 +108,22 @@ a {
 
 .title-random-recipe {
   text-align: center;
-  background-color: var(--primary-color);
   width: 105.5%;
-  color: var(--background-color);
+  color: rgba(100, 0, 0, 0.899); /* rgba(123, 0, 0, 0.899);*/
   padding: 10px 0;
   margin: 30px -10px;
   letter-spacing: 2px;
-  text-shadow: 0px 0px 4px rgb(155, 27, 48);
+  text-shadow: 0px 2px 2px #ff470476;
   background-image: linear-gradient(to right, var(--navbar-buttons), var(--accent-color), var(--navbar-buttons));
-  background-image: url('/images/Chef-proposal2.png');
+  background-image: url('/images/Chef-proposal11.png');
   background-repeat: no-repeat;
-  background-size: 390px 50px;
+  background-size: 390px 70px;
+  font-family: "Dancing Script";
+  font-size: 35px;
+  
 
 }
+
 .gradient {
 box-shadow: 0px 15px 25px #333333b8;
 }

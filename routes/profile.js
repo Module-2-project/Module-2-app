@@ -4,18 +4,14 @@ const User = require('../models/User');
 const {isLoggedIn} = require('../middlewares');
 const Recipe = require ('../models/Recipe');
 const Favorite = require("../models/Favorite");
+const cloudinary = require("../config/cloudinary.config");
 
 // @desc    Shows profile page
 // @route   GET /profile
 // @access  User
-router.get('/', isLoggedIn,  async (req,res,next) => {
+router.get('/', isLoggedIn, (req,res,next) => {
   const user = req.session.currentUser;
-  try {
-    const userDB = await User.findOne({_id: user._id})
-    res.render("profile/profile", {user: userDB});
-  } catch(error) {
-    next(error);
-  }
+  res.render("profile/profile", {user});
 });
 
 // @desc    Shows profile edit page
@@ -23,12 +19,7 @@ router.get('/', isLoggedIn,  async (req,res,next) => {
 // @access  User
 router.get("/edit", isLoggedIn, async (req, res, next) => {
   const user = req.session.currentUser;
-  try {
-    const userDB = await User.findOne({_id: user._id});
-    res.render("profile/editProfile", {user: userDB});
-  } catch(error) {
-    next(error);
-  }
+  res.render("profile/editProfile", {user});
 });
 
 // @desc    Send new data to profile
@@ -56,12 +47,43 @@ router.post("/edit", isLoggedIn, async (req, res, next) => {
   }
 });
 
+// @desc    Displays change profile pic form
+// @route   GET /profile/change-picture
+// @access  User
+router.get("/change-picture", isLoggedIn, cloudinary.single("profilePic"), (req, res, next) => {
+  const user = req.session.currentUser;
+  res.render("profile/pictureEdit", {user});
+});
+
+// @desc    Submits profile picture change to DB
+// @route   POST /profile/change-picture
+// @access  User
+router.post("/change-picture", isLoggedIn, cloudinary.single("profilePic"), async (req, res, next) => {
+  const user = req.session.currentUser;
+  try {
+    const updatedUser = await User.findByIdAndUpdate(user._id, {profilePic: req.file.path});
+    req.session.currentUser = updatedUser;
+    res.redirect("/profile");
+  } catch(error) {
+    next(error);
+  }
+});
+
+// @desc    Delete profile confirmation page
+// @route   POST /profile/confirmation
+// @access  User
+router.get("/confirmation", isLoggedIn, (req, res, next) => {
+  const user = req.session.currentUser;
+  res.render("profile/confirmation", {user});
+});
+
 // @desc    Delete profile
 // @route   POST /profile/delete
 // @access  User
 router.get("/delete", isLoggedIn, async (req, res, next) => {
   const user = req.session.currentUser;
   try {
+    await Favorite.deleteMany({favOwner: user._id});
     await User.findByIdAndDelete(user._id);
     res.redirect("/auth/signup");
   } catch(error) {
@@ -80,7 +102,8 @@ router.get("/:userId", isLoggedIn, async (req, res, next) => {
     const recipes = await Recipe.find({owner: otherUser._id});
     const promises = recipes.map(async recipe => {
       const favoriteCount = await Favorite.countDocuments({favRecipe: recipe._id});
-      return {...recipe.toObject(), favoriteCount};
+      const recipeInFavorites = await Favorite.find({favRecipe: recipe._id, favOwner: user._id});
+      return {...recipe.toObject(), favoriteCount, recipeInFavorites};
     });
     const recipesWithFavorites = await Promise.all(promises);
     // toString used because otherwise the validation will work even though they are the same values

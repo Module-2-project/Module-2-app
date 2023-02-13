@@ -9,8 +9,7 @@ const recipeSchema = new Schema({
   },
   image: {
     type: String,
-    required: [true, "Please add recipe image URL"],
-    unique: true,
+    required: [true, "Please add recipe's image"],
   },
   time: {
     type: Number,

@@ -6,6 +6,7 @@ const Recipe = require("../models/Recipe");
 const Review = require("../models/Review");
 const Favorite = require("../models/Favorite");
 const {isLoggedIn} = require('../middlewares');
+const cloudinary = require("../config/cloudinary.config");
 
 // @desc    Displays search form for recipes
 // @route   GET /recipe/search
@@ -40,14 +41,18 @@ router.get("/search-results", async (req, res, next) => {
   if (sortBy === "timeAsc") sort.time = 1;
   if (sortBy === "timeDesc") sort.time = -1;
   try {
-    const userDB = await User.findById(user._id);
     const recipes = await Recipe.find(query).sort(sort);
     const promises = recipes.map(async recipe => {
-    const favoriteCount = await Favorite.countDocuments({favRecipe: recipe._id});
-    return {...recipe.toObject(), favoriteCount};
+      const favoriteCount = await Favorite.countDocuments({favRecipe: recipe._id});
+      if (user) {
+        const recipeInFavorites = await Favorite.find({favRecipe: recipe._id, favOwner: user._id});
+        return {...recipe.toObject(), favoriteCount, recipeInFavorites};
+      } else {
+        return {...recipe.toObject(), favoriteCount};
+      }
     });
-      const recipesWithFavorites = await Promise.all(promises);
-      res.render("recipe/searchResults", {recipe: recipesWithFavorites, user: userDB});
+    const recipesWithFavorites = await Promise.all(promises);
+    res.render("recipe/searchResults", {recipe: recipesWithFavorites, user});
   } catch (error) {
     next(error);
   }
@@ -71,7 +76,12 @@ router.get("/all", async (req, res, next) => {
     const recipes = await Recipe.find({}).sort(sort);
     const promises = recipes.map(async recipe => {
       const favoriteCount = await Favorite.countDocuments({favRecipe: recipe._id});
-      return {...recipe.toObject(), favoriteCount};
+      if (user) {
+        const recipeInFavorites = await Favorite.find({favRecipe: recipe._id, favOwner: user._id});
+        return {...recipe.toObject(), favoriteCount, recipeInFavorites};
+      } else {
+        return {...recipe.toObject(), favoriteCount};
+      }
     });
     const recipesWithFavorites = await Promise.all(promises);
     res.render("recipe/searchResults", {recipe: recipesWithFavorites, user});
@@ -90,7 +100,14 @@ router.get("/random", async (req, res, next) => {
     const randomIndex = Math.floor(Math.random() * count);
     const randomRecipe = await Recipe.findOne().skip(randomIndex);
     const favoriteCount = await Favorite.countDocuments({favRecipe: randomRecipe._id});
-    res.render("recipe/randomRecipe", {recipe: randomRecipe, user, favoriteCount});
+    if (user) {
+      const recipeInFavorites = await Favorite.find({favRecipe: randomRecipe._id, favOwner: user._id});
+      const recipe = {...randomRecipe.toObject(), favoriteCount, recipeInFavorites};
+      res.render("recipe/randomRecipe", {recipe, user});
+    } else {
+      const recipe = {...randomRecipe.toObject(), favoriteCount};
+      res.render("recipe/randomRecipe", {recipe, user});
+    }
   } catch(error) {
     next(error);
   }
@@ -107,17 +124,17 @@ router.get("/new", isLoggedIn, (req, res, next) => {
 // @desc    Sends new recipe form
 // @route   POST /recipe/new
 // @access  User
-router.post("/new", isLoggedIn, async (req, res, next) => {
-  const { name, image, time, cuisine, kcal, spices, lactose, gluten, meat, level, pax, ingredients, steps } = req.body;
+router.post("/new", isLoggedIn, cloudinary.single("image"), async (req, res, next) => {
+  const { name, time, cuisine, kcal, spices, lactose, gluten, meat, level, pax, ingredients, steps } = req.body;
   const user = req.session.currentUser;
   // regex to make sure the ingredients and steps strings start by a letter or a number
   if (!/^[0-9a-zA-Z].*/.test(ingredients) || !/^[0-9a-zA-Z].*/.test(steps)) {
-    res.render("recipe/newRecipe", {error: "You need to add ingredients and steps."});
+    res.render("recipe/newRecipe", {error: "You need to add ingredients and steps."}, user);
     return;
   }
   try {
     const owner = await User.findOne({_id: user._id});
-    const newRecipe = await Recipe.create({ name, image, time, cuisine, kcal, spices, lactose, gluten, meat, level, pax, ingredients, steps, owner});
+    const newRecipe = await Recipe.create({ name, image: req.file.path, time, cuisine, kcal, spices, lactose, gluten, meat, level, pax, ingredients, steps, owner});
     res.redirect(`/recipe/${newRecipe._id}`);
   } catch(error) {
     next(error);
@@ -139,14 +156,14 @@ router.get("/my-recipes", isLoggedIn, async (req, res, next) => {
   if (sortBy === "timeAsc") sort.time = 1;
   if (sortBy === "timeDesc") sort.time = -1;
   try {
-    const userDB = await User.findById(user._id);
     const recipes = await Recipe.find({owner: user._id}).sort(sort);
     const promises = recipes.map(async recipe => {
       const favoriteCount = await Favorite.countDocuments({favRecipe: recipe._id});
-      return {...recipe.toObject(), favoriteCount};
+      const recipeInFavorites = await Favorite.find({favRecipe: recipe._id, favOwner: user._id});
+      return {...recipe.toObject(), favoriteCount, recipeInFavorites};
     });
     const recipesWithFavorites = await Promise.all(promises);
-    res.render("recipe/myRecipes", {recipe: recipesWithFavorites, user: userDB});
+    res.render("recipe/myRecipes", {recipe: recipesWithFavorites, user});
   } catch(error) {
     next(error);
   }
@@ -156,15 +173,16 @@ router.get("/my-recipes", isLoggedIn, async (req, res, next) => {
 // @route   GET /recipe/:recipeId
 // @access  User
 router.get("/:recipeId", isLoggedIn, async (req, res, next) => {
-  const { recipeId } = req.params;
+  const {recipeId} = req.params;
   const user = req.session.currentUser;
   try {
-    const userDB = await User.findById(user._id);
     const recipe = await Recipe.findById(recipeId);
-    const reviews = await Review.find({ recipeRated: recipe._id });
-    const recipeInFavorites = await Favorite.find({ favRecipe: recipeId, favOwner: userDB._id });
-    const favoriteCount = await Favorite.countDocuments({favRecipe: recipeId});
-    res.render("recipe/recipeDetail", {recipe, user: userDB, review: reviews, recipeInFavorites, favoriteCount});
+    const reviews = await Review.find({recipeRated: recipe._id});
+    const favoriteCount = await Favorite.countDocuments({favRecipe: recipe._id});
+    const recipeInFavorites = await Favorite.find({favRecipe: recipe._id, favOwner: user._id});
+    const recipeViewed = {...recipe.toObject(), favoriteCount, recipeInFavorites};
+    res.render("recipe/recipeDetail", {recipe: recipeViewed, user, review: reviews});
+    console.log(recipeViewed);
   } catch (error) {
     next(error);
   }
@@ -179,8 +197,7 @@ router.get("/edit/:recipeId", isLoggedIn, async (req, res, next) => {
   const user = req.session.currentUser;
   try {
     const recipe = await Recipe.findById(recipeId);
-    const userDB = await User.findById(user._id);
-    res.render("recipe/editRecipe", {recipe, user: userDB});
+    res.render("recipe/editRecipe", {recipe, user});
   } catch(error) {
     next(error);
   }
@@ -189,16 +206,16 @@ router.get("/edit/:recipeId", isLoggedIn, async (req, res, next) => {
 // @desc    Sends edit recipe form data
 // @route   POST /recipe/edit/:recipeId
 // @access  User
-router.post("/edit/:recipeId", isLoggedIn, async (req, res, next) => {
-  const {recipeId} = req.params;
+router.post("/edit/:recipeId", cloudinary.single("image"), isLoggedIn, async (req, res, next) => {
   const user = req.session.currentUser;
-  const {name, image, time, cuisine, kcal, spices, lactose, gluten, meat, level, pax, ingredients, steps, owner} = req.body;
+  const {recipeId} = req.params;
+  const {name, time, cuisine, kcal, spices, lactose, gluten, meat, level, pax, ingredients, steps, owner} = req.body;
   // regex to make sure the ingredients and steps strings start by a letter or a number
   if (!/^[0-9a-zA-Z].*/.test(ingredients) || !/^[0-9a-zA-Z].*/.test(steps)) {
     return next(new Error("You need to add ingredients and steps."));
   }
   try {
-    await Recipe.findByIdAndUpdate(recipeId, {name, image, time, cuisine, kcal, spices, lactose, gluten, meat, level, pax, ingredients, steps, owner}, {new: true});
+    await Recipe.findByIdAndUpdate(recipeId, {name, image: req.file.path, time, cuisine, kcal, spices, lactose, gluten, meat, level, pax, ingredients, steps, owner}, {new: true});
     res.redirect(`/recipe/${recipeId}`);
   } catch(error) {
     next(error);

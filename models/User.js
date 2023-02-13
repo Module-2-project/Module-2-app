@@ -2,6 +2,10 @@ const { Schema, model } = require('mongoose');
  
 const userSchema = new Schema(
   {
+    profilePic: {
+      type: String,
+      required: [true, "Please select a profile picture or avatar."]
+    },
     username: {
       type: String,
       trim: true,

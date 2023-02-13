@@ -12,8 +12,7 @@ const {isLoggedIn} = require('../middlewares');
 router.get("/", isLoggedIn, async (req, res, next) => {
   const user = req.session.currentUser;
   try {
-    const userDB = await User.findById(user._id);
-    const favorites = await Favorite.find({favOwner: userDB._id});
+    const favorites = await Favorite.find({favOwner: user._id});
     const favIds = favorites.map(favorite => favorite.favRecipe);
     const recipePromises = [];
     for (let i=0; i<favIds.length; i++) {
@@ -22,10 +21,11 @@ router.get("/", isLoggedIn, async (req, res, next) => {
     const recipes = await Promise.all(recipePromises);
     const promises = recipes.map(async recipe => {
       const favoriteCount = await Favorite.countDocuments({favRecipe: recipe._id});
-      return {...recipe.toObject(), favoriteCount};
+      const recipeInFavorites = await Favorite.find({favRecipe: recipe._id, favOwner: user._id});
+      return {...recipe.toObject(), favoriteCount, recipeInFavorites};
     });
     const recipesWithFavorites = await Promise.all(promises);
-    res.render("favorite/myFavorites", {user: userDB, recipe: recipesWithFavorites});
+    res.render("favorite/myFavorites", {user, recipe: recipesWithFavorites});
   } catch (error) {
     next(error);
   }
@@ -39,9 +39,14 @@ router.get("/add/:recipeId", isLoggedIn, async (req, res, next) => {
   const user = req.session.currentUser;
   const {recipeId} = req.params;
   try {
-    const userDB = await User.findById(user._id);
-    await Favorite.create({favRecipe: recipeId, favOwner: userDB._id});
-    res.redirect("back");
+    const favCheck = await Favorite.find({favRecipe: recipeId, favOwner: user._id});
+    if (favCheck.length !== 0) {
+      res.redirect("/favorites");
+      return;
+    } else {
+      await Favorite.create({favRecipe: recipeId, favOwner: user._id});
+      res.redirect("back");
+    }
   } catch(error) {
     next(error);
   }
@@ -54,9 +59,13 @@ router.get("/delete/:recipeId", isLoggedIn, async (req, res, next) => {
   const user = req.session.currentUser;
   const {recipeId} = req.params;
   try {
-    const userDB = await User.findById(user._id);
-    await Favorite.deleteOne({favRecipe: recipeId, favOwner: userDB._id});
-    res.redirect("back");
+    const favCheck = await Favorite.find({favRecipe: recipeId, favOwner: user._id});
+    if (favCheck.length === 0) {
+      res.redirect("favorites");
+    } else {
+      await Favorite.findOneAndDelete({favRecipe: recipeId, favOwner: user._id});
+      res.redirect("back");
+    }
   } catch(error) {
     next(error);
   }

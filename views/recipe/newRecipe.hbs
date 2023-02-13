@@ -2,11 +2,11 @@
 <h2 class="titles">Add recipe</h2>
 
 
-<form method="POST" action="/recipe/new">
+<form method="POST" action="/recipe/new" enctype="multipart/form-data">
   <label>Dish name:</label>
   <input required="true" type="text" name="name" placeholder="Hummus"/>
-  <label>Image URL:</label>
-  <input required="true" type="text" name="image"/>
+  <label>Image:</label>
+  <input required="true" type="file" name="image"/>
   <label>Time required in minutes:</label>
   <input required="true" type="number" name="time" placeholder="25" />
   <label>Cuisine type:</label>

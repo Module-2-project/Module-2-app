@@ -1,7 +1,9 @@
 <h2 class="titles">Create your account</h2>
 
 <div>
-  <form action="/auth/signup" method="POST">
+  <form action="/auth/signup" method="POST" enctype="multipart/form-data">
+    <label>Profile picture:</label>
+    <input required="true" type="file" name="profilePic"/>
     <label>Username:</label>
     <input type="text" name="username" placeholder="JohnD69" />
     <label>First Name:</label>

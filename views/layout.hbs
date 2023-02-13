@@ -14,10 +14,16 @@
   <img class="folio-icon" src="/images/app-logo.png" alt="FoodFolio icon">
   <header class="top-navbar">
     {{#if user}}
-    <div class="signed-in-nav">
-      <a href="/recipe/new"><img class="home-page-icons" src="/images/add-icon.png" alt="Add icon" /></a>
-      <a href="/recipe/all"><img class="home-page-icons" src="/images/chef-hat.png" alt="All recipes" /></a>
-    </div>
+      {{#eq user.username "admin"}}
+        <div class="signed-in-nav">
+          <a href="/review/all"><img class="home-page-icons" src="/images/review.png" alt="Review logo" /></a>
+        </div>
+      {{else}}
+        <div class="signed-in-nav">
+          <a href="/recipe/new"><img class="home-page-icons" src="/images/add-icon.png" alt="Add icon" /></a>
+          <a href="/recipe/all"><img class="home-page-icons" src="/images/chef-hat.png" alt="All recipes" /></a>
+        </div>
+      {{/eq}}
     {{else}}
     {{/if}}
   </header>
@@ -28,15 +34,21 @@
     <nav>
       <ul>
         {{#if user}}
-        <li class="home-icon"><a href="/"><img src="/images/home-icon.png"></a></li>
-        <li><a href="/recipe/random"><img src="/images/question-icon-box.png"></a></li>
-        <li><a href="/recipe/search"><img src="/images/search-icon.png"></a></li>
-        <li><a href="/favorites"><img src="/images/heart-icon-navbar.png"></a></li>
-        <li><a href="/profile"><img src="/images/chef-icon.png"></a></li>
+        {{#eq user.username "admin"}}
+          <li class="home-icon"><a href="/"><img src="/images/home-icon.png"></a></li>
+          <li><a href="/recipe/search"><img src="/images/search-icon.png"></a></li>
+          <li><a href="/profile"><img src="/images/chef-icon.png"></a></li>
         {{else}}
-        <li class="home-icon"><a href="/"><img src="/images/home-icon.png"></a></li>
-        <li><a href="/recipe/random"><img src="/images/question-icon-box.png"></a></li>
-        <li><a href="/recipe/search"><img src="/images/search-icon.png"></a></li>
+          <li class="home-icon"><a href="/"><img src="/images/home-icon.png"></a></li>
+          <li><a href="/recipe/random"><img src="/images/question-icon-box.png"></a></li>
+          <li><a href="/recipe/search"><img src="/images/search-icon.png"></a></li>
+          <li><a href="/favorites"><img src="/images/heart-icon-navbar.png"></a></li>
+          <li><a href="/profile"><img src="/images/chef-icon.png"></a></li>
+        {{/eq}}
+        {{else}}
+          <li class="home-icon"><a href="/"><img src="/images/home-icon.png"></a></li>
+          <li><a href="/recipe/random"><img src="/images/question-icon-box.png"></a></li>
+          <li><a href="/recipe/search"><img src="/images/search-icon.png"></a></li>
         {{/if}}
       </ul>
     </nav>

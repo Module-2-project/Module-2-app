@@ -51,7 +51,7 @@ nav ul {
 }
 
 nav ul li a img {
-  width: calc(60% - var(--margin-gap) * 4 / 5);
+  width: calc(55% - var(--margin-gap) * 4 / 5);
 }
 
 .home-icon {
@@ -142,6 +142,12 @@ label {
 }
 
 /* home page */
+
+.admin-phrase {
+font-weight: bold;
+margin-top: 450px;
+text-align: center;
+}
 
 .home-title {
   position: absolute;
@@ -308,9 +314,9 @@ label {
 .profile-avatar {
   margin-top: 30px;
   background-color:white;
-  border-radius: 30%;
-  width: 120px;
-  object-fit:scale-down;
+  border-radius: 15%;
+  width: 100px;
+  max-height: 140px;
   box-shadow: 2px 2px 8px var(--text-color);
 }
 
@@ -354,6 +360,10 @@ label {
   padding: 10px 20px;
 }
 
+.option-buttons {
+  height: 20px;
+}
+
 .otherUser {
   position: absolute;
   top: 180px;
@@ -375,7 +385,9 @@ label {
 
 .recipe-options {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 .recipe-options {
   gap: var(--margin-gap);
@@ -450,9 +462,8 @@ label {
   top: -247px;
 }
 
-.add-favorite > p,
-.add-favorite-card > p {
-  color: red;
+.fav-count {
+  color: var(--text-color);
 }
 
 .fav-icon {
@@ -478,5 +489,23 @@ label {
 @media (orientation: landscape) {
   nav ul li a img {
     width: calc(35% - var(--margin-gap) * 4 / 5);
+  }
+
+  .catch-phrase {
+    font-size: 30px;
+    max-width: 900px;
+    max-height: 140px;
+    margin-top: 120px;
+  }
+  
+  .recipe-images {
+    width: 50%;
+  }
+
+  .add-favorite,
+  .add-favorite-card {
+    position: relative;
+    top: -250;
+    left: 215px;
   }
 }

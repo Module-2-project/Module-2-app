@@ -5,6 +5,7 @@ const Recipe = require("../models/Recipe");
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 const {isLoggedIn} = require('../middlewares');
+const cloudinary = require("../config/cloudinary.config");
 
 // @desc    Displays form view to sign up
 // @route   GET /auth/signup
@@ -17,7 +18,7 @@ router.get('/signup', async (req, res, next) => {
 // @desc    Sends user auth data to database to create a new user
 // @route   POST /auth/signup
 // @access  Public
-router.post('/signup', async (req, res, next) => {
+router.post('/signup', cloudinary.single("profilePic"), async (req, res, next) => {
   const {username, firstName , lastName, email, password, cookingLevel} = req.body;
   if (!username || !firstName || !lastName || !email || !password || !cookingLevel) {
     res.render('auth/signup', {error: 'Please fill all data to sign up.'});
@@ -41,7 +42,7 @@ router.post('/signup', async (req, res, next) => {
   try {
     const salt = bcrypt.genSaltSync(saltRounds);
     const hashedPassword = bcrypt.hashSync(password, salt);
-    await User.create({username, firstName, lastName, email, hashedPassword, cookingLevel});
+    await User.create({profilePic: req.file.path, username, firstName, lastName, email, hashedPassword, cookingLevel});
     res.redirect('/auth/login');
   } catch (error) { 
     next (error);
@@ -87,14 +88,9 @@ router.post('/login', async (req, res, next) => {
 // @desc    Shows reset password page
 // @route   GET /auth/password-reset
 // @access  User
-router.get("/password-reset", isLoggedIn, async (req, res, next) => {
+router.get("/password-reset", isLoggedIn, (req, res, next) => {
   const user = req.session.currentUser;
-  try {
-    const userDB = await User.findOne({_id: user._id});
-    res.render("auth/passwordReset", {user: userDB});
-  } catch(error) {
-    next(error);
-  }
+  res.render("auth/passwordReset", {user});
 });
 
 // @desc    Resets password 
@@ -146,5 +142,4 @@ router.get('/logout', isLoggedIn, (req, res, next) => {
   });
 })
 
-module.exports = router;
 module.exports = router;

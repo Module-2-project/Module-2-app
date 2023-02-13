@@ -2,10 +2,9 @@
 <h2 class="titles">Edit profile</h2>
 
 <div class="profile-intro">
-  <img class="profile-avatar" src="/images/chef-icon.png" alt="Profile avatar" />
+  <img class="profile-avatar" src="{{user.profilePic}}" alt="Profile avatar" />
 </div>
-<form method="POST" action="/profile/edit">
-  <label>Username:</label>
+<form method="POST" action="/profile/edit" enctype="multipart/form-data">
   <input required="true" name="username" value="{{user.username}}"></input>
 <div class="profile-items"></div>
   <label>First name:</label>
@@ -30,5 +29,5 @@
 {{#if error}}
   <p style="color:rgb(218, 90, 90)">{{ error }}</p>
 {{/if}}
-<button type="submit">Save changes</button>
-<a class="anchors" href="/profile/delete">Delete account</a>
+<button type="submit"><img class="option-buttons" src="/images/save.png" alt="Save button"> Save changes</button>
+<a class="anchors" href="/profile/confirmation"><img class="option-buttons" src="/images/delete.png" alt="Delete button"> Delete account</a>

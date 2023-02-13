@@ -317,7 +317,6 @@ text-align: center;
   border-radius: 15%;
   width: 100px;
   max-height: 140px;
-  object-fit: scale-down;
   box-shadow: 2px 2px 8px var(--text-color);
 }
 
@@ -490,5 +489,23 @@ text-align: center;
 @media (orientation: landscape) {
   nav ul li a img {
     width: calc(35% - var(--margin-gap) * 4 / 5);
+  }
+
+  .catch-phrase {
+    font-size: 30px;
+    max-width: 900px;
+    max-height: 140px;
+    margin-top: 120px;
+  }
+  
+  .recipe-images {
+    width: 50%;
+  }
+
+  .add-favorite,
+  .add-favorite-card {
+    position: relative;
+    top: -250;
+    left: 215px;
   }
 }

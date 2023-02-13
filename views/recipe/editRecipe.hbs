@@ -1,11 +1,11 @@
 <button onclick="history.back()"><img class="arrow-back" src="/images/back-arrow.png" /> Go back</button>
 <h2 class="titles">Edit recipe</h2>
 
-<form method="POST" action="/recipe/edit/{{recipe._id}}">
+<form method="POST" action="/recipe/edit/{{recipe._id}}" enctype="multipart/form-data">
   <label>Dish name:</label>
   <input required="true" type="text" name="name" value="{{recipe.name}}" />
-  <label>Image URL:</label>
-  <input required="true" type="text" name="image" value="{{recipe.image}}"/>
+  <label>Image:</label>
+  <input required="true" type="file" name="image" />
   <label>Time required in minutes:</label>
   <input required="true" type="number" name="time" value="{{recipe.time}}" />
   <label>Cuisine type:</label>

@@ -6,6 +6,7 @@ const Recipe = require("../models/Recipe");
 const Review = require("../models/Review");
 const Favorite = require("../models/Favorite");
 const {isLoggedIn} = require('../middlewares');
+const cloudinary = require("../config/cloudinary.config");
 
 // @desc    Displays search form for recipes
 // @route   GET /recipe/search
@@ -110,8 +111,8 @@ router.get("/new", isLoggedIn, (req, res, next) => {
 // @desc    Sends new recipe form
 // @route   POST /recipe/new
 // @access  User
-router.post("/new", isLoggedIn, async (req, res, next) => {
-  const { name, image, time, cuisine, kcal, spices, lactose, gluten, meat, level, pax, ingredients, steps } = req.body;
+router.post("/new", isLoggedIn, cloudinary.single("image"), async (req, res, next) => {
+  const { name, time, cuisine, kcal, spices, lactose, gluten, meat, level, pax, ingredients, steps } = req.body;
   const user = req.session.currentUser;
   // regex to make sure the ingredients and steps strings start by a letter or a number
   if (!/^[0-9a-zA-Z].*/.test(ingredients) || !/^[0-9a-zA-Z].*/.test(steps)) {
@@ -120,7 +121,7 @@ router.post("/new", isLoggedIn, async (req, res, next) => {
   }
   try {
     const owner = await User.findOne({_id: user._id});
-    const newRecipe = await Recipe.create({ name, image, time, cuisine, kcal, spices, lactose, gluten, meat, level, pax, ingredients, steps, owner});
+    const newRecipe = await Recipe.create({ name, image: req.file.path, time, cuisine, kcal, spices, lactose, gluten, meat, level, pax, ingredients, steps, owner});
     res.redirect(`/recipe/${newRecipe._id}`);
   } catch(error) {
     next(error);
@@ -192,16 +193,16 @@ router.get("/edit/:recipeId", isLoggedIn, async (req, res, next) => {
 // @desc    Sends edit recipe form data
 // @route   POST /recipe/edit/:recipeId
 // @access  User
-router.post("/edit/:recipeId", isLoggedIn, async (req, res, next) => {
+router.post("/edit/:recipeId", cloudinary.single("image"), isLoggedIn, async (req, res, next) => {
   const user = req.session.currentUser;
   const {recipeId} = req.params;
-  const {name, image, time, cuisine, kcal, spices, lactose, gluten, meat, level, pax, ingredients, steps, owner} = req.body;
+  const {name, time, cuisine, kcal, spices, lactose, gluten, meat, level, pax, ingredients, steps, owner} = req.body;
   // regex to make sure the ingredients and steps strings start by a letter or a number
   if (!/^[0-9a-zA-Z].*/.test(ingredients) || !/^[0-9a-zA-Z].*/.test(steps)) {
     return next(new Error("You need to add ingredients and steps."));
   }
   try {
-    await Recipe.findByIdAndUpdate(recipeId, {name, image, time, cuisine, kcal, spices, lactose, gluten, meat, level, pax, ingredients, steps, owner}, {new: true});
+    await Recipe.findByIdAndUpdate(recipeId, {name, image: req.file.path, time, cuisine, kcal, spices, lactose, gluten, meat, level, pax, ingredients, steps, owner}, {new: true});
     res.redirect(`/recipe/${recipeId}`);
   } catch(error) {
     next(error);

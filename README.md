@@ -15,6 +15,9 @@ PORT = 3000;
 MONGO_URL = "mongodb+srv://admin:admin@cluster0.1qqscwt.mongodb.net/module2DB";
 SESSION_SECRET = "Ir0nH4cK";
 NODE_ENV = "development";
+CLOUDINARY_NAME = "driiciufk";
+CLOUDINARY_KEY = "367769423522417";
+CLOUDINARY_SECRET = "QKaZCXbIhzK1iTk5r9UJ4WXoqXU";
 ```
 
 Then, run:
@@ -22,6 +25,7 @@ Then, run:
 ```bash
 npm install
 npm i lodash
+npm install cloudinary multer multer-storage-cloudinary
 ```
 
 To start the project run:
@@ -310,7 +314,7 @@ const favoriteSchema = new Schema({
 | ------------------------ | ------ | --------------------------- | --------- | ---------------------------------------------------------------------------------------------------------- | ------------------------- |
 | Home                     | GET    | /                           | No        |                                                                                                            |                           |
 | Login                    | GET    | /auth/login                 | No        |                                                                                                            |                           |
-| Login                    | POST   | /auth/login                 | No        | { email, password }                                                                                        | index                     |
+| Login                    | POST   | /auth/login                 | No        | { email, password }                                                                                        | /                         |
 | Signup                   | GET    | /auth/signup                | No        |                                                                                                            |                           |
 | Signup                   | POST   | /auth/signup                | No        | { username, firstName, lastName, email, password, cookingLevel }                                           | /auth/login               |
 | Logout                   | GET    | /auth/logout                | Yes       |                                                                                                            | /auth/login               |
@@ -329,7 +333,7 @@ const favoriteSchema = new Schema({
 | Edit profile             | POST   | /profile/edit               | Yes       | { username, firstName, lastName, email, cookingLevel }                                                     | /profile                  |
 | Edit picture             | GET    | /profile/change-picture     | Yes       |                                                                                                            |                           |
 | Edit picture             | POST   | /profile/change-picture     | Yes       |                                                                                                            | /profile                  |
-| Confirm profile deletion | GET    | /profile/confirmation       | Yes       |                                                                                                            |                           |
+| Confirm profile deletion | GET    | /profile/confirmation       | Yes       |                                                                                                            | /profile/delete           |
 | Delete profile           | GET    | /profile/delete             | Yes       |                                                                                                            | /auth/signup              |
 | Add review               | GET    | /review/new/:recipeId       | Yes       |                                                                                                            |                           |
 | Add review               | POST   | /review/new/:recipeId       | Yes       | { title, comment, stars, reviewerName }                                                                    | /recipe/${recipeId}       |

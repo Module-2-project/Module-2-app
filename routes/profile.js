@@ -67,6 +67,14 @@ router.post("/change-picture", isLoggedIn, cloudinary.single("profilePic"), asyn
   }
 });
 
+// @desc    Delete profile confirmation page
+// @route   POST /profile/confirmation
+// @access  User
+router.get("/confirmation", isLoggedIn, (req, res, next) => {
+  const user = req.session.currentUser;
+  res.render("profile/confirmation", {user});
+});
+
 // @desc    Delete profile
 // @route   POST /profile/delete
 // @access  User

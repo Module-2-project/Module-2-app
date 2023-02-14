@@ -5,7 +5,7 @@
   --margin-gap: 10px;
   --padding: 10px 20px;
   --border-radius: 8px;
-  --navbar-buttons: rgb(255, 172, 130);
+  --navbar-buttons: rgb(255, 155, 90);
   --text-color :#333;
   --background-color : #eeece6;
   --accent-color: #FC766AFF;
@@ -14,9 +14,9 @@
   --grey-color: rgb(89, 78, 72);
   --Beige-color-: rgb(238, 225, 197);
   --title-color: rgba(100, 0, 0, 0.899);
-      --Ocre-highlight: rgb(183, 127, 69);
-      --Granate-color: rgb(121, 0, 20);
-      --Vino-color: rgb(57, 0, 14);
+  --Ocre-highlight: rgb(183, 127, 69);
+  --Granate-color: rgb(121, 0, 20);
+  --Vino-color: rgb(57, 0, 14);
 }
 
 body {
@@ -25,7 +25,7 @@ body {
   font-size: 16px;
   font-family: "Montserrat", Lucida, Helvetica, Arial, sans-serif;
   /* margin for navbar not to cover text */
-  margin-bottom: 120px;
+  margin-bottom: 100px;
   background-color: var(--background-color);
   color: var(--text-color);
 }
@@ -74,23 +74,30 @@ button {
   color: var(--text-color);
 }
 
+button,
+.home-page-icons,
+.recipe-button,
+.anchors {
+  background-image: radial-gradient(circle, #FFCC98 30%, #ffb162);
+}
+
+
 button {
   border: none;
-  background-color: var(--muted-color);
   border-radius: var(--border-radius);
   padding: var(--padding);
 }
 
 #back-btn {
-  background-image: linear-gradient(to right, #FFCC98 30%, #ffb162);
   margin-top: -2px;
   margin-left: -5px;
   border: 1px solid rgba(0, 0, 0, 0.146);
+  background-image: linear-gradient(to right, #FFCC98 30%, #ffb162);
   box-shadow: 0px 1px 2px #3333337c;
 }
 
 a {
-  color: var(--background-color);
+  color: var(--Granate-color);
   text-decoration: none;
 }
 
@@ -216,7 +223,6 @@ text-align: center;
   width: 30px;
   padding: 5px 5px;
   border-radius: 100%;
-  background-image: radial-gradient(circle, #FFCC98 30%, #ffb162);
   background-color: var(--navbar-buttons);
   box-shadow: 0px 1px 2px #333;
   border: 1px solid rgba(0, 0, 0, 0.228);
@@ -309,7 +315,6 @@ text-align: center;
 }
 
 .catch-phrase q {
-  /* text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.229); */
   font-weight: 200;
   margin: 5px 0 5px -10px;
 }
@@ -331,14 +336,13 @@ text-align: center;
 }
 
 .profile-intro-other {
-  margin-top: 70px;
   display: flex;
   justify-content: center;
 }
 
 .arrow-deco {
   width: 50%;
-  margin-top: 15px;
+  margin-top: 10px;
 }
 
 .profile-avatar {
@@ -380,12 +384,9 @@ text-align: center;
 }
 
 .anchors {
-  font-size: 14px;
-  width: fit-content;
-  display: inline-block;
   align-items: center;
   justify-content: center;
-  background-color: #FFCC98;
+  background-color: var(--muted-color);
   box-shadow: 0px 0px 20px #FFF7D9;
   background-color: var(--muted-color);
   color: var(--text-color);
@@ -398,8 +399,14 @@ text-align: center;
 }
 
 .otherUser {
-  position: absolute;
-  top: 180px;
+  text-align: center;
+  margin-bottom: -10px;
+}
+
+.other-user-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /* recipes */
@@ -459,10 +466,10 @@ text-align: center;
   align-items: center;
 }
 .recipe-button {
-  background-color: var(--primary-color);
-  color: var(--background-color);
+  color: var(--text-color);
   border-radius: var(--border-radius);
   padding: var(--padding);
+  background-color: var(--navbar-buttons);
 }
 
 .cuisine {

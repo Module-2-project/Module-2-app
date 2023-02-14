@@ -99,12 +99,22 @@ a {
 
 .titles {
   text-align: center;
-  background-color: var(--primary-color);
   width: 105.5%;
   color: var(--background-color);
   padding: 10px 0;
-  margin: 30px -10px;
+  margin: 30px -10px 45px;
   letter-spacing: 2px;
+
+  color: rgba(100, 0, 0, 0.899);
+  text-shadow: 0px 2px 2px #ff470476;
+  background-image: linear-gradient(to right, var(--navbar-buttons), var(--accent-color), var(--navbar-buttons));
+  background-image: url('/images/Chef-proposal11.png');
+  background-repeat: no-repeat;
+  background-size: 390px 70px;
+  font-family: "Dancing Script";
+  font-size: 35px;
+  
+  box-shadow: 0px 1px 2px #3333337c;
   
 }
 

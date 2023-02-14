@@ -188,6 +188,9 @@ label {
 }
 
 .recipe-contain {
+  font-size: 15px;
+  padding-top: 8px;
+  padding-bottom: 8px;
   display: flex;
   flex-direction: column;
   align-items: left;

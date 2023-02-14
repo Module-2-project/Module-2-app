@@ -5,14 +5,14 @@ const User = require("../models/User");
 const catchPhrases = [
   "Thanks to Food Folio, we can finally get rid of grandma. Well done.",
   "All of my favourite recipes are always handy, no more cooking notes, farewell paper...",
-  "Food Folio is a step up in my cooking game. Don't waste time thinking about what to cook, just cook it.",
+  "Step up your cooking game. Don't waste time thinking about what to cook, just cook it.",
   "The dark fire will not avail you. Flame of Udun! Go back to the shadow. You Shall Not Pass!!!",
   "We finally have a way to store all of our family recipes and traditions thanks to Food Folio.",
   "Your cooking will become creative, engaging, purposeful and efficient. Give it a week... ",
   "If I could cook I'd definetely do it with Food Folio by my side.",
   "Food Folio is the artery through which the solutions of my cooking problems flow.",
-  "Knowing what to cook empowers you far beyond those who waste time just to find recipes.",
-  "No shame in admitting you don't know how to cook. The only shame is not using Food Folio to fix it.",
+  "Knowing what to cook empowers you, don't waste more time trying to find recipes.",
+  "No shame in admitting you don't know how to cook. The only shame is not using this app to fix it.",
   "Perfect place to keep all my recipes, no more time wasted searching through cooking notes.",
   "I totally recommend it. What a tool this app is NUTS!!!",
   "Eating is my favourite hobby and it's necessary, but cooking is an Art, be the artist.",
@@ -22,7 +22,7 @@ const catchPhrases = [
   "The secret ingredient for cooking used to be love, now it's Food Folio.",
   "It says only 5gr! Make it 20gr fam... Yoh! Where are my herbs at?!",
   "I cook with wine, sometimes I even add it to the food while cooking.",
-  "My one regret in life is that I'm not someone else.",
+  // "My one regret in life is that I'm not someone else.",
   "Like the rest of the important stuff in life... Just do it smarter, not harder",
   "Food Folio brings your kitchen to your fingertips...",
 ]
@@ -47,8 +47,8 @@ const catchAuthors = [
   "— Snoop Dogg",
   "— Woody Allen",
   "— Elon Musk",
+  // "— Tupac Shakur",
   "— Nicholas James Vujicic",
-  "— Tupac Shakur"
 ]
 function orderPhrase () { 
   return Math.floor(Math.random() * catchPhrases.length)

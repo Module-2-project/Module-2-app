@@ -3,7 +3,7 @@
   {{> authOptions}}
 {{/if}}
 
-<button onclick="history.back()"><img class="arrow-back" src="/images/back-arrow.png" /> Go back</button>
+<button  id="back-btn" onclick="history.back()"><img class="arrow-back" src="/images/back-arrow.png" /> Go back</button>
 <h2 class="titles">Search</h2>
 
 {{#if user}}
@@ -40,17 +40,17 @@
   <label>Does the recipe contain:</label>
   <div class="recipe-contain">
     <div class="element-contain">
-      <label>Lactose:</label>
+      <label>‣ Lactose:</label>
       <input type="radio" name="lactose" value="true" />Yes
       <input type="radio" name="lactose" value="false" />No
     </div>
     <div>
-      <label>Gluten:</label>
+      <label>‣ Gluten:</label>
       <input type="radio" name="gluten" value="true" />Yes
       <input type="radio" name="gluten" value="false" />No
     </div>
     <div>
-      <label>Meat:</label>
+      <label>‣ Meat:</label>
       <input type="radio" name="meat" value="true" />Yes
       <input type="radio" name="meat" value="false" />No
     </div>

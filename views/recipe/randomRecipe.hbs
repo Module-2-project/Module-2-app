@@ -3,8 +3,10 @@
     {{> authOptions}}
 {{/if}}
 
-<button onclick="history.back()"><img class="arrow-back" src="/images/back-arrow.png" /> Go back</button>
-<h2 class="titles">Chef's suggestion</h2>
+<button id="back-btn" onclick="history.back()"><img class="arrow-back" src="/images/back-arrow.png" /> Go back</button>
+<div class="gradient">
+    <h2 class="titles">Chef's suggestion</h2>
+</div>
 
 {{#if recipe}}
     {{> randomRecipe}}

@@ -8,12 +8,15 @@
   --navbar-buttons: rgb(255, 172, 130);
   --text-color :#333;
   --background-color : #eeece6;
-  --primary-color: #B85042;
-  --secondary-color:  #65b37d;
   --accent-color: #FC766AFF;
-  --highlight: #E3B448;
-  --muted-color: #CBD18F;
-  --extra-color: #ffb3007b;
+  --muted-color: #FFCC98;
+  /* added by Joandi */
+  --grey-color: rgb(89, 78, 72);
+  --Beige-color-: rgb(238, 225, 197);
+  --title-color: rgba(100, 0, 0, 0.899);
+      --Ocre-highlight: rgb(183, 127, 69);
+      --Granate-color: rgb(121, 0, 20);
+      --Vino-color: rgb(57, 0, 14);
 }
 
 body {
@@ -65,7 +68,8 @@ nav ul li a img {
 
 a,
 button {
-  font-family: 'Montserrat';font-size: 1rem;
+  font-family: 'Montserrat';
+  font-size: 1rem;
   text-align: center;
   color: var(--text-color);
 }
@@ -77,20 +81,41 @@ button {
   padding: var(--padding);
 }
 
+#back-btn {
+  background-image: linear-gradient(to right, #FFCC98 30%, #ffb162);
+  margin-top: -2px;
+  margin-left: -5px;
+  border: 1px solid rgba(0, 0, 0, 0.146);
+  box-shadow: 0px 1px 2px #3333337c;
+}
+
 a {
-  color: var(--primary-color);
+  color: var(--background-color);
   text-decoration: none;
 }
 
 .titles {
   text-align: center;
-  background-color: var(--primary-color);
   width: 105.5%;
-  color: var(--background-color);
   padding: 10px 0;
   margin: 30px -10px;
+  font-family: "Dancing Script";
+  font-size: 35px;
   letter-spacing: 2px;
-  color: var(--background-color);
+  color: var(--title-color);
+  text-shadow: 0px 2px 2px #ff470476;
+  border: 1px solid rgba(0, 0, 0, 0.037);
+  background-image: linear-gradient(to right, var(--navbar-buttons), var(--accent-color), var(--navbar-buttons));
+  background-image: url('/images/chef-proposal.png');
+  background-repeat: no-repeat;
+  background-size: 390px 70px;
+  box-shadow: 0px 1px 2px #3333337c;
+  margin-bottom: 35px;
+}
+
+.gradient {
+  background-color: var(--background-color);
+  box-shadow: 0px 15px 25px #333333b8;
 }
 
 .small-hr {
@@ -128,7 +153,7 @@ textarea {
 }
 
 label {
-  margin:10px 0;
+  margin: 10px 0;
 }
 
 .recipe-contain {
@@ -151,11 +176,17 @@ text-align: center;
 
 .home-title {
   position: absolute;
-  top: 160px;
-  font-size: 24px;
-  color: var(--background-color);
-  text-shadow: 1px 1px 3px grey;
+  top: 130px;
   font-family: "Lato";
+  font-family: "Dancing Script";
+  margin: 0 0 0 -10px;
+  font-size: 35px;
+  color: var(--text-color);
+  text-shadow: 0px 1px 1px rgb(62, 62, 62);
+  width: 390px;
+  background-image: linear-gradient(to right, rgba(153, 25, 51, 0.132), rgba(127, 56, 73, 0.108));
+  height: 52px;
+  text-indent: 8px;
 }
 
 .signed-in-nav,
@@ -181,16 +212,14 @@ text-align: center;
   text-underline-offset: 5px;
 }
 
-.home-title {
-  position: absolute;
-  top: 130px;
-}
-
 .home-page-icons {
   width: 30px;
+  padding: 5px 5px;
+  border-radius: 100%;
+  background-image: radial-gradient(circle, #FFCC98 30%, #ffb162);
   background-color: var(--navbar-buttons);
-  padding: var(--padding);
-  border-radius: var(--border-radius);
+  box-shadow: 0px 1px 2px #333;
+  border: 1px solid rgba(0, 0, 0, 0.228);
 }
 
 .recipeSlides {
@@ -267,7 +296,7 @@ text-align: center;
 
 .catch-phrase {
   display: flex;
-  font-size: 15px;
+  font-size: 14.5px;
   max-width: 370px;
   max-height: 140px;
   text-align: center;
@@ -280,12 +309,13 @@ text-align: center;
 }
 
 .catch-phrase q {
-  text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.229);
+  /* text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.229); */
   font-weight: 200;
+  margin: 5px 0 5px -10px;
 }
 
 .catch-phrase p span{
-  font-style:oblique;
+  font-style: oblique;
   font-size: 15px;
   font-weight: 200;
   font-family: 'Montserrat';
@@ -333,7 +363,7 @@ text-align: center;
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  gap: var(--margin-gap)
+  gap: var(--margin-gap);
 }
 
 .profile-divider {
@@ -345,15 +375,18 @@ text-align: center;
   display: flex;
   justify-content: center;
   margin-top: 15px;
-}
-
-.profile-anchors {
-  display: flex;
-  gap: 20px;
+  gap: 15px;
   flex-wrap: wrap;
 }
 
 .anchors {
+  font-size: 14px;
+  width: fit-content;
+  display: inline-block;
+  align-items: center;
+  justify-content: center;
+  background-color: #FFCC98;
+  box-shadow: 0px 0px 20px #FFF7D9;
   background-color: var(--muted-color);
   color: var(--text-color);
   border-radius: var(--border-radius);
@@ -388,8 +421,6 @@ text-align: center;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
-}
-.recipe-options {
   gap: var(--margin-gap);
   margin: 30px 0;
 }

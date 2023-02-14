@@ -298,6 +298,7 @@ label {
 /* Catch phrases */
 
 .phrase-container {
+  /* height: 155px; */
   display: flex;
   align-content: flex-end;
   margin-top: 480px;
@@ -308,17 +309,18 @@ label {
   position: relative;
   width: var(--width-hundred);
   margin-top: -20px;
+  height: 165px;
 }
 
 .catch-phrase {
   display: flex;
-  font-size: 15px;
+  font-size: 14.5px;
   max-width: 370px;
   max-height: 140px;
   text-align: center;
   margin-top: 35px;
-  margin-left: auto;
-  margin-right: auto;
+  margin-left: 10px;
+  margin-right: 10px;
   font-family:'Montserrat', Times, serif;
   font-style: italic;
   position: absolute;
@@ -327,6 +329,9 @@ label {
 .catch-phrase q {
   text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.229);
   font-weight: 200;
+  margin-left: -10px;
+  margin-bottom: 5px;
+  margin-top: 5px;
 }
 
 .catch-phrase p span{
@@ -334,6 +339,7 @@ label {
   font-size: 15px;
   font-weight: 200;
   font-family: 'Montserrat';
+  margin-right: 5px;
 }
 
 /*Profile page */

@@ -139,19 +139,16 @@ a {
   border: 1px solid rgba(0, 0, 0, 0.037);
   box-shadow: 0px 1px 2px #3333337c;
   
+  
 
 }
 
 .gradient {
+  background-color: var(--background-color);
 box-shadow: 0px 15px 25px #333333b8;
+
 }
 
-.gradient h2 {
-  /* background-image: linear-gradient(60deg, #E21143, #FFB03A); */
-  /* background-clip: text; */
-  color: linear-gradient(60deg, #E21143, #FFB03A);
-  
-}
 
 .small-hr {
   margin: 20px 60px;

@@ -84,9 +84,11 @@ button {
   /* background-image: linear-gradient(to right,rgb(254, 58, 58), rgba(232, 108, 105),rgb(250, 188, 182) ); */
   /* background-image: linear-gradient(to right,var(--muted-color), #e5ec98,rgba(213, 249, 214, 0.596)); */
    /* background-image: linear-gradient(to right,var(--background-color)5%,rgba(142, 183, 38, 0.996), rgba(208, 245, 116, 0.999),var(--background-color) ); */
-   background-image: linear-gradient(to right,#fdeab0bd , #fff4d5 );
-   box-shadow: 0px 3px 5px #333;
+   background-image: linear-gradient(to right,var(--navbar-buttons) 15%,rgb(255, 156, 138) );/*linear-gradient(to right,#fdeab0bd , #fff4d5 );*/
+   box-shadow: 0px 1px 2px #3333337c;
    margin-top: -2px;
+   margin-left: -5px;
+   border: 1px solid rgba(0, 0, 0, 0.146);
   
 }
 
@@ -112,6 +114,7 @@ a {
   color: rgba(100, 0, 0, 0.899); /* rgba(123, 0, 0, 0.899);*/
   padding: 10px 0;
   margin: 30px -10px;
+  margin-bottom: 30px;
   letter-spacing: 2px;
   text-shadow: 0px 2px 2px #ff470476;
   background-image: linear-gradient(to right, var(--navbar-buttons), var(--accent-color), var(--navbar-buttons));
@@ -233,9 +236,11 @@ label {
 
 .home-page-icons {
   width: 30px;
-  background-image: radial-gradient(circle, rgba(255, 127, 80, 0.751) 50%, rgb(255, 68, 0));
   padding: 5px 5px;
   border-radius: 100%;
+  background-image: radial-gradient(circle,var(--navbar-buttons) 20%,rgb(255, 156, 138) );
+  box-shadow: 0px 1px 2px #333;
+  border: 1px solid rgba(0, 0, 0, 0.228);
 }
 
 .recipeSlides {

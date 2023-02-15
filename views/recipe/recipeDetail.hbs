@@ -68,6 +68,9 @@
 {{#if error}}
   <p style="color:rgb(218, 90, 90)">{{ error }}</p>
 {{/if}}
+{{#eq user.username "admin"}}
+{{else}}
 <div class="recipe-options">
   <a class="recipe-button" href="/review/new/{{recipe._id}}">Add a review</a>
 </div>
+{{/eq}}

@@ -50,7 +50,7 @@ router.get("/new/:recipeId", isLoggedIn, async (req, res, next) => {
 // @access  User
 router.post("/new/:recipeId", isLoggedIn, async (req, res, next) => {
   const user = req.session.currentUser;
-  const {title, comment, stars, reviewerName, recipeName } = req.body;
+  const {title, comment, stars, reviewerName, recipeName} = req.body;
   const {recipeId} = req.params;
   try {
     const recipe = await Recipe.findOne({_id: recipeId});

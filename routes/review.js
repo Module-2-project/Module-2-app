@@ -67,7 +67,7 @@ router.post("/new/:recipeId", isLoggedIn, async (req, res, next) => {
 router.get("/all", isAdmin, async(req, res, next) => {
   const user = req.session.currentUser;
   try {
-    const allReviews = await Review.find();
+    const allReviews = await Review.find().populate("reviewer");;
     res.render("review/allReviews", {review: allReviews, user});
   } catch(error) {
     next(error);

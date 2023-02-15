@@ -4,8 +4,6 @@
 <form method="POST" action="/recipe/edit/{{recipe._id}}" enctype="multipart/form-data">
   <label>Dish name:</label>
   <input required="true" type="text" name="name" value="{{recipe.name}}" />
-  <label>Image:</label>
-  <input required="true" type="file" name="image" />
   <label>Time required in minutes:</label>
   <input required="true" type="number" name="time" value="{{recipe.time}}" />
   <label>Cuisine type:</label>

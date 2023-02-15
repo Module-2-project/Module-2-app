@@ -1,0 +1,11 @@
+<button id="back-btn" onclick="history.back()"><img class="arrow-back" src="/images/back-arrow.png" /> Go back</button>
+<h2 class="titles">Change recipe's image</h2>
+
+<form action="/recipe/change-picture/{{recipe._id}}" method="POST" enctype="multipart/form-data">
+  <label>New image:</label>
+  <input required="true" type="file" name="recipeImage" />
+  {{#if error}}
+    <p style="color: red;">{{error}}</p>
+  {{/if}}
+  <button type="submit"><img class="option-buttons" src="/images/save.png" alt="Save button"> Change image</button>
+</form>

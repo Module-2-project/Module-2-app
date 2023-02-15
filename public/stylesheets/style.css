@@ -522,9 +522,21 @@ text-align: center;
   margin: 10px 0;
 }
 
-.review-from,
-.review-from > a {
-  font-size: 0.75rem;
+.review-from-div a {
+  font-size: 13px;
+}
+
+.review-img {
+  height: 40px;
+  border-radius: 100%;
+}
+
+.review-from-div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: right;
+  gap: 10px;
 }
 
 /* media query for mobile landscape */

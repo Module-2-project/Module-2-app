@@ -177,7 +177,8 @@ router.get("/:recipeId", isLoggedIn, async (req, res, next) => {
   const user = req.session.currentUser;
   try {
     const recipe = await Recipe.findById(recipeId);
-    const reviews = await Review.find({recipeRated: recipe._id});
+    const reviews = await Review.find({recipeRated: recipe._id})
+  .populate("reviewer");
     const favoriteCount = await Favorite.countDocuments({favRecipe: recipe._id});
     const recipeInFavorites = await Favorite.find({favRecipe: recipe._id, favOwner: user._id});
     const recipeViewed = {...recipe.toObject(), favoriteCount, recipeInFavorites};

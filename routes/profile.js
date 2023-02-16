@@ -110,7 +110,7 @@ router.get("/:userId", isLoggedIn, async (req, res, next) => {
     if (otherUser._id.toString() === user._id.toString()) {
       res.redirect("/recipe/my-recipes");
     } else {
-      res.render("profile/otherUser", {user: otherUser, recipe: recipesWithFavorites});
+      res.render("profile/otherUser", {user, otherUser, recipe: recipesWithFavorites});
     }
   } catch(error) {
     next(error);

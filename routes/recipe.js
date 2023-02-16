@@ -177,7 +177,8 @@ router.get("/:recipeId", isLoggedIn, async (req, res, next) => {
   const user = req.session.currentUser;
   try {
     const recipe = await Recipe.findById(recipeId);
-    const reviews = await Review.find({recipeRated: recipe._id});
+    const reviews = await Review.find({recipeRated: recipe._id})
+  .populate("reviewer");
     const favoriteCount = await Favorite.countDocuments({favRecipe: recipe._id});
     const recipeInFavorites = await Favorite.find({favRecipe: recipe._id, favOwner: user._id});
     const recipeViewed = {...recipe.toObject(), favoriteCount, recipeInFavorites};
@@ -206,7 +207,7 @@ router.get("/edit/:recipeId", isLoggedIn, async (req, res, next) => {
 // @desc    Sends edit recipe form data
 // @route   POST /recipe/edit/:recipeId
 // @access  User
-router.post("/edit/:recipeId", cloudinary.single("image"), isLoggedIn, async (req, res, next) => {
+router.post("/edit/:recipeId", isLoggedIn, async (req, res, next) => {
   const user = req.session.currentUser;
   const {recipeId} = req.params;
   const {name, time, cuisine, kcal, spices, lactose, gluten, meat, level, pax, ingredients, steps, owner} = req.body;
@@ -215,7 +216,35 @@ router.post("/edit/:recipeId", cloudinary.single("image"), isLoggedIn, async (re
     return next(new Error("You need to add ingredients and steps."));
   }
   try {
-    await Recipe.findByIdAndUpdate(recipeId, {name, image: req.file.path, time, cuisine, kcal, spices, lactose, gluten, meat, level, pax, ingredients, steps, owner}, {new: true});
+    await Recipe.findByIdAndUpdate(recipeId, {name, time, cuisine, kcal, spices, lactose, gluten, meat, level, pax, ingredients, steps, owner}, {new: true});
+    res.redirect(`/recipe/${recipeId}`);
+  } catch(error) {
+    next(error);
+  }
+});
+
+// @desc    Displays edit recipe picture form
+// @route   GET /recipe/change-picture/:recipeId
+// @access  User
+router.get("/change-picture/:recipeId", isLoggedIn, async (req, res, next) => {
+  const {recipeId} = req.params;
+  const user = req.session.currentUser;
+  try {
+    const recipe = await Recipe.findById(recipeId);
+    res.render("recipe/recipePictureEdit", {recipe, user});
+  } catch(error) {
+    next(error);
+  }
+});
+
+// @desc    Sends new recipe picture
+// @route   POST /recipe/change-picture/:recipeId
+// @access  User
+router.post("/change-picture/:recipeId", isLoggedIn, cloudinary.single("recipeImage"), async (req, res, next) => {
+  const {recipeId} = req.params;
+  const user = req.session.currentUser;
+  try {
+    await Recipe.findByIdAndUpdate(recipeId, {image: req.file.path});
     res.redirect(`/recipe/${recipeId}`);
   } catch(error) {
     next(error);

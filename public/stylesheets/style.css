@@ -25,7 +25,7 @@ body {
   font-size: 16px;
   font-family: "Montserrat", Lucida, Helvetica, Arial, sans-serif;
   /* margin for navbar not to cover text */
-  margin-bottom: 100px;
+  margin-bottom: 110px;
   background-color: var(--background-color);
   color: var(--text-color);
 }
@@ -522,9 +522,21 @@ text-align: center;
   margin: 10px 0;
 }
 
-.review-from,
-.review-from > a {
-  font-size: 0.75rem;
+.review-from-div a {
+  font-size: 13px;
+}
+
+.review-img {
+  height: 40px;
+  border-radius: 100%;
+}
+
+.review-from-div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: right;
+  gap: 10px;
 }
 
 /* media query for mobile landscape */
@@ -550,5 +562,131 @@ text-align: center;
     position: relative;
     top: -250;
     left: 215px;
+  }
+}
+
+/* media query for browser */
+
+@media (min-width: 1100px) and (min-height: 700px) {
+  /* global */ 
+  .titles {
+    background-size: 100%;
+    width: 101%;
+  }
+
+  .navbar {
+    position: fixed;
+    bottom: 0px;
+  }
+
+  /* home page adjustments */
+  .slide img {
+    height: 800px;
+    object-fit: stretch;
+  }
+
+  .phrase-container {
+    margin-top: 950px;
+    justify-content: center;
+  }
+
+  .phrase-container img {
+    width: 70%;
+  }
+
+  .catch-phrase {
+    font-size: 30px;
+    margin-top: 190px;
+  }
+
+  .home-title {
+    font-size: 50px;
+    background-image: linear-gradient(to right, var(--Granate-color) 5%, rgb(252, 169, 115), var(--background-color) 90%);
+    width: var(--width-hundred);
+    height: 70px;
+  }
+
+  /* recipe cards */
+  .recipe-detail {
+    text-align: center;
+  }
+  
+  .recipe-images {
+    height: 500px;
+  }
+
+  .add-favorite-card {
+    top: -490px;
+    left: 445px;
+  }
+
+  .recipe-summary {
+    justify-content: center;
+    gap: 200px;
+  }
+
+  .small-hr {
+    width: 60%;
+    margin: auto;
+  }
+
+  .bigger-hr {
+    width: 90%;
+    margin: 30px 50px;
+  }
+
+  .recipe-detail ul,
+  .recipe-detail ol {
+    list-style-position: inside;
+    margin: 20px 100px;
+  }
+
+  /* form */
+  form {
+    text-align: center;
+    margin: 50px 500px;
+  }
+
+  input,
+  .input,
+  select,
+  textarea {
+    text-align: center;
+  }
+
+  /* profile */
+  .arrow-deco {
+    width: 35%;
+    margin-top: 10px;
+  }
+
+  .profile-avatar {
+    width: 250px;
+    max-height: 400px;
+  }
+
+  /* reviews */
+  .review-card {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    gap: 100px;
+  }
+
+  .reviews {
+    text-align: center;
+  }
+
+  .admin-phrase {
+    position: absolute;
+    font-size: 35px;
+    top: -400px;
+    right: 100px;
+  }
+
+  /* auth pages */
+  .account-message {
+    text-align: center;
   }
 }

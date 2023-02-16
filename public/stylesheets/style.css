@@ -563,6 +563,10 @@ text-align: center;
     top: -250;
     left: 215px;
   }
+
+  .titles {
+    background-size: 844px;
+  }
 }
 
 /* media query for browser */

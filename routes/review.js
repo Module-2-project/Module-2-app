@@ -28,7 +28,7 @@ router.get("/new/:recipeId", isLoggedIn, async (req, res, next) => {
   const user = req.session.currentUser;
   try {
     const recipe = await Recipe.findOne({_id: recipeId});
-    const allReviews = await Review.find({recipeRated: recipe._id});
+    const allReviews = await Review.find({recipeRated: recipe._id}).populate("reviewer");
     const reviewCheck = await Review.find({recipeRated: recipe._id, reviewer: user._id});
     // toString used because otherwise the validation will work even though they are the same values
     if (recipe.owner.toString() === user._id.toString()) {

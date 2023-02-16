@@ -1,5 +1,7 @@
 <button id="back-btn" onclick="history.back()"><img class="arrow-back" src="/images/back-arrow.png" /> Go back</button>
-<h2 class="titles">Change recipe's image</h2>
+<div class="gradient">
+  <h2 class="titles">Changes recipe's image</h2>
+</div>
 
 <form action="/recipe/change-picture/{{recipe._id}}" method="POST" enctype="multipart/form-data">
   <label>New image:</label>

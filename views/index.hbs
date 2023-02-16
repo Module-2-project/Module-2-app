@@ -7,7 +7,7 @@
 
 <div class="slideshow">
   {{#each recipe}}
-    <div class="slide slide-right">
+    <div class="slide">
       <img src="{{this.image}}" alt="{{this.name}}">
     </div>
   {{/each}}
@@ -31,7 +31,7 @@
 </script>
 
 {{#eq user.username "admin"}}
-<p class="admin-phrase">Remember to do the daily reviews checkup.</p>
+<p class="admin-phrase">Remember to perform the daily reviews checkup.</p>
 {{else}}
   <div class="phrase-container">
     <img src="/images/Menu-frame.png" alt="Phrase-background-img">

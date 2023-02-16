@@ -19,8 +19,8 @@ router.get('/signup', async (req, res, next) => {
 // @route   POST /auth/signup
 // @access  Public
 router.post('/signup', cloudinary.single("profilePic"), async (req, res, next) => {
-  const {username, firstName , lastName, email, password, cookingLevel} = req.body;
-  if (!username || !firstName || !lastName || !email || !password || !cookingLevel) {
+  const {username, firstName , lastName, email, password, confirmPassword, cookingLevel} = req.body;
+  if (!username || !firstName || !lastName || !email || !password || !confirmPassword || !cookingLevel) {
     res.render('auth/signup', {error: 'Please fill all data to sign up.'});
     return;
   } 
@@ -34,6 +34,10 @@ router.post('/signup', cloudinary.single("profilePic"), async (req, res, next) =
     res.render("auth/signup", {error: "Password needs to contain at least 6 characters, one number, one special character and one lowercase and uppercase character."});
     return;
   }
+  if (password !== confirmPassword) {
+    res.render("auth/signup", {error: "You need to confirm your password by re-writing the same password as the desired one."});
+    return;
+    };
   const userInDB = await User.findOne({email});
   if (userInDB) {
     res.render('auth/signup', {error: `${email} already exists!`});

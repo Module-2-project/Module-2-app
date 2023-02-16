@@ -23,7 +23,9 @@
         <option value="Grandma">Grandma 👵🏻</option>
       </select>  
     <label>Password:</label>
-      <input type="password" name="password" placeholder="********" />
+      <input required="true" type="password" name="password" placeholder="********" />
+    <label>Confirm password:</label>
+      <input required="true" type="password" name="confirmPassword" placeholder="********"/>
       {{#if error}}
       <p style="color: red;">{{error}}</p>
       {{/if}}

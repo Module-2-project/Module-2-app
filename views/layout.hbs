@@ -12,6 +12,27 @@
   <title>Food Folio</title>
 </head>
 <body>
+  <div class="hamburger-menu">
+    <input id="menu__toggle" type="checkbox" />
+    <label class="menu__btn" for="menu__toggle">
+      <span></span>
+    </label>
+    <div class="overlay"></div>
+    <ul class="menu__box">
+      {{#if user}}
+      <li><a class="menu__item" href="/review/my-reviews">My reviews</a></li>
+      <li><a class="menu__item" href="/recipe/my-recipes">My recipes</a></li>
+      <li><a class="menu__item" href="/auth/logout">Log out</a></li>
+      {{else}}
+      <li><a class="menu__item" href="/auth/signup">Sign up</a></li>
+      <li><a class="menu__item" href="/auth/login">Log in</a></li>
+      {{/if}}
+    </ul>
+  </div>
+  {{#if user}}
+  {{else}}
+    {{> authOptions}}
+  {{/if}}
   <img class="folio-icon" src="/images/app-logo.png" alt="FoodFolio icon">
   <header class="top-navbar">
     {{#if user}}

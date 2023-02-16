@@ -203,7 +203,57 @@ label {
   
 }
 
-/* home page */
+/* home page , buerger menu*/
+/* .mobile-container {
+  max-width: 480px;
+  margin: auto;
+  background-color: #555;
+  height: 500px;
+  color: white;
+  border-radius: 10px;
+} */
+
+.topnav {
+  overflow: hidden;
+  background-color: var(--background-color);
+  position: relative;
+}
+
+.topnav #myLinks {
+  display: none;
+}
+
+.topnav a {
+  float: left;
+  color: var(--text-color);
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 14px;
+  
+  display: block;
+  align-items: flex-end;
+
+
+  
+}
+
+.topnav a.icon {
+  float: right;
+
+  
+}
+
+/* .topnav a:hover {
+  background-color: #ddd;
+  color: black;
+} */
+
+.active {
+  background-color: var(--background-color);
+  color: white;
+}
+
+/* End of Burger Menu */
 
 .admin-phrase {
 font-weight: bold;

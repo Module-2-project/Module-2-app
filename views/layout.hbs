@@ -8,12 +8,42 @@
 <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
   <link href='https://fonts.googleapis.com/css?family=Dancing Script' rel='stylesheet'>
+  {{!-- To load icon library to show burger menu bars --}}
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
  
   <link href='/stylesheets/style.css' rel="stylesheet"/>
   <title>Food Folio</title>
 </head>
 <body>
-  <img class="folio-icon" src="/images/app-logo.png" alt="FoodFolio icon">
+
+  <!-- Top Navigation Menu -->
+<div class="mobile-container"></div>  
+ <div class="topnav">
+  <a href="#home" class="active"><img class="folio-icon active" src="/images/app-logo.png" alt="FoodFolio icon"></a>
+  <!-- Navigation links (hidden by default) -->
+  <div id="myLinks">
+    <a href="/recipe/my-recipes">My Recipes</a>
+    <a href="/review/my-reviews">My Reviews</a>
+    <a href="/favorites">Favourites</a>
+    <a href="#">Log Out</a>
+  </div>
+   <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+    <i class="fa fa-bars"></i>
+  </a>
+ </div>
+</div>
+  {{!-- Hide and toggle Function --}}
+  <script>
+function myFunction() {
+  var x = document.getElementById("myLinks");
+  if (x.style.display === "block") {
+    x.style.display = "none";
+  } else {
+    x.style.display = "block";
+  }
+}
+</script>
+  
   <header class="top-navbar">
     {{#if user}}
       {{#eq user.username "admin"}}

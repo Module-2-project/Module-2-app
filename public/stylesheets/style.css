@@ -33,7 +33,8 @@ main {
 }
 
 .folio-icon {
-  width: 250px;
+  position:static;
+  width: 220px;
   margin: var(--margin-gap);
 }
 
@@ -215,30 +216,41 @@ label {
 
 .topnav {
   overflow: hidden;
-  background-color: var(--background-color);
   position: relative;
+  
 }
+
 
 .topnav #myLinks {
   display: none;
-}
 
+}
+/* .topnav #myLinks a {
+  
+} */
+
+.fa-bars::before {
+  font-size: 25px;
+  ;
+  
+}
 .topnav a {
   float: left;
   color: var(--text-color);
-  padding: 14px 16px;
+  padding: 8px 8px;
   text-decoration: none;
   font-size: 14px;
-  
   display: block;
-  align-items: flex-end;
 
-
-  
 }
 
 .topnav a.icon {
   float: right;
+  background: var(--background-color);
+  display: block;
+  position: absolute;
+  right: 0;
+  top: 0;
 
   
 }

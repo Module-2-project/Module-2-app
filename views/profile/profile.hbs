@@ -42,13 +42,3 @@
     <a href="/auth/password-reset"><img src="/images/edit-button.png" alt="Edit button" /></a>
   </div>
 </div>
-
-<div class="profile-anchors">
-  {{#eq user.username "admin"}}
-    <a class="anchors" href="/auth/logout">Log out</a>
-  {{else}}
-    <a class="anchors" href="/recipe/my-recipes">My recipes</a>
-    <a class="anchors" href="/review/my-reviews">My reviews</a>
-    <a class="anchors" href="/auth/logout">Log out</a>
-  {{/eq}}
-</div>

@@ -20,35 +20,26 @@
     <div class="overlay"></div>
     <ul class="menu__box">
       {{#if user}}
-      <li><a class="menu__item" href="/review/my-reviews">My reviews</a></li>
-      <li><a class="menu__item" href="/recipe/my-recipes">My recipes</a></li>
+      {{#eq user.username "admin"}}
+      <li><a class="menu__item" href="/review/all">All reviews</a></li>
       <li><a class="menu__item" href="/auth/logout">Log out</a></li>
       {{else}}
+      <li><a class="menu__item" href="/recipe/all">All recipes</a></li>
+      <li><a class="menu__item" href="/recipe/my-recipes">My recipes</a></li>
+      <li><a class="menu__item" href="/recipe/new">Add a recipe</a></li>
+      <li><a class="menu__item" href="/review/my-reviews">My reviews</a></li>
+      <li><a class="menu__item" href="/auth/logout">Log out</a></li>
+      {{/eq}}
+      {{else}}
+      <li><a class="menu__item" href="/recipe/all">All recipes</a></li>
       <li><a class="menu__item" href="/auth/signup">Sign up</a></li>
       <li><a class="menu__item" href="/auth/login">Log in</a></li>
       {{/if}}
+      <p class="menu-phrase">Food Folio, powered by Patri and Joandi</p>
+      <hr class="small-hr">
     </ul>
   </div>
-  {{#if user}}
-  {{else}}
-    {{> authOptions}}
-  {{/if}}
   <img class="folio-icon" src="/images/app-logo.png" alt="FoodFolio icon">
-  <header class="top-navbar">
-    {{#if user}}
-      {{#eq user.username "admin"}}
-        <div class="signed-in-nav">
-          <a href="/review/all"><img class="home-page-icons" src="/images/star.png" alt="Review logo" /></a>
-        </div>
-      {{else}}
-        <div class="signed-in-nav">
-          <a href="/recipe/new"><img class="home-page-icons" src="/images/add-icon.png" alt="Add icon" /></a>
-          <a href="/recipe/all"><img class="home-page-icons" src="/images/chef-hat.png" alt="All recipes" /></a>
-        </div>
-      {{/eq}}
-    {{else}}
-    {{/if}}
-  </header>
   <main>
     {{{ body }}}
   </main>
@@ -62,14 +53,14 @@
           <li><a href="/profile"><img src="/images/chef-icon.png"></a></li>
         {{else}}
           <li class="home-icon"><a href="/"><img src="/images/home-icon.png"></a></li>
-          <li><a href="/recipe/random"><img src="/images/question-icon-box.png"></a></li>
+          <li class="home-icon"><a href="/recipe/random"><img src="/images/random-recipe.png"></a></li>
           <li><a href="/recipe/search"><img src="/images/search-icon.png"></a></li>
           <li><a href="/favorites"><img src="/images/heart-icon-navbar.png"></a></li>
           <li><a href="/profile"><img src="/images/chef-icon.png"></a></li>
         {{/eq}}
         {{else}}
           <li class="home-icon"><a href="/"><img src="/images/home-icon.png"></a></li>
-          <li><a href="/recipe/random"><img src="/images/question-icon-box.png"></a></li>
+          <li class="home-icon"><a href="/recipe/random"><img src="/images/random-recipe.png"></a></li>
           <li><a href="/recipe/search"><img src="/images/search-icon.png"></a></li>
         {{/if}}
       </ul>

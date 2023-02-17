@@ -24,7 +24,7 @@ body {
   margin: 0;
   font-size: 16px;
   font-family: "Montserrat", Lucida, Helvetica, Arial, sans-serif;
-  /* margin for navbar not to cover text */
+  /* margin for navbar not to cover body */
   margin-bottom: 110px;
   background-color: var(--background-color);
   color: var(--text-color);
@@ -90,7 +90,7 @@ button {
 
 #back-btn {
   margin-top: -10px;
-  margin-left: -5px;
+  margin-left: 5px;
   border: 1px solid rgba(0, 0, 0, 0.146);
   background-image: linear-gradient(to right, #FFCC98 30%, #ffb162);
   box-shadow: 0px 1px 2px #3333337c;
@@ -135,7 +135,16 @@ a {
   border-top: 1px solid rgba(128, 128, 128, 0.671);
 }
 
+.account-message {
+  text-align: center;
+}
+
 /* forms */
+
+.signup-text {
+  text-align: center;
+  font-weight: bold;
+}
 
 form {
   margin: 40px 0;
@@ -183,6 +192,7 @@ text-align: center;
 
 .home-title {
   position: absolute;
+  text-align: center;
   top: 135px;
   font-family: "Lato";
   font-family: "Dancing Script";
@@ -191,46 +201,13 @@ text-align: center;
   color: var(--background-color);
   text-shadow: 0px 1px 1px rgb(62, 62, 62);
   width: var(--width-hundred);
-  background-image: linear-gradient(to right, var(--Granate-color) 5%, rgb(252, 169, 115), var(--background-color) 80%);
+  background-image: linear-gradient(to right, var(--Granate-color) 5%, rgb(252, 169, 115), var(--background-color) 94%);
   height: 52px;
   text-indent: 8px;
   z-index: -1;
 }
 
 .home-title p {
-  margin-top: 5px;
-}
-
-.signed-in-nav,
-.signed-out-nav {
-  position: absolute;
-  top: 135px;
-  right: var(--margin-gap);
-  display: flex;
-  justify-content: flex-end;
-  gap: var(--margin-gap);
-}
-
-.signed-out-nav {
-  gap: 25px;
-}
-
-.signed-out-nav > div {
-  display: flex;
-  gap: 10px;
-  margin-top: 20px;
-  font-weight: bold;
-  text-decoration: underline;
-  text-underline-offset: 5px;
-}
-
-.home-page-icons {
-  width: 30px;
-  padding: 5px 5px;
-  border-radius: 100%;
-  background-image: radial-gradient(circle,#FFCC98 30%,#ffb162);
-  box-shadow: 0px 1px 2px #333;
-  border: 1px solid rgba(0, 0, 0, 0.228);
   margin-top: 5px;
 }
 
@@ -308,13 +285,13 @@ text-align: center;
 
 .catch-phrase {
   display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
   font-size: 14.5px;
   max-width: 370px;
   max-height: 140px;
-  text-align: center;
   margin-top: 35px;
-  margin-left: auto;
-  margin-right: auto;
   font-family:'Montserrat', Times, serif;
   font-style: italic;
   position: absolute;
@@ -567,7 +544,7 @@ text-align: center;
 .menu__btn {
   position: absolute;
   top: 50px;
-  right: 30px;
+  right: 15px;
   width: 26px;
   height: 26px;
   cursor: pointer;
@@ -646,6 +623,12 @@ text-align: center;
   display: none;
 }
 
+.menu-phrase {
+  text-align: center;
+  font-style: oblique;
+  margin-top: 450px;
+  letter-spacing: 1px;
+}
 
 /* media query for mobile landscape */
 
@@ -675,6 +658,10 @@ text-align: center;
   .titles {
     background-size: 844px;
   }
+
+  .menu-phrase {
+    margin-top: 2px;
+  }
 }
 
 /* media query for browser */
@@ -693,6 +680,10 @@ text-align: center;
 
   .menu__box {
     width: 30%;
+  }
+
+  .menu-phrase {
+    margin-top: 480px;
   }
 
   /* home page adjustments */
@@ -803,10 +794,5 @@ text-align: center;
     font-size: 35px;
     top: -400px;
     right: 100px;
-  }
-
-  /* auth pages */
-  .account-message {
-    text-align: center;
   }
 }

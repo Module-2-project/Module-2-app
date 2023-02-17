@@ -71,7 +71,7 @@ If logged in, these are extra features:
 - User can see his/her profile and edit the information there, as well as delete the account
 - User can see recipe detail (additional data on ingredients and steps etc)
 - User can create recipe and edit them
-- User can access all his/her recipes in his/her profile
+- User can access all his/her recipes from the menu
 
 ---
 
@@ -82,12 +82,14 @@ If not logged in:
 - User can search for recipes by name
 - User can sort results by different fields - ascending and descending
 - User can view all reviews linked to a recipe
+- User can user the hamburger menu to navigate the app
+- User can see this app on landscape and web browser format
 
 If logged in, these are extra features:
 
 - User can search for recipes with different filters
 - User can send a review to rate a recipe
-- User can see all his/her reviews in his profile
+- User can access all his/her reviews from the menu
 - User can reset his/her password
 - User can access other users' profiles through their recipes or reviews, they will only see the other user's username and recipes
 - User can add or remove recipes to his/her favorites
@@ -357,6 +359,5 @@ const favoriteSchema = new Schema({
 ## Useful links
 
 - [Github Repo](https://github.com/Module-2-project/Module-2-app)
-- [Trello kanban]()
 - [Deployed version](https://food-folio-app.fly.dev/)
 - [Presentation slides](https://slides.com/patriciacostadacruz/minimal)

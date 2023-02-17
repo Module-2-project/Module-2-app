@@ -47,7 +47,9 @@ npm run dev
 
 ## Wireframes
 
-![](docs/wireframes.png)
+![](docs/wireframe1.png)
+![](docs/wireframe2.png)
+![](docs/wireframe3.png)
 
 ---
 

@@ -4,6 +4,7 @@ const User = require('../models/User');
 const {isLoggedIn} = require('../middlewares');
 const Recipe = require ('../models/Recipe');
 const Favorite = require("../models/Favorite");
+const Review = require("../models/Review");
 const cloudinary = require("../config/cloudinary.config");
 
 // @desc    Shows profile page
@@ -83,6 +84,8 @@ router.get("/confirmation", isLoggedIn, (req, res, next) => {
 router.get("/delete", isLoggedIn, async (req, res, next) => {
   const user = req.session.currentUser;
   try {
+    await Recipe.deleteMany({owner: user._id});
+    await Review.deleteMany({reviewer: user._id});
     await Favorite.deleteMany({favOwner: user._id});
     await User.findByIdAndDelete(user._id);
     res.redirect("/auth/signup");
@@ -108,7 +111,7 @@ router.get("/:userId", isLoggedIn, async (req, res, next) => {
     const recipesWithFavorites = await Promise.all(promises);
     // toString used because otherwise the validation will work even though they are the same values
     if (otherUser._id.toString() === user._id.toString()) {
-      res.redirect("/recipe/my-recipes");
+      res.render("profile/profile", {error: "You can access you recipes from the burger menu.", user});
     } else {
       res.render("profile/otherUser", {user, otherUser, recipe: recipesWithFavorites});
     }

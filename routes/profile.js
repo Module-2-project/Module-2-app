@@ -111,7 +111,7 @@ router.get("/:userId", isLoggedIn, async (req, res, next) => {
     const recipesWithFavorites = await Promise.all(promises);
     // toString used because otherwise the validation will work even though they are the same values
     if (otherUser._id.toString() === user._id.toString()) {
-      res.redirect("/recipe/my-recipes");
+      res.render("profile/profile", {error: "You can access you recipes from the burger menu.", user});
     } else {
       res.render("profile/otherUser", {user, otherUser, recipe: recipesWithFavorites});
     }

@@ -211,7 +211,6 @@ router.post("/edit/:recipeId", isLoggedIn, async (req, res, next) => {
   const user = req.session.currentUser;
   const {recipeId} = req.params;
   const {name, time, cuisine, kcal, spices, lactose, gluten, meat, level, pax, ingredients, steps, owner} = req.body;
-  console.log(ingredients, steps);
   // regex to make sure the ingredients and steps strings start by a letter or a number
   if (!/^[0-9a-zA-Z].*/.test(ingredients) || !/^[0-9a-zA-Z].*/.test(steps)) {
     return next(new Error("You need to add ingredients and steps."));

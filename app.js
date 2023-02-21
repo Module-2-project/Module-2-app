@@ -53,12 +53,13 @@ app.set('view engine', 'hbs');
 const hbs = require("hbs");
 hbs.registerPartials(__dirname + "/views/partials");
 
+const { profile } = require('console');
+
 // middlewares
 const {isLoggedIn, isAdmin} = require("./middlewares");
 
 // lodash and custom helpers used to manipulate ingedients and steps coming from Recipe model
 const _ = require("lodash");
-const { profile } = require('console');
 // ingredients will show as an unordered list, all with capital letter
 const splitIngredients = _.template(
   '<ul>' +

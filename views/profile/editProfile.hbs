@@ -6,25 +6,25 @@
 <div class="profile-intro">
   <img class="profile-avatar" src="{{user.profilePic}}" alt="Profile avatar" />
 </div>
-<form method="POST" action="/profile/edit" enctype="multipart/form-data">
-  <input required="true" name="username" value="{{user.username}}"></input>
+<form method="POST" action="/profile/edit">
+  <input required="true" name="username" value="{{user.username}}">
 <div class="profile-items"></div>
   <label>First name:</label>
-  <input required="true" name="firstName" value="{{user.firstName}}"></input>
+  <input required="true" name="firstName" value="{{user.firstName}}">
 </div>
 <div class="profile-items"></div>
   <label>Last name:</label>
-  <input required="true" name="lastName" value="{{user.lastName}}"></input>
+  <input required="true" name="lastName" value="{{user.lastName}}">
 </div>
 <div class="profile-items"></div>
   <label>Email:</label>
-  <input required="true" name="email" value="{{user.email}}"></input>
+  <input required="true" name="email" value="{{user.email}}">
 </div>
 <label>Cooking level:</label>
 <select required="true" name="cookingLevel">
   <option value="Beginner" {{#eq user.cookingLevel "Beginner" }}selected{{/eq}}>Beginner 👶🏻</option>
   <option value="Medium" {{#eq user.cookingLevel "Medium" }}selected{{/eq}}>Medium 👨🏻</option>
-  <option value="Experienced" {{#eq user.cookingLevel "Experienced" }}selected{{/eq}}>Experienced 🧞‍♂️</option>
+  <option value="Hard" {{#eq user.cookingLevel "Hard" }}selected{{/eq}}>Experienced 🧞‍♂️</option>
   <option value="God" {{#eq user.cookingLevel "God" }}selected{{/eq}}>God 👨🏻‍🍳</option>
   <option value="Grandma" {{#eq user.cookingLevel "Grandma" }}selected{{/eq}}>Grandma 👵🏻</option>
 </select>

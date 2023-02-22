@@ -3,7 +3,7 @@
   <h2 class="titles">Edit recipe</h2>
 </div>
 
-<form method="POST" action="/recipe/edit/{{recipe._id}}" enctype="multipart/form-data">
+<form method="POST" action="/recipe/edit/{{recipe._id}}">
   <label>Dish name:</label>
   <input required="true" type="text" name="name" value="{{recipe.name}}" />
   <label>Time required in minutes:</label>
@@ -58,7 +58,7 @@
   <select required="true" name="level">
     <option value="Beginner" {{#eq recipe.level "Beginner" }}selected{{/eq}}>Beginner 👶🏻</option>
     <option value="Medium" {{#eq recipe.level "Medium" }}selected{{/eq}}>Medium 👨🏻</option>
-    <option value="Experienced" {{#eq recipe.level "Experienced" }}selected{{/eq}}>Experienced 🧞‍♂️</option>
+    <option value="Hard" {{#eq recipe.level "Hard" }}selected{{/eq}}>Experienced 🧞‍♂️</option>
     <option value="God" {{#eq recipe.level "God" }}selected{{/eq}}>God 👨🏻‍🍳</option>
     <option value="Grandma" {{#eq recipe.level "Grandma" }}selected{{/eq}}>Grandma 👵🏻</option>
   </select>

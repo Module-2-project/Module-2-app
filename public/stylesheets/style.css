@@ -115,7 +115,7 @@ a {
   background-image: linear-gradient(to right, var(--navbar-buttons), var(--accent-color), var(--navbar-buttons));
   background-image: url('/images/chef-proposal.png');
   background-repeat: no-repeat;
-  background-size: 390px 70px;
+  background-size: 100%;
   box-shadow: 0px 1px 2px #3333337c;
   margin-bottom: 35px;
 }
